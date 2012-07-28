@@ -470,7 +470,6 @@ h1 small {
 
 h2 {
   font-size: 2em;
-  font-family: Tahoma;
   line-height: 36px;
   text-align: center;
   margin: 0 0 15px;
@@ -5056,7 +5055,7 @@ span.events {
 	font-size: 1.4em;
 }
 
-.lb_event {
+.lb_event, .login label {
 	display:inline;
 	font-size: 1.1em;
 }
@@ -5095,7 +5094,7 @@ span.events {
 	display:inline;
 }
 
-.date-unit h2, .date-unit span {
+.date-unit h2, .date-unit span, .shadow {
 	text-shadow: 2px 2px 2px #d0d0d0;
 }
 
@@ -5194,3 +5193,21 @@ div.wysiwyg {
 .toggle-cal {
 	display: none;
   }
+  
+.spacer {
+	margin:0;
+	padding:0;
+}
+
+.login h2 {
+	font-size: 2.2em;
+}
+
+.login {
+	text-align:center;
+}
+
+.login table {
+	width: 100%;
+	text-align: left;
+}
