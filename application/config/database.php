@@ -48,9 +48,9 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = 'sqlmaster';
+$db['default']['hostname'] = 'tunnel.pagodabox.com';
+$db['default']['username'] = 'karyn';
+$db['default']['password'] = 'VGKI7zx3';
 $db['default']['database'] = 'ci_intro';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
@@ -63,7 +63,7 @@ $db['default']['dbcollat'] = 'utf8_general_ci';
 $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
-
+$db['default']['port'] = 3306;
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */
