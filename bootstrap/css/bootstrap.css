@@ -5210,4 +5210,13 @@ div.wysiwyg {
 .login table {
 	width: 100%;
 	text-align: left;
+	padding-left: 50px;
+}
+
+.remember {
+	margin-left: 7px;
+}
+
+.remeber input {
+	margin-right: 5px;
 }

@@ -4,6 +4,7 @@ class Simplecal extends CI_Controller {
 
 	public function index()
 	{
+		$this->check_isvalidated();
 		$this->show();
 	}
 
@@ -22,4 +23,10 @@ class Simplecal extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
+	// Check if user logged in!
+	private function check_isvalidated(){
+        if(! $this->session->userdata('validated')){
+            redirect('login');
+        }
+    }
 }

@@ -50,7 +50,11 @@
           <a class="brand" href="#">Simplecal</a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li class="active"><a href="#">Login</a></li>
+				<?php if ($this->session->userdata('validated')) { ?>
+					<li><a href="<?php echo base_url();?>/logout">Logout</a></li>
+				<?php } else { ?>
+					<li><a href="<?php echo base_url();?>/login">Login</a></li>
+				<?php }  ?>
               <li><a href="#about">Signup</a></li>
               <li><a href="#contact">About</a></li>
             </ul>

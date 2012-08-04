@@ -5,6 +5,7 @@ class Ajax extends CI_Controller {
 	function __construct() 
 	{
 		parent::__construct();
+		$this->check_isvalidated();
 		if(!$this->input->is_ajax_request()) { exit('This is not an ajax request! :)'); }
 	}
 	
@@ -27,9 +28,9 @@ class Ajax extends CI_Controller {
 			//Add the event to DB
 			$result = $this->Simplecalendar->add_event(
 				"$year-$month-$day",
-				$this->input->post('time'),
-				$this->input->post('event'),
-				$this->input->post('description')
+				$this->security->xss_clean($this->input->post('time')),
+				$this->security->xss_clean($this->input->post('event')),
+				$this->security->xss_clean($this->input->post('description'))
 			);
 			
 			// Possible outcomes (returns json cuz i needed 2 parameters)
@@ -61,11 +62,11 @@ class Ajax extends CI_Controller {
 			$this->load->model('Simplecalendar');
 			//Add the event to DB
 			$result = $this->Simplecalendar->edit_event(
-				$this->input->post('id'),
+				$this->security->xss_clean($this->input->post('id')),
 				"$year-$month-$day",
-				$this->input->post('time'),
-				$this->input->post('data'),
-				$this->input->post('description')
+				$this->security->xss_clean($this->input->post('time')),
+				$this->security->xss_clean($this->input->post('data')),
+				$this->security->xss_clean($this->input->post('description'))
 			);
 			
 			// Possible outcomes
@@ -128,4 +129,11 @@ class Ajax extends CI_Controller {
 			echo 'Error marking event';
 		}
 	}
+	
+	// Check if user logged in!
+	private function check_isvalidated(){
+        if(! $this->session->userdata('validated')){
+            redirect('login');
+        }
+    }
 }	

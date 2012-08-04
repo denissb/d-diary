@@ -3,6 +3,7 @@
 class Simplecalendar extends CI_Model {
 
 	private $conf;
+	private $userid;
 	
 	function __construct() 
 	{
@@ -63,13 +64,14 @@ class Simplecalendar extends CI_Model {
 		</table>
 		{/table_close}
 		';
-		
+	// Get the user id
+		$this->userid = $this->session->userdata('userid');
 	}
 	
 	// Get the event counts for the days that have events
 	public function get_data($year, $month) {
 		$query= $this->db->select('date, COUNT(*) AS ev_count')->from('events')
-		->like('date', "$year-$month", 'after')->group_by('date')->get();
+		->where('user_id', $this->userid)->like('date', "$year-$month", 'after')->group_by('date')->get();
 		$cal_data=array();
 		foreach ($query->result() as $row) {
 			$day = substr($row->date, 8, 2);
@@ -92,8 +94,8 @@ class Simplecalendar extends CI_Model {
 		if($time == '') { $time= '00:00:00'; }
 		if($this->validate($date, $time, $title)) {
 		// Check if time is taken
-			if($this->db->select('date')->from('events')->where('date', $date)->where('time', $time)
-				->count_all_results()) 
+			if($this->db->select('date')->from('events')->where('date', $date)->where('user_id', $this->userid)
+			->where('time', $time)->count_all_results()) 
 			{
 				return "reserved";
 			// Try to insert data
@@ -102,7 +104,8 @@ class Simplecalendar extends CI_Model {
 					'date' => $date,
 					'time' => $time,
 					'title' => $title,
-					'description' => $description))
+					'description' => $description,
+					'user_id' => $this->userid))
 						) {
 						return array('result'=> 'Added', 'id'=> $this->db->insert_id() );
 						} else {
@@ -120,8 +123,8 @@ class Simplecalendar extends CI_Model {
 		if($time == '') { $time= '00:00:00'; }
 		if($this->validate($date, $time, $title)) {
 		// Check if time is taken
-			if($this->db->select('date')->from('events')->where('date', $date)->where('time', $time)
-				->where('id !=', $id)->count_all_results()) 
+			if($this->db->select('date')->from('events')->where('date', $date)->where('user_id', $this->userid)
+			->where('time', $time)->where('id !=', $id)->count_all_results()) 
 			{
 				return "reserved";
 			} else {
@@ -147,7 +150,7 @@ class Simplecalendar extends CI_Model {
 		$p_date='/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/';
 		if(preg_match($p_date, $date)) {
 			$query = $this->db->select('id, date, time, title, description, done')->from('events')
-			->where('date', $date)->group_by('time')->get();
+			->where('date', $date)->where('user_id', $this->userid)->group_by('time')->get();
 			return $query->result();
 		} else {
 			return false;
@@ -157,7 +160,7 @@ class Simplecalendar extends CI_Model {
 	// Delete the event
 	public function del_event($id) {
 		if(is_int(intval($id))) {
-			$query = $this->db->where('id', $id)->delete('events');
+			$query = $this->db->where('user_id', $this->userid)->where('id', $id)->delete('events');
 			return ($this->db->affected_rows() > 0 ? true : false); 
 		} else {
 			return false;
@@ -168,7 +171,7 @@ class Simplecalendar extends CI_Model {
 	public function done_event($id) {
 		if(is_int(intval($id))) {
 			$data = array('done' => 1);
-			$query = $this->db->where('id', $id)->update('events', $data);
+			$query = $this->db->where('user_id', $this->userid)->where('id', $id)->update('events', $data);
 			return ($this->db->affected_rows() > 0 ? true : false); 
 		} else {
 			return false;
