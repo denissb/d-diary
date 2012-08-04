@@ -48,7 +48,7 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localost';
+$db['default']['hostname'] = 'tunnel.pagodabox.com';
 $db['default']['username'] = 'karyn';
 $db['default']['password'] = 'VGKI7zx3';
 $db['default']['database'] = 'ci_intro';
