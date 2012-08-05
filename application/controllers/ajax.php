@@ -96,13 +96,12 @@ class Ajax extends CI_Controller {
 				$day = date('d');
 				$month = date('m');
 				$year = date('Y');
-			}
-			
+			} 	
 		$data['month_name'] = date("F");
-		$data['day'] = &$day;
+		$data['day'] = $day;
 		$data['year'] = &$year;
-		
 		$this->load->model('Simplecalendar');
+		if($day < 10) { $day= "0".$day; }
 		$data['events'] = $this->Simplecalendar->get_events("$year-$month-$day");
 		$this->load->view('day_events', $data);
 		
