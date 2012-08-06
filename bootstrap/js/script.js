@@ -1,11 +1,12 @@
 /* Configuration */
 	var config = {};
-	config.popup = 'http://ci_intro.loc/ajax/showpopup';
-	config.add_event = 	'http://ci_intro.loc/ajax/addevent';
-	config.events = 'http://ci_intro.loc/ajax/events';
-	config.edit = 'http://ci_intro.loc/ajax/editevent';
-	config.remove = 'http://ci_intro.loc/ajax/delete';
-	config.done = 'http://ci_intro.loc/ajax/done';
+	config.home= 'http://simplecalendar.pagodabox.com/';
+	config.popup = config.home + 'ajax/showpopup';
+	config.add_event = 	config.home + 'ajax/addevent';
+	config.events = config.home +'ajax/events';
+	config.edit = config.home + 'ajax/editevent';
+	config.remove = config.home + 'ajax/delete';
+	config.done = config.home+ 'ajax/done';
 	config.loc = window.location.pathname.split( '/' );
 	if(config.loc.length > 2) {
 		config.add_event += '/' + config.loc[2] + '/' +config.loc[3];

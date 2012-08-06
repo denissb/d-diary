@@ -92,18 +92,16 @@ class Ajax extends CI_Controller {
 			exit('Invalid parameters!');
 			}
 		$day = $this->input->post('day');
-		if( empty($day) || $day == 'null' ) {	
+		if( !isset($day) || $day == 'null' ) {	
 				$day = date('d');
 				$month = date('m');
 				$year = date('Y');
-			}
-			
+			} 	
 		$data['month_name'] = date("F");
 		$data['day'] = $day;
 		$data['year'] = &$year;
-		
 		$this->load->model('Simplecalendar');
-		if($day < 10) { $day = '0'.$day; }
+		if($day < 10) { $day= "0".$day; }
 		$data['events'] = $this->Simplecalendar->get_events("$year-$month-$day");
 		$this->load->view('day_events', $data);
 		
