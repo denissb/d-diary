@@ -7,6 +7,7 @@
 			<form class="well form form-vertical login" action="<?php echo base_url();?>login/process" method="post" name="process">
 				<h2 class="shadow">Simplecalendar login</h2>
 				<hr />
+				<?php if(! is_null($msg)) echo $msg; ?>
 				<table>
 					<tr>
 						<td><label>Login:</label></td>
@@ -16,8 +17,11 @@
 						<td><label>Password:</label></td>
 						<td><input type="password" name="password" class="input-large" placeholder="Password"></td>
 					</tr>
-				</table>  
+				</table>
 				  <button type="submit" class="btn btn-primary" value="login">Sign in</button>
+					<label class="remember">Stay Signed in 
+						<input type="checkbox" name="rememberme" value="ON" >
+					</label>	
 			</form>
         </div><!--/span-->
       </div><!--/row-->

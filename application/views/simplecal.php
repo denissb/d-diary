@@ -1,5 +1,5 @@
 	<div class="container-fluid">
-			<h2>Someones calendar</h2>
+			<h2><?php echo ucfirst($this->session->userdata('fname')); ?>'s calendar</h2>
 
 	<div class="row-fluid">
       

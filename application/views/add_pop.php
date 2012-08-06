@@ -3,13 +3,13 @@
 	<div class="popover-add">
 	  <form autocomplete="off" id="time-form">
 				<label for="time" class="lb_time">Time:</label>
-				<input type="text" class="input-mini" name="time" id="time" placeholder="0:00" value=""></input>
+				<input type="text" class="input-mini" name="time" id="time" class="time_p" placeholder="0:00" value=""></input>
 	  </form>
 	</div>	
   <div class="popover-content">
 	<form id="event-form">
 				<label for="event" class="lb_event">Event:&nbsp;</label>
-				<input type="text" class="input-medium" name="event" id="event" value=""></input>
+				<input type="text" class="input-medium" name="event" id="event" class="event_p" value=""></input>
 				<div class="details">
 					<label for="description" class="lb_event">Description:&nbsp;</label>
 					<div class="area" contenteditable="true"></div>

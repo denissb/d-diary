@@ -84,8 +84,8 @@ $(document).ready(function() {
 	$('#add-event').live('click', function(e) {
 		e.preventDefault();
 		var day = $('div.cal-active').find('.day').html();
-		var time = $('#time').val();
-		var event = $('#event').val();
+		var time = $('input.time_p').val();
+		var event = $('input.event_p').val();
 		var description = $('div.area')[0].innerHTML;
 		if(day != "" & event != "") {
 			$.ajax({
@@ -412,8 +412,8 @@ function(data, success) {
 		}
 	//Append html
 	this.prepend(
-				'<div class="alert ' + type + '">' + data 
-					+ '<a class="close" data-dismiss="alert" href="#">&times;</a></div>');
+		'<div class="alert ' + type + '">' + data 
+			+ '<a class="close" data-dismiss="alert" href="#">&times;</a></div>');
 	setTimeout("$('.alert').alert('close');", 5000);				
 	}				
 
