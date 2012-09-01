@@ -1,6 +1,6 @@
 /* Configuration */
 	var config = {};
-	config.home= 'http://simplecalendar.pagodabox.com/';
+	config.home= 'http://ci_intro.loc/';
 	config.popup = config.home + 'ajax/showpopup';
 	config.add_event = 	config.home + 'ajax/addevent';
 	config.events = config.home +'ajax/events';

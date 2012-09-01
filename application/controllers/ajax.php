@@ -97,7 +97,7 @@ class Ajax extends CI_Controller {
 				$month = date('m');
 				$year = date('Y');
 			} 	
-		$data['month_name'] = date("F");
+		$data['month_name'] = date("F",mktime(0,0,0,$month,1,$year)); 
 		$data['day'] = $day;
 		$data['year'] = &$year;
 		$this->load->model('Simplecalendar');
