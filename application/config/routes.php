@@ -38,9 +38,9 @@
 |
 */
 
-$route['default_controller'] ='simplecal';
+$route['default_controller'] ='about';
 $route['404_override'] = '';
-$route['show/(:any)'] = 'simplecal/show/$1';
+//$route['show/(:any)'] = 'simplecal/show/$1';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

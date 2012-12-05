@@ -1,8 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/* Author: Jorge Torres
- * Description: Login model class 
- * Modified for use in a Simplecalendar app =)
- */
+
 class Login_model extends CI_Model{
     function __construct(){
         parent::__construct();
@@ -13,7 +10,11 @@ class Login_model extends CI_Model{
         $username = $this->security->xss_clean($this->input->post('username'));
         $password = $this->security->xss_clean($this->input->post('password'));
 		$remember = $this->security->xss_clean($this->input->post('rememberme'));
- 
+        return $this->login($username, $password, $remember);
+    }
+    
+    // Logs in the specified user
+    public function login($username, $password, $remember) {
         // Prep the query
         $this->db->where('username', $username);
         $this->db->where('password', $this->prep_password($password));
@@ -30,7 +31,8 @@ class Login_model extends CI_Model{
                     'fname' => $row->f_name,
                     'lname' => $row->l_name,
                     'username' => $row->username,
-                    'validated' => true
+                    'validated' => true,
+					'with_fb' => false
                     );
             $this->session->set_userdata($data);
 			// Remember user to keep them signed in
@@ -43,6 +45,48 @@ class Login_model extends CI_Model{
         // then return false.
         return false;
 		}
+    }
+	
+	 // Logs in the specified user
+    public function fb_login($fb_id) {
+        // Prep the query
+		if(!$fb_id) {
+			return false;
+		}
+        $this->db->where('fb_id', $fb_id);
+        // Run the query
+        $query = $this->db->get('users');
+        // Let's check if there are any results
+        if($query->num_rows() == 1)
+        {
+            // If there is a user, then create session data
+            $row = $query->row();
+            $data = array(
+                    'userid' => $row->id,
+                    'fname' => $row->f_name,
+                    'lname' => $row->l_name,
+                    'username' => $row->username,
+					'with_fb' => true,
+                    'validated' => true,
+					'settings' => $row->settings
+                    );
+            $this->session->set_userdata($data);
+			$this->facebook->setExtendedAccessToken();
+			$this->log_ip($row->id);
+			// Remember user to keep them signed in
+            return true;
+        } 
+		if($query->num_rows() == 0) 
+		{
+			// If the previous process did not validate
+			// then register a new user
+			$this->load->model('signup_model');
+			if($this->signup_model->fb_register($fb_id))
+				{
+					return true;
+				}
+		}
+		return false;
     }
 	
 	// Generate a persistant login cookie
@@ -58,7 +102,7 @@ class Login_model extends CI_Model{
 				array(
 				'name' => 'Remembered_auth',
 				'value'  => urlencode(serialize($data)),
-				'expire' => '172800' 
+				'expire' => '864000' 
 				)
 			);
 		}
@@ -95,9 +139,11 @@ class Login_model extends CI_Model{
 								'fname' => $row->f_name,
 								'lname' => $row->l_name,
 								'username' => $row->username,
-								'validated' => true
+								'validated' => true,
+								'with_fb' => $row->fb_id ? true : false
 								);
 						$this->session->set_userdata($data);
+						$this->log_ip($row->id);
 						// Set a new cookie
 						$this->remember($row->username);
 						return true;
@@ -115,5 +161,11 @@ class Login_model extends CI_Model{
 	{
 		return sha1($password.$this->config->item('encryption_key'));
 	}
+	
+	// Saves the users ip in a database encoded as a long integer
+	public function log_ip($user_id) {
+		$ip = ip2long($this->input->ip_address());
+		$this->db->set('last_ip', $ip)->where('id', $user_id)->update('users');
+	}	
 }
 ?>

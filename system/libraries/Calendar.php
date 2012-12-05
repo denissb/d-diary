@@ -147,7 +147,7 @@ class CI_Calendar {
 		$this->parse_template();
 
 		// Begin building the calendar output
-		$out = $this->temp['table_open'];
+		$out = str_replace('{year-month}', $year."-".$month, $this->temp['table_open']);
 		$out .= "\n";
 
 		$out .= "\n";
@@ -170,7 +170,6 @@ class CI_Calendar {
 
 		$this->temp['heading_title_cell'] = str_replace('{colspan}', $colspan, $this->temp['heading_title_cell']);
 		$this->temp['heading_title_cell'] = str_replace('{heading}', $this->get_month_name($month)."&nbsp;".$year, $this->temp['heading_title_cell']);
-
 		$out .= $this->temp['heading_title_cell'];
 		$out .= "\n";
 

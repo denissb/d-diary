@@ -6,6 +6,7 @@ class Login extends CI_Controller {
         parent::__construct();
 		// Load the model
         $this->load->model('login_model');
+		// Try to login if facebook auth detected
     }
 
 	public function index($msg = NULL)
@@ -14,15 +15,30 @@ class Login extends CI_Controller {
 		if($this->login_model->catch_remembered()) {
 			redirect('simplecal');
 		}
+		$user = $this->facebook->getUser();
+		if($user) {
+			if($this->login_model->fb_login($user)) {
+				redirect('simplecal');
+			}
+		}	
+		
+		$links[] = 	"<div id=\"fbLogin\"><span><a class=\"fb_button fb_button_medium\"><span class=\"fb_button_text\">Login</span></a></span></div>";
+		$links[] =	"<a href=\"".base_url()."login\" id=\"menu-active\">Login (no fb)</a></li>";
+		$links[] = 	"<a href=\"".base_url()."signup\">Signup (no fb)</a>";
+		
+		$links[] = "<a href=\"".base_url()."about\">About</a>";
+		$attributes = array('class' => 'nav');
+		
 		// Load the view and pass in auth data (if such is present)
 		$data['msg'] = $msg;
-		$this->load->view('header');
-		$this->load->view('login_view', $data);
-		$this->load->view('footer');
+		$data['navlist'] = ul($links,$attributes);
+		$this->load->view('header/header', $data);
+		$this->load->view('body/login_view', $data);
+		$this->load->view('footer/footer_public');
 	}
 	
 	public function process(){
-        // Validate the user can login
+        // Validate the user
         $result = $this->login_model->validate();
         // Now we verify the result
         if(!$result){
@@ -31,10 +47,8 @@ class Login extends CI_Controller {
 				<a class='close' data-dismiss='alert' href='#''>&times;</a></div>";
             $this->index($msg);
         }else{
-            // If user did validate,
             // Send them to members area
             redirect('simplecal');
         }
-    }
-	
+    }	
 }

@@ -806,13 +806,6 @@
     padding-left: 10px;
   }
   
-  .toggle-cal {
-	display: inline;
-	position: relative;
-	top: -2px;
-	left: 5px;
-  }
-  
   th h3 { display:inline-block; }
 }
 
@@ -821,15 +814,32 @@
     height: auto !important;
     overflow: visible !important;
 	}
+
+	#friends_birthdays h3 { font-size: 15px;}
+	#friends_birthdays .well { padding: 2px 10px;}
+	#friends_birthdays a.btn-mini { position: relative; top: 2px; margin-left: 3px;}
 }
 
 
 /* My styles */
-@media (max-width: 1024px) {
+@media (max-width: 1010px) {
 
 .cal-week-row {
 	line-height: 1.3em;
 	font-size: 1.4em;
+}
+
+.brand {
+	position:relative;
+	left: 10px;
+}
+
+#fbLogin {
+	margin: 0 14px 5px;
+}
+
+#fbLogout {
+	padding: 3px 15px;
 }
 
 #active-date {

@@ -5,12 +5,13 @@ class Ajax extends CI_Controller {
 	function __construct() 
 	{
 		parent::__construct();
-		$this->check_isvalidated();
-		if(!$this->input->is_ajax_request()) { exit('This is not an ajax request! :)'); }
+		if(!$this->input->is_ajax_request() || !$this->session->userdata('validated')) 
+			{ exit('Invalid request!'); }
+		$this->lang->load('calendar');	
 	}
 	
 	public function showpopup() {
-		$this->load->view('add_pop');
+		$this->load->view('ajax/add_pop');
 	}
 	
 	//Add the event with AJAX
@@ -93,17 +94,18 @@ class Ajax extends CI_Controller {
 			}
 		$day = $this->input->post('day');
 		if( !isset($day) || $day == 'null' ) {	
-				$day = date('d');
+				$day = date('j');
 				$month = date('m');
 				$year = date('Y');
 			} 	
-		$data['month_name'] = date("F",mktime(0,0,0,$month,1,$year)); 
+		$data['month_name'] = lang('cal_'.strtolower(date("F",mktime(0,0,0,$month,1,$year)))); 
 		$data['day'] = $day;
 		$data['year'] = &$year;
+		$this->lang->load('ddiary');
 		$this->load->model('Simplecalendar');
 		if($day < 10) { $day= "0".$day; }
 		$data['events'] = $this->Simplecalendar->get_events("$year-$month-$day");
-		$this->load->view('day_events', $data);
+		$this->load->view('ajax/day_events', $data);
 		
 	}
 	
@@ -131,7 +133,7 @@ class Ajax extends CI_Controller {
 	
 	// Check if user logged in!
 	private function check_isvalidated(){
-        if(! $this->session->userdata('validated')){
+        if(!$this->session->userdata('validated')){
             redirect('login');
         }
     }

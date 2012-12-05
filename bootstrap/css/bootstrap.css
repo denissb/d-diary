@@ -1,3 +1,4 @@
+
 /*!
  * Bootstrap v2.0.4
  *
@@ -156,6 +157,8 @@ textarea {
 }
 
 body {
+  padding-top: 55px;
+  padding-bottom: 40px;
   margin: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 13px;
@@ -405,6 +408,8 @@ a:hover {
 }
 
 .container-fluid {
+  max-width: 1400px;
+  margin: 0 auto;
   padding-right: 20px;
   padding-left: 20px;
   *zoom: 1;
@@ -1148,6 +1153,15 @@ input[type="checkbox"][readonly] {
           box-shadow: 0 0 6px #d59392;
 }
 
+input.error, input.error:focus {
+ color: #b94a48;
+  border-color: #b94a48;
+  border-color: #953b39;
+  -webkit-box-shadow: 0 0 6px #d59392;
+  -moz-box-shadow: 0 0 6px #d59392;
+  box-shadow: 0 0 6px #d59392;
+}
+
 .control-group.error .input-prepend .add-on,
 .control-group.error .input-append .add-on {
   color: #b94a48;
@@ -1181,6 +1195,14 @@ input[type="checkbox"][readonly] {
           box-shadow: 0 0 6px #7aba7b;
 }
 
+input.success, input.success:focus {
+  color: #468847;
+  border-color: #468847;
+  border-color: #356635;
+  -webkit-box-shadow: 0 0 6px #7aba7b;
+  -moz-box-shadow: 0 0 6px #7aba7b;
+  box-shadow: 0 0 6px #7aba7b;
+}
 .control-group.success .input-prepend .add-on,
 .control-group.success .input-append .add-on {
   color: #468847;
@@ -2483,7 +2505,7 @@ table .span24 {
           border-radius: 4px;
 }
 
-.well, .event-item {
+.well, .event-item, .ext {
   min-height: 20px;
   padding: 19px 15px 8px;
   margin-bottom: 20px;
@@ -2496,6 +2518,11 @@ table .span24 {
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
      -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
           box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.ext {
+	background-color: #fff;
+	margin: 5px 0;
 }
 
 .well blockquote {
@@ -3304,6 +3331,7 @@ input[type="submit"].btn.btn-mini {
 
 .nav-tabs {
   border-bottom: 1px solid #ddd;
+  margin-bottom: 5px;
 }
 
 .nav-tabs > li {
@@ -3572,6 +3600,7 @@ input[type="submit"].btn.btn-mini {
   *z-index: 2;
   margin-bottom: 18px;
   overflow: visible;
+  border-bottom: 4px solid #007bd2;
 }
 
 .navbar-inner {
@@ -3816,7 +3845,8 @@ input[type="submit"].btn.btn-mini {
 }
 
 .navbar .nav .active > a,
-.navbar .nav .active > a:hover {
+.navbar .nav .active > a:hover ,
+#menu-active {
   color: #ffffff;
   text-decoration: none;
   background-color: #222222;
@@ -5131,6 +5161,11 @@ span.events {
 	float: right;
 }
 
+ @media all and (-webkit-min-device-pixel-ratio:10000), not all and (-webkit-min-device-pixel-ratio:0) {
+    .controlls { position:relative; top: -20px;}
+	.show-desc { position: absolute; right:50px; z-index: 100;}
+}
+
 .event-item .description {
 	border-top: 1px dashed #ccc;
 	padding-top: 5px;
@@ -5190,8 +5225,13 @@ div.wysiwyg {
 	color: #999;
 }
 
+h3.sel_month { display:inline; }
+
 .toggle-cal {
 	display: none;
+	position: relative;
+	top: -2px;
+	left: 5px;
   }
   
 .spacer {
@@ -5220,3 +5260,149 @@ div.wysiwyg {
 .remeber input {
 	margin-right: 5px;
 }
+
+table.register {
+	width:90%;
+	margin: 0 auto;
+}
+
+label.opt { color: #888; }
+
+#pass_result {position: absolute; margin: 6px 0 0 5px;}
+
+.brand:hover { color: #f6f6f6; }
+
+.slogan { padding: 4% 0 3% 7%; }
+
+.slogan h2 { color: #444; }
+
+.slogan_img { padding: 1% 0 0 6%;}
+
+ul.features { padding-left: 10%;}
+
+ul.features li {
+    padding: 2%;
+    font-size: 18px;
+    line-height: 22px;
+    color: #333;
+    text-shadow: 1px 1px #dcdcdc;
+}
+
+span.quote {
+    font-style:italic;
+    text-align:center;
+    color: #888;
+    text-shadow: 1px 1px #eee;
+}
+
+.full-page {
+	width:70%;
+	margin: 0 auto;
+	padding: 10px 15px;
+}
+
+a.terms { float: right;}
+
+.sidebar-nav { padding: 9px 0;}
+
+table.calendar {
+-webkit-touch-callout: none;
+-webkit-user-select: none;
+-khtml-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+}
+
+span.copy, #sendRequests {
+	padding-right: 15px;
+	display: inline;
+	vertical-align: middle;
+}
+
+/* Facebook experiments */
+
+.fb_button .fb_button_text, .fb_button_rtl .fb_button_text {
+background: #5F78AB url(http://static.ak.fbcdn.net/rsrc.php/v2/yl/x/FGFbc80dUKj.png);
+border-top: solid 1px #879AC0;
+border-bottom: solid 1px #1A356E;
+color: white;
+display: block;
+font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+font-weight: bold;
+padding: 2px 6px 3px 6px;
+margin: 1px 1px 0 21px;
+text-shadow: none;
+}
+
+.fb_button_medium, .fb_button_medium_rtl {
+font-size: 11px;
+line-height: 14px;
+}
+
+.fb_button_small .fb_button_text {
+padding: 2px 6px 3px;
+margin-left: 17px;
+}
+
+.fb_button_small, .fb_button_small_rtl {
+font-size: 10px;
+line-height: 10px;
+}
+
+.fb_button, .fb_button_rtl {
+cursor: pointer;
+}
+
+a.fb_button, a.fb_button_rtl, .fb_button, .fb_button_rtl {
+text-decoration: none;
+}
+
+.fb_button, .fb_button_rtl {
+	background: #29447E url(http://static.ak.fbcdn.net/rsrc.php/v2/yl/x/FGFbc80dUKj.png);
+	background-repeat: no-repeat;
+	cursor: pointer;
+	display: inline-block;
+	padding: 0 0 0 1px;
+	text-decoration: none;
+	outline: none;
+}
+
+#fbLogin {
+	padding: 8px 7px 0 0;
+}
+
+#fbLogout {
+	padding: 8px 0 0 7px;
+}
+
+/* Birthday plugin */
+
+#friends_birthdays .well { padding: 2px 15px;}
+
+#friends_birthdays h3 { display:inline;}
+
+#result_birthdays span {
+	display: block;
+	text-shadow: 1px 1px 1px #d0d0d0;
+}
+
+span.name {
+	font-weight: bold;
+	padding: 10px 4px 4px;
+	font-size: 14px;
+}
+
+span.date { font-size: 14px;}
+
+#friends_birthdays a.btn-mini { position: relative; top: 2px; margin-left: 7px;}
+
+.birthday { clear: both; height: 60px; margin: 5px 0; background: #fff; border-radius: 4px;}
+
+div.is_today { border: solid 1px #FC6363;}
+
+#result_birthdays .icon-gift { margin-left: 2px;}
+
+#result_birthdays img { float: left; margin: 5px 10px 5px 5px;}
+
+.plugin_buttons {float: right;}
