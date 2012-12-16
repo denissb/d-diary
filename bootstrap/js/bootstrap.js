@@ -313,8 +313,6 @@
   function clearMenus() {
     $(toggle).parent().removeClass('open')
   }
-
-
   /* DROPDOWN PLUGIN DEFINITION
    * ========================== */
 

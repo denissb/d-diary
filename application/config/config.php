@@ -71,6 +71,7 @@ $config['url_suffix'] = '';
 */
 
 $lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+$config['lang_short'] = $lang;
 switch ($lang){
     case "lv":
        $lang = "latvian";
@@ -329,7 +330,7 @@ $config['csrf_expire'] = 7200;
 | by the output class.  Do not 'echo' any values with compression enabled.
 |
 */
-$config['compress_output'] = FALSE;
+$config['compress_output'] = TRUE;
 
 /*
 |--------------------------------------------------------------------------

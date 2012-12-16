@@ -5,12 +5,14 @@ class Ajax extends CI_Controller {
 	function __construct() 
 	{
 		parent::__construct();
+		$this->set_fb_lang();
 		if(!$this->input->is_ajax_request() || !$this->session->userdata('validated')) 
 			{ exit('Invalid request!'); }
 		$this->lang->load('calendar');	
 	}
 	
 	public function showpopup() {
+		$this->lang->load('ddiary');
 		$this->load->view('ajax/add_pop');
 	}
 	
@@ -37,14 +39,23 @@ class Ajax extends CI_Controller {
 			// Possible outcomes (returns json cuz i needed 2 parameters)
 			switch($result) {
 				case is_array($result):
-					echo json_encode($result);
+					$this->output->set_output(json_encode($result));
 					break;
 				case 'reserved':
-					echo json_encode(array('result' => 'This time is already reserved'));
+					$this->output->set_output(json_encode(array('result' => lang('cal_time_reserved'))));
 					break;
 				default:
-					echo json_encode(array('result' => 'Error'));
+					$this->output->set_output(json_encode(array('result' => lang('cal_error'))));
 			}
+		}
+	}
+	
+	public function changedate() {
+		if($this->input->post('newdate') && $this->input->post('id')) {
+			$this->load->model('Simplecalendar');
+			$result = $this->Simplecalendar->change_date($this->security->xss_clean($this->input->post('id')),
+				$this->security->xss_clean($this->input->post('newdate')));
+			$this->output->set_output($result ? 'changed' : 'Error changing event');
 		}
 	}
 	
@@ -73,13 +84,13 @@ class Ajax extends CI_Controller {
 			// Possible outcomes
 			switch($result) {
 				case "edited":
-					echo 'Changes saved!';
+					$this->output->set_output('Changes saved!');
 					break;
 				case "reserved":
-					echo 'reserved';
+					$this->output->set_output('reserved');
 					break;
 				default:
-					echo 'error';
+					$this->output->set_output('error');
 			}
 		}
 	}
@@ -100,13 +111,13 @@ class Ajax extends CI_Controller {
 			} 	
 		$data['month_name'] = lang('cal_'.strtolower(date("F",mktime(0,0,0,$month,1,$year)))); 
 		$data['day'] = $day;
+		$data['month'] = &$month;
 		$data['year'] = &$year;
 		$this->lang->load('ddiary');
 		$this->load->model('Simplecalendar');
 		if($day < 10) { $day= "0".$day; }
 		$data['events'] = $this->Simplecalendar->get_events("$year-$month-$day");
 		$this->load->view('ajax/day_events', $data);
-		
 	}
 	
 	// Delete event with post by ajax
@@ -114,9 +125,9 @@ class Ajax extends CI_Controller {
 		if( $id = $this->input->post('id') ) {
 			$this->load->model('Simplecalendar');
 			$result = $this->Simplecalendar->del_event($id);
-			echo ($result ? 'deleted' : 'Error deleting event'); }
+			$this->output->set_output($result ? 'deleted' : 'Error deleting event'); }
 		else {
-			echo 'Error deleting event';
+			$this->output->set_output('Error deleting event');
 		}
 	}
 	
@@ -125,9 +136,9 @@ class Ajax extends CI_Controller {
 		if( $id = $this->input->post('id') ) {
 			$this->load->model('Simplecalendar');
 			$result = $this->Simplecalendar->done_event($id);
-			echo ($result ? 'done' : 'Error marking event'); }
+			$this->output->set_output($result ? 'done' : 'Error marking event'); }
 		else {
-			echo 'Error marking event';
+			$this->output->set_output('Error marking event');
 		}
 	}
 	
@@ -137,4 +148,23 @@ class Ajax extends CI_Controller {
             redirect('login');
         }
     }
+	
+	private function set_fb_lang() {
+		$lang = $this->session->userdata('language');
+		if($lang) {
+			$this->config->set_item('language',$this->session->userdata('language'));
+			switch ($lang){
+				case "latvian":
+				   $lang = "lv";
+				   break;
+				case "russian":
+				   $lang = "ru";
+				   break;   
+				default:
+				   $lang = "en";
+				   break;
+			}
+			$this->config->set_item('lang_short', $lang);
+		}	
+	}
 }	

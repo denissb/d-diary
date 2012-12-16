@@ -122,6 +122,16 @@ class Simplecalendar extends CI_Model {
         }
     }
 
+	public function change_date($id, $new_date) {
+		 if (is_int(intval($id)) && isset($new_date)) {
+			$data = array('date' => $new_date);
+            $query = $this->db->where('user_id', $this->userid)->where('id', $id)->update('events', $data);
+            return ($this->db->affected_rows() > 0 ? true : false);
+        } else {
+            return false;
+        }
+	}
+
     // Mark event as done
     public function done_event($id) {
         if (is_int(intval($id))) {

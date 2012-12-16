@@ -680,6 +680,14 @@
 }
 
 @media (max-width: 979px) {
+  #fbLogin {
+	margin: 0 14px 5px;
+   }
+
+  #fbLogout {
+	padding: 3px 15px;
+   }
+	
   body {
     padding-top: 0;
   }
@@ -822,7 +830,11 @@
 
 
 /* My styles */
-@media (max-width: 1010px) {
+@media (max-width: 1100px) {
+
+h2.topic {
+	font-size: 1.6em;
+}	
 
 .cal-week-row {
 	line-height: 1.3em;
@@ -832,14 +844,6 @@
 .brand {
 	position:relative;
 	left: 10px;
-}
-
-#fbLogin {
-	margin: 0 14px 5px;
-}
-
-#fbLogout {
-	padding: 3px 15px;
 }
 
 #active-date {
@@ -879,6 +883,14 @@ span.events {
 	border-width: 3px;
 	padding: 7px 0 3px 0;
 }
+
+div.plugin_buttons { float: left;}
+
+#friends_birthdays .well { min-height: 44px; }
+
+#friends_birthdays a.btn-mini { position: static; margin: 0 5px 5px 0;}
+
+#friends_birthdays h3 { line-height: 21px;}
 
 }
 

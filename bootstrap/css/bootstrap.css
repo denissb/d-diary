@@ -5015,13 +5015,15 @@ a.badge:hover {
 
 /* My styles */
 
+h2.topic {
+	font-size: 22px;
+	line-height: 28px;
+} 
+
 .cal-week-row {
 	text-align:center;
 	line-height: 1.5em;
 	font-size: 1.7em;
-}
-
-.cal-row {
 }
 
 .cal-cell {
@@ -5034,7 +5036,7 @@ a.badge:hover {
 div.day { 
 	font-size: 3em;
 	display:inline-block;
-	padding-right: 2px;
+	padding-right: 3px;
 }
 
 span.events {
@@ -5118,7 +5120,7 @@ span.events {
 .date-unit h2 {
 	text-align: left;
 	padding: 15px 10px;
-	font-size: 5em;
+	font-size: 4.1em;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-weight:normal;
 	display:inline;
@@ -5129,7 +5131,7 @@ span.events {
 }
 
 .date-unit span {
-	font-size: 3.2em;
+	font-size: 2.8em;
 }
 
 .date-unit .year {

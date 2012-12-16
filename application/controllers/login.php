@@ -7,6 +7,7 @@ class Login extends CI_Controller {
 		// Load the model
         $this->load->model('login_model');
 		// Try to login if facebook auth detected
+		$this->lang->load('ui');
     }
 
 	public function index($msg = NULL)
@@ -23,10 +24,10 @@ class Login extends CI_Controller {
 		}	
 		
 		$links[] = 	"<div id=\"fbLogin\"><span><a class=\"fb_button fb_button_medium\"><span class=\"fb_button_text\">Login</span></a></span></div>";
-		$links[] =	"<a href=\"".base_url()."login\" id=\"menu-active\">Login (no fb)</a></li>";
-		$links[] = 	"<a href=\"".base_url()."signup\">Signup (no fb)</a>";
+		$links[] =	"<a href=\"".base_url()."login\" id=\"menu-active\">".lang('ui_login_no_fb')."</a></li>";
+		$links[] = 	"<a href=\"".base_url()."signup\">".lang('ui_signup')."</a>";
 		
-		$links[] = "<a href=\"".base_url()."about\">About</a>";
+		$links[] = "<a href=\"".base_url()."about\">".lang('ui_about')."</a>";
 		$attributes = array('class' => 'nav');
 		
 		// Load the view and pass in auth data (if such is present)

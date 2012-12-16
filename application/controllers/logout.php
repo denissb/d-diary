@@ -15,9 +15,12 @@ class Logout extends CI_Controller {
 			delete_cookie('Remembered_auth');
 			$this->db->delete('remembered', array('user' => $data['user']));
 		}
+		$this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate, no-transform, max-age=0, post-check=0, pre-check=0");
+        $this->output->set_header("Pragma: no-cache");
+
 		// Logout from facebook and revoke acces token
 		if($user_id = $this->facebook->getUser()) {
-			$logout_url = array( 'next' => base_url()."about/" );
+			$logout_url = array( 'next' => base_url()."about/");
 			$url = $this->facebook->getLogoutUrl($logout_url);
 			redirect($url);
 		}	

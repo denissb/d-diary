@@ -5,7 +5,6 @@ config.popup = config.home + 'ajax/showpopup';
 config.add_event = config.home + 'ajax/addevent';
 config.events = config.home +'ajax/events';
 config.edit = config.home + 'ajax/editevent';
-config.changedate = config.home + 'ajax/changedate';
 config.remove = config.home + 'ajax/delete';
 config.done = config.home+ 'ajax/done';
 config.loc = window.location.pathname.split( '/' );
@@ -25,6 +24,7 @@ $(document).ready(function() {
     load_events($('#day-events'));
 	
 	//Hide calendar if hidden
+
 	
     // Register popover		
     $('div.cal-cell').popover({
@@ -110,7 +110,7 @@ $(document).ready(function() {
                 success: function(data) { 
                     if(data.result == 'Added') { 
                         change_count("+"); 
-                        $('.popover-add').response(ui_lang['cal_added'], true); 
+                        $('.popover-add').response(data.result, true); 
 						$("p.event-info").remove();
                         //Add element with javascript
                         add_event(data.id, time, event, description);
@@ -121,11 +121,11 @@ $(document).ready(function() {
                     }
                 },
                 fail: function() {
-                    $('.popover-add').response(ui_lang['server_side_error'], false); 
+                    $('.popover-add').response("Server side error", false); 
                 }
             });
         } else {
-            $('.popover-add').response(ui_lang['cal_no_values'], false); 
+            $('.popover-add').response("No values provided", false); 
         }
     });
 	
@@ -157,7 +157,7 @@ $(document).ready(function() {
         // Remake the button to save
         $(this).removeClass('edit-event btn-primary');
         $(this).addClass('btn-success save-event');
-        $(this).html(ui_lang['save']);
+        $(this).html('Save');
         // Enable editing of contents
         var event = $(this).parents(':eq(2)');
         event.find('span.time').attr('contentEditable', 'true').forcetime();
@@ -193,20 +193,20 @@ $(document).ready(function() {
                 },
                 success: function(data) { 
                     if( data == 'deleted' ) {
-                        event.parent().response(ui_lang['cal_evt_deleted'], true);
+                        event.parent().response("Event deleted", true);
                         change_count("-");
                         event.remove(); 
                     }
                     else {
-                        event.response(ui_lang['cal_error_del'], false);
+                        event.response(data, false);
                     }
                 },
                 fail: function() {
-                    alert(ui_lang['fail']);
+                    alert("Failed!");
                 }
             });
         } else {
-            alert(ui_lang['finish_editing']);
+            alert('Please finish editing');
         }
     });
 	
@@ -232,11 +232,11 @@ $(document).ready(function() {
                     }
                 },
                 fail: function() {
-                    alert(ui_lang['fail']);
+                    alert("Failed!");
                 }
             });
         } else {
-            alert(ui_lang['finish_editing']);
+            alert('Please finish editing!');
         }
     });	
 	
@@ -269,7 +269,7 @@ $(document).ready(function() {
                 success: function(data) { 
                     switch(data) {
                         case "error":
-                            event.response(ui_lang['cal_couldnt_save'], false);
+                            event.response("Changes couldn't be saved!", false);
                             //Disable editing of contents - not to confuse the user
                             time_el.attr('contentEditable', 'false');
                             event_el.attr('contentEditable', 'false');
@@ -277,10 +277,10 @@ $(document).ready(function() {
                             // Remake the button to save
                             pointer.removeClass('save-event btn-success');
                             pointer.addClass('btn-primary edit-event');
-                            pointer.html(ui_lang['edit']);
+                            pointer.html('Edit');
                             break;
                         case "reserved":
-                            event.response(ui_lang['cal_time_reserved']);
+                            event.response("Time already reserved!");
                             break;
                         default:
                             //On success disable editing of contents
@@ -292,13 +292,13 @@ $(document).ready(function() {
                             // Remake the button to save
                             pointer.removeClass('save-event btn-success');
                             pointer.addClass('btn-primary edit-event');
-                            pointer.html(ui_lang['edit']);
+                            pointer.html('Edit');
                             // Sort elements by time
                             $("div#event-container > div").tsort("span.time"); 
                     }		
                 },
                 fail: function() {
-                    event.response(ui_lang['fail'], false);
+                    event.response("Error", false);
                     // Disable editing of cotnents
                     time_el.attr('contentEditable', 'false');
                     event_el.attr('contentEditable', 'false');
@@ -306,58 +306,10 @@ $(document).ready(function() {
                 }
             });
         } else {
-            alert(ui_lang['no_values']);
+            alert('NO values');
         }
         desc_button();
     });
-	
-	//Add datepicker
-	$(document).on('hover', '.change-event', function(){
-		$(this).datepicker('show');
-		$(document).on('hover', '.delete-event', function(){
-			$('.change-event').datepicker('hide');
-		});
-		$(document).on('hover', '.done-event', function(){
-			$('.change-event').datepicker('hide');
-		});
-		$(this).datepicker()
-			.on('changeDate', function(ev){
-				var event = $(this).parents(':eq(4)');
-				var id = event.find('button.edit-event').attr('id');
-				var newdate = getFormatedDate(ev.date);
-				if(id != undefined) {
-					if( ev.date.getTime() == getSelDate().getTime()) {
-						return false;
-					}
-					$.ajax({
-						type: 'POST',
-						url: config.changedate,
-						data: {
-							id: id,
-							newdate: newdate
-						},
-						success: function(data) { 
-							if( data == 'changed' ) {
-								event.parent().response(ui_lang['cal_date_changed'] + newdate , true);
-								change_count("-");
-								find_increment(ev.date.getDate());
-								event.remove(); 
-							}
-							else {
-								event.response(ui_lang['cal_error_change'], false);
-							}
-						},
-						fail: function() {
-							alert(ui_lang['fail']);
-						}
-					});
-				} else {
-					alert(ui_lang['finish_editing']);
-				}
-				$(this).datepicker('hide');
-				ev.stopPropogation();
-			});
-	});
 	
     // Show the main adding form
     $('#show-add').live('click', function() {
@@ -408,17 +360,17 @@ $(document).ready(function() {
                         $("p.event-info").remove();
                         $("div#event-container > div").tsort("span.time");
                         $('#hide-add').trigger('click');
-                        $('div#event-container').response(ui_lang['cal_added'], true); 
+                        $('div#event-container').response(data.result, true); 
                     } else {
                         $('.popover-add').response(data.result, false);	
                     }
                 },
                 fail: function() {
-                    $('.popover-add').response(ui_lang['server_side_error'], false); 
+                    $('.popover-add').response("Server side error", false); 
                 }
             });
         } else {
-            $('.popover-add').response(ui_lang['no_values'], false); 
+            $('.popover-add').response("No values provided", false); 
         }
     });
 // End document.ready
@@ -455,10 +407,9 @@ jQuery.fn.forcetime =
     };
 
 // change_count event count
-function change_count(action, day) {
+function change_count(action) {
     //Increase event count asynch
-	var events = $('.cal-active').find('span.events'); 
-
+    var events = $('.cal-active').find('span.events');
     if(events.length > 0) {
         var count = events.text();
         count = parseInt(count);
@@ -518,11 +469,11 @@ function load_events(el, day) {
                 desc_button(); 
             },
             fail: function() {
-                el.html('<p>'+ ui_lang['server_side_error']+'</p>');
+                el.html('<p>Server side error</p>');
             }
         });
     } else {
-        alert(ui_lang['no_values']);
+        alert('NO values');
     }
 }		
 	
@@ -547,20 +498,15 @@ function add_event(id, time, event, description) {
     if(time == "") {
         time ="0:00";
     }
-	
-	// Maybe use a plugin or write my own?
-	var seldate = getFormatedDate(getSelDate());
-	
     var item = '<div class="event-item">' +
     '<div class="controlls">' + '<div class="btn-group">' +
-    '<button class="btn btn-primary edit-event" id="' + id + '">' + ui_lang['edit'] + '</button>' +
+    '<button class="btn btn-primary edit-event" id="' + id + '">Edit</button>' +
     '<button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">' +
     '<span class="caret"></span></button>' +
     '<ul class="dropdown-menu">' +
-    '<li><a href="#" class="done-event">' + ui_lang['done'] + '</a></li>' +
-	'<li><a href="#" class="change-event" data-date-format="yyyy-mm-dd" data-date="'+ seldate +'">'+ ui_lang['change_date'] +'</a></li>'+
+    '<li><a href="#" class="done-event">Done</a></li>' +
     '<li class="divider"></li>' +
-    '<li><a href="#" class="delete-event">'+ ui_lang['delete'] + '</a></li>' +
+    '<li><a href="#" class="delete-event">Delete</a></li>' +
     '</ul></div></div>';
     item+= '<span class="time">'+ time + '</span>' +
     '<h3 class="event-name">&nbsp;' + event + '</h3>';
@@ -581,47 +527,9 @@ function ready_time(el) {
     el.forcetime();
 }
 
-// Getting the selected date in js
-function getSelDate() {
-	var day = $('.cal-active').find('div.day').html();
-	var month_year = $('table.calendar').attr('id');
-	var year = month_year.match(/[0-9]{4}/);
-	var month = month_year.match(/[0-9]{2}$/);
-	if( day != null )
-		return (new Date(year, month - 1, day));
-	else
-		return (new Date());
-}
 /* Hiding calendar body - need rewriting */
 
-// Get the date in yyyy-mm-dd
-function getFormatedDate(date) {
-	var cd = date.getDate();
-	var cm = date.getMonth() + 1;
-	var cy = date.getFullYear();
-	var result = cy + "-" + cm + "-" + cd;
-	return result;
-}
 
 function hasScrollBar() {
 	return $('body').outerHeight() > $(window).height();
-}
-
-function find_increment(day) {
-	var target = $('#cal-body').find("div.day:textEquals('"+ day +"')");
-	target.removeClass('no-events');
-	events = target.parent().find('span.events');
-	if(events.length > 0) {
-		var count = events.text();
-        count = parseInt(count);
-		count++; 
-		events.text(count);
-	} else {
-		target.parent().append('<span class="events">1</span>');
-	}
-}
-
-$.expr[':'].textEquals = function(a, i, m) {
-    var match = $(a).text().match("^" + m[3] + "$")
-    return match && match.length > 0;                                                                                                                                                                                                                                            
 }

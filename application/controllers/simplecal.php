@@ -6,28 +6,27 @@ class Simplecal extends CI_Controller {
 	
 	function __construct() {
         parent::__construct();
+		$this->set_fb_lang();
         $this->check_isvalidated();
 		$this->settings = $this->session->userdata('settings');
+		$this->lang->load('ui');
 	}
 
 	public function index()
 	{	
 		$this->show();
-		$me = $this->facebook->api('/me');
-		$locale = $me;
-		var_dump($locale);
 	}
 
 	public function show($year='', $month='') {
 		// Determine the available links for the header
 		if (!$this->session->userdata('with_fb')) { 
-			$links[] = 	"<div id=\"fbLogin\"><span><a class=\"fb_button fb_button_medium\"><span class=\"fb_button_text\">Add facebook</span></a></span></div>";
-			$links[] = "<a href=\"".base_url()."logout\">Logout</a></li>";
+			$links[] = "<div id=\"fbLogin\"><span><a class=\"fb_button fb_button_medium\"><span class=\"fb_button_text\">".lang('ui_fb_add')."</span></a></span></div>";
+			$links[] = "<a href=\"".base_url()."logout\">".lang('ui_logout')."</a></li>";
 		}
-		$links[] = 	"<a href=\"".base_url()."settings\">Settings</a>";        
-		$links[] = "<a href=\"".base_url()."about\">About</a>";
+		$links[] = 	"<a href=\"".base_url()."settings\">".lang('ui_settings')."</a>";        
+		$links[] = "<a href=\"".base_url()."about\">".lang('ui_about')."</a>";
 		if ($this->session->userdata('with_fb')) {
-			$links[] = 	"<div id=\"fbLogout\"><span><a class=\"fb_button fb_button_medium\" href=\"".base_url()."logout\"><span class=\"fb_button_text\">Logout</span></a></span></div>";
+			$links[] = 	"<div id=\"fbLogout\"><span><a class=\"fb_button fb_button_medium\" href=\"".base_url()."logout\"><span class=\"fb_button_text\">".lang('ui_logout')."</span></a></span></div>";
 		}
 		$attributes = array('class' => 'nav');
 		$data['navlist'] = ul($links,$attributes);
@@ -48,6 +47,10 @@ class Simplecal extends CI_Controller {
 	
 	// Check if user logged in!
 	private function check_isvalidated(){
+		if(!$this->session->userdata('validated')){
+            redirect('login');
+		}
+	
 		if($this->facebook->getUser()) {
 			if(!$this->session->userdata('with_fb')) {
 				$this->load->model("signup_model");
@@ -58,8 +61,24 @@ class Simplecal extends CI_Controller {
 				}
 			}
 		}
-        if(!$this->session->userdata('validated')){
-            redirect('login');
-		}
     }
+	
+	private function set_fb_lang() {
+		$lang = $this->session->userdata('language');
+		if($lang) {
+			$this->config->set_item('language',$this->session->userdata('language'));
+			switch ($lang){
+				case "latvian":
+				   $lang = "lv";
+				   break;
+				case "russian":
+				   $lang = "ru";
+				   break;   
+				default:
+				   $lang = "en";
+				   break;
+			}
+			$this->config->set_item('lang_short', $lang);
+		}	
+	}
 }

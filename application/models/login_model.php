@@ -32,7 +32,8 @@ class Login_model extends CI_Model{
                     'lname' => $row->l_name,
                     'username' => $row->username,
                     'validated' => true,
-					'with_fb' => false
+					'with_fb' => false,
+					'language' => false
                     );
             $this->session->set_userdata($data);
 			// Remember user to keep them signed in
@@ -68,7 +69,8 @@ class Login_model extends CI_Model{
                     'username' => $row->username,
 					'with_fb' => true,
                     'validated' => true,
-					'settings' => $row->settings
+					'settings' => $row->settings,
+					'language' => $this->facebook->get_lang()
                     );
             $this->session->set_userdata($data);
 			$this->facebook->setExtendedAccessToken();
