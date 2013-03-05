@@ -1,11 +1,11 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Ajax extends CI_Controller {
+class Ajax extends MY_Controller {
 
 	function __construct() 
 	{
 		parent::__construct();
-		$this->set_fb_lang();
+		$this->set_lang();
 		if(!$this->input->is_ajax_request() || !$this->session->userdata('validated')) 
 			{ exit('Invalid request!'); }
 		$this->lang->load('calendar');	
@@ -148,23 +148,4 @@ class Ajax extends CI_Controller {
             redirect('login');
         }
     }
-	
-	private function set_fb_lang() {
-		$lang = $this->session->userdata('language');
-		if($lang) {
-			$this->config->set_item('language',$this->session->userdata('language'));
-			switch ($lang){
-				case "latvian":
-				   $lang = "lv";
-				   break;
-				case "russian":
-				   $lang = "ru";
-				   break;   
-				default:
-				   $lang = "en";
-				   break;
-			}
-			$this->config->set_item('lang_short', $lang);
-		}	
-	}
 }	

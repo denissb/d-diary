@@ -13,7 +13,7 @@ class Fb_model extends CI_Model {
 	public function get_user() {
 		try {
 			// Fetch the viewer's basic information
-			$basic = $this->facebook->api('/me');
+			$basic = $this->facebook->api('/'.$this->user_id);
 		} catch (FacebookApiException $e) {
 			  return false;
 		}
@@ -41,10 +41,10 @@ class Fb_model extends CI_Model {
 	}
 	
 	public function get_permissions() {
-		$full_array = $this->facebook->api('me/permissions');
+		$full_array = $this->facebook->api('/'.$this->user_id.'/permissions');
 		$array = $this->facebook->idx($full_array, 'data');
 		return $array[0];
 	}
 	
-}	
+}
 ?>

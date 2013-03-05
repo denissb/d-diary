@@ -1,12 +1,12 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Simplecal extends CI_Controller {
+class Simplecal extends MY_Controller {
 	
 	public $settings = array();
 	
 	function __construct() {
         parent::__construct();
-		$this->set_fb_lang();
+		$this->set_lang();
         $this->check_isvalidated();
 		$this->settings = $this->session->userdata('settings');
 		$this->lang->load('ui');
@@ -50,35 +50,16 @@ class Simplecal extends CI_Controller {
 		if(!$this->session->userdata('validated')){
             redirect('login');
 		}
-	
 		if($this->facebook->getUser()) {
 			if(!$this->session->userdata('with_fb')) {
 				$this->load->model("signup_model");
 				if($this->signup_model->add_fb($this->session->userdata('userid'), $this->facebook->getUser())) {
 					redirect('simplecal');
 				} else {
-					redirect('simplecal/error/fb_add');
+					redirect('signup/error/fb_add');
 				}
 			}
 		}
     }
 	
-	private function set_fb_lang() {
-		$lang = $this->session->userdata('language');
-		if($lang) {
-			$this->config->set_item('language',$this->session->userdata('language'));
-			switch ($lang){
-				case "latvian":
-				   $lang = "lv";
-				   break;
-				case "russian":
-				   $lang = "ru";
-				   break;   
-				default:
-				   $lang = "en";
-				   break;
-			}
-			$this->config->set_item('lang_short', $lang);
-		}	
-	}
 }

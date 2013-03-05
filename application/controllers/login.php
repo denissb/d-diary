@@ -23,7 +23,7 @@ class Login extends CI_Controller {
 			}
 		}	
 		
-		$links[] = 	"<div id=\"fbLogin\"><span><a class=\"fb_button fb_button_medium\"><span class=\"fb_button_text\">Login</span></a></span></div>";
+		$links[] = 	"<div id=\"fbLogin\"><span><a class=\"fb_button fb_button_medium\"><span class=\"fb_button_text\">".lang('ui_login')."</span></a></span></div>";
 		$links[] =	"<a href=\"".base_url()."login\" id=\"menu-active\">".lang('ui_login_no_fb')."</a></li>";
 		$links[] = 	"<a href=\"".base_url()."signup\">".lang('ui_signup')."</a>";
 		
@@ -44,7 +44,7 @@ class Login extends CI_Controller {
         // Now we verify the result
         if(!$result){
             // If user did not validate, then show them login page again
-			$msg ="<div class='alert alert-error'>Invalid username/password!
+			$msg ="<div class='alert alert-error'>".lang('ui_error_login')."
 				<a class='close' data-dismiss='alert' href='#''>&times;</a></div>";
             $this->index($msg);
         }else{

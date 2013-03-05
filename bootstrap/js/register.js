@@ -1,7 +1,7 @@
 ﻿$(document).ready(function() {
     
 	var config = {};
-	config.home = "http://simplecal.loc/";
+	config.home = "http://ddiary.loc/";
 	window.err_msg ="Please check all fields!"; // Storing error data
 	
     // Run email validation
@@ -46,7 +46,9 @@
                 data: {
                     username: $("#login-input").val(),
 					password: $("#pass-input").val(),
-					email: $("#email-input").val()
+					email: $("#email-input").val(),
+					terms: $("#agree-terms:checked").val(),
+					capatcha: $("#capatcha-confirm").val()
                 },
                 success: function(data) { 
                     if(data == 'valid') { 
@@ -62,6 +64,20 @@
         } else {
             $('.register').response(window.err_msg, false); 
         } 
+    });
+	
+	    // Run password strength check   
+    $("#refresh_capatcha").click(function() {
+		$.ajax({
+            type: 'GET',
+            url: config.home + 'signup/capatcha',
+            success: function(data) { 
+					$('.terms_td').children("img").replaceWith(data);
+                },
+                fail: function() {
+                    $('.register').response("Server side error", false); 
+                }
+            });
     });
     
 // End document ready    

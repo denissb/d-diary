@@ -815,6 +815,8 @@
   }
   
   th h3 { display:inline-block; }
+  
+  .input-large { max-width: 165px; }
 }
 
 @media (min-width: 980px) {
@@ -823,9 +825,9 @@
     overflow: visible !important;
 	}
 
-	#friends_birthdays h3 { font-size: 15px;}
-	#friends_birthdays .well { padding: 2px 10px;}
-	#friends_birthdays a.btn-mini { position: relative; top: 2px; margin-left: 3px;}
+	#friends_events h3, #friends_birthdays h3 { font-size: 15px;}
+	#friends_events .well, #friends_birthdays .well { padding: 2px 10px;}
+	#friends_events a.btn-mini, #friends_birthdays a.btn-mini { position: relative; top: 2px; margin-left: 3px;}
 }
 
 
@@ -886,11 +888,11 @@ span.events {
 
 div.plugin_buttons { float: left;}
 
-#friends_birthdays .well { min-height: 44px; }
+#friends_events .well, #friends_birthdays .well { min-height: 44px; }
 
-#friends_birthdays a.btn-mini { position: static; margin: 0 5px 5px 0;}
+#friends_events a.btn-mini, #friends_birthdays a.btn-mini { position: static; margin: 0 5px 5px 0;}
 
-#friends_birthdays h3 { line-height: 21px;}
+#friends_events h3, #friends_birthdays h3 { line-height: 21px;}
 
 }
 

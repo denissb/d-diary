@@ -14,11 +14,15 @@ class Login_model extends CI_Model{
     }
     
     // Logs in the specified user
-    public function login($username, $password, $remember) {
+    public function login($username, $password, $remember, $hashed = false) {
         // Prep the query
         $this->db->where('username', $username);
-        $this->db->where('password', $this->prep_password($password));
- 
+		
+		if(!$hashed) 
+			$this->db->where('password', $this->prep_password($password));
+		else
+			$this->db->where('password', $password);
+			
         // Run the query
         $query = $this->db->get('users');
         // Let's check if there are any results
@@ -26,6 +30,15 @@ class Login_model extends CI_Model{
         {
             // If there is a user, then create session data
             $row = $query->row();
+			
+			// if user is linked with facebook and is logged in to it
+			if($row->fb_id != "") {
+				$this->load->model('fb_model');
+				if($this->facebook->getUser()) {
+					return $this->fb_login($row->fb_id);
+				}
+			}
+			
             $data = array(
                     'userid' => $row->id,
                     'fname' => $row->f_name,
@@ -33,7 +46,7 @@ class Login_model extends CI_Model{
                     'username' => $row->username,
                     'validated' => true,
 					'with_fb' => false,
-					'language' => false
+					'language' => $row->language
                     );
             $this->session->set_userdata($data);
 			// Remember user to keep them signed in
@@ -70,7 +83,7 @@ class Login_model extends CI_Model{
 					'with_fb' => true,
                     'validated' => true,
 					'settings' => $row->settings,
-					'language' => $this->facebook->get_lang()
+					'language' => $row->language == "" ? $this->facebook->get_lang() : $row->language
                     );
             $this->session->set_userdata($data);
 			$this->facebook->setExtendedAccessToken();
@@ -83,7 +96,7 @@ class Login_model extends CI_Model{
 			// If the previous process did not validate
 			// then register a new user
 			$this->load->model('signup_model');
-			if($this->signup_model->fb_register($fb_id))
+			if($this->signup_model->fb_register($fb_id) == "valid")
 				{
 					return true;
 				}

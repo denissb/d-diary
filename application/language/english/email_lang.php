@@ -19,6 +19,15 @@ $lang['email_smtp_auth_pw'] = "Failed to authenticate password. Error: %s";
 $lang['email_smtp_data_failure'] = "Unable to send data: %s";
 $lang['email_exit_status'] = "Exit status code: %s";
 
+$lang['email_reg_subject']				= 'D-diary: confirm registration';
+$lang['email_reg_message']				= '<strong>Thank you, you have successfully registered an account in <a href="http://simplecal.loc">D-diary</a>!<br/><br/>To start using your diary please activate your new account by visiting the following link:</strong><br/>';
+$lang['email_reg_message_2']			= '<br/> This activation link is valid till ';
+$lang['email_reg_cancel']				= 'If you accidentaly recived this message, please cancel the registration using the following link:<br />';
 
+$lang['email_new_pass_subject']			= 'D-diary: unlinking of this facebook account';
+$lang['email_new_pass_user']			= 'Username: ';
+$lang['email_new_pass_pass'] 			= 'Password: ';
+$lang['email_new_pass_message']			= '<span><strong>This facebook profile was successfuly unlinked form your D-diary account.<br/>To get access to your D-diary account please use the following information:<br/></span><br/>';
+$lang['email_new_pass_message_2']		= '<br/><span>This facebook profile can no longer be used to create a new D-diary account. It can only be linked to another D-diary account or back to your old account.</span>';
 /* End of file email_lang.php */
 /* Location: ./system/language/english/email_lang.php */

@@ -962,7 +962,7 @@ input[type="checkbox"]:focus {
 }
 
 .input-medium {
-  width: 200px;
+  width: 175px;
 }
 
 .input-large {
@@ -4451,6 +4451,10 @@ input[type="submit"].btn.btn-mini {
           box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
 }
 
+.popover-inner.small {
+	width: 246px;
+}
+
 .popover-title, .popover-add {
   padding: 9px 9px 0px;
   line-height: 1;
@@ -5027,7 +5031,7 @@ h2.topic {
 }
 
 .cal-cell {
-	padding: 18px 7px 12px 1px;
+	padding: 16px 7px 10px 1px;
 	text-align: center;
 }
 
@@ -5059,7 +5063,7 @@ span.events {
 	border: 4px solid #0074cc;
 	border-color: #0086ed #0074cc #0062ae;
 	box-shadow: 2px 2px 2px #bfbfbf;
-	padding: 13px 0 8px 0;
+	padding: 11px 0 6px 0;
 	border-radius: 4px;
 	cursor: pointer;
 }
@@ -5268,7 +5272,16 @@ table.register {
 	margin: 0 auto;
 }
 
-label.opt { color: #888; }
+#reg-controls {
+	text-align: left;
+	padding: 5px 10px 5px 0;
+}
+
+table.register td { text-align: right; }
+
+table.register buttons { text-align: center;}
+
+.opt { color: #888; }
 
 #pass_result {position: absolute; margin: 6px 0 0 5px;}
 
@@ -5378,33 +5391,48 @@ text-decoration: none;
 	padding: 8px 0 0 7px;
 }
 
-/* Birthday plugin */
+/* Plugins */
 
-#friends_birthdays .well { padding: 2px 15px;}
+#friends_events .well, #friends_birthdays .well { padding: 2px 15px;}
 
-#friends_birthdays h3 { display:inline;}
+#friends_events h3, #friends_birthdays h3 { display:inline;}
 
-#result_birthdays span {
+#result_events span, #result_birthdays span {
 	display: block;
 	text-shadow: 1px 1px 1px #d0d0d0;
 }
 
 span.name {
 	font-weight: bold;
-	padding: 10px 4px 4px;
 	font-size: 14px;
 }
 
-span.date { font-size: 14px;}
+.birthday span.name { padding: 10px 4px 4px; }
 
-#friends_birthdays a.btn-mini { position: relative; top: 2px; margin-left: 7px;}
+span.date, span.place { font-size: 14px; line-height: 1.4em;}
 
-.birthday { clear: both; height: 60px; margin: 5px 0; background: #fff; border-radius: 4px;}
-
-div.is_today { border: solid 1px #FC6363;}
-
-#result_birthdays .icon-gift { margin-left: 2px;}
-
-#result_birthdays img { float: left; margin: 5px 10px 5px 5px;}
+#friends_events a.btn-mini, #friends_birthdays a.btn-mini { position: relative; top: 2px; margin-left: 7px;}
 
 .plugin_buttons {float: right;}
+
+.plugin_buttons.bottom { padding-bottom: 5px; position: relative; top: -2px;}
+
+/* Friends birthdays and events*/
+
+.event, .birthday { clear: both; margin: 5px 0; margin-right: 2px; background: #fff; border-radius: 4px;}
+
+.birthday { height: 60px;}
+
+.event {padding: 2px 0;}
+
+div.birthday.is_today { border: solid 1px #0074cc; }
+
+/*div.event.is_today { border: solid 1px #0074cc}*/
+
+#result_events .icon-bell, #result_birthdays .icon-gift { margin-left: 3px;}
+
+#result_events i { margin-right: 5px;}
+
+div.img_holder { float: left; margin: 5px 10px 5px 5px; max-height: 82px; overflow:hidden; min-height: 52px; min-width: 50px;}
+
+a.img_holder { max-height: 82px; overflow:hidden;}

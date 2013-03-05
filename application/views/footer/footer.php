@@ -4,7 +4,7 @@
 	<a class="terms" href="<?php echo base_url()."policy"; ?>" ><?php echo lang('ui_terms'); ?></a>
 	<?php if ($this->session->userdata('with_fb')) { ?>
 	<div id="sendRequests"><span><a class="fb_button fb_button_small"><span class="fb_button_text"><?php echo lang('ui_invite'); ?></span></a></span></div>
-	<fb:like data-href="http://apps.facebook.com/d-diary/" width="350" layout="button_count" 
+	<fb:like data-href="https://apps.facebook.com/d-diary/" width="350" layout="button_count" 
 		style="position: relative; top: 4px; height: 20px;"/>
 	<?php } ?>
 </footer>

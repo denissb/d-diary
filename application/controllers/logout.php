@@ -4,49 +4,29 @@ class Logout extends CI_Controller {
 	
 	function __construct() {
         parent::__construct();
+		$this->load->model('logout_model');
 	}	
 	
 	public function index()
 	{	
-		$this->session->sess_destroy();
-		$this->load->helper('cookie');
-		if($data = get_cookie('Remembered_auth', TRUE)) {
-			$data = unserialize(urldecode($data)); 
-			delete_cookie('Remembered_auth');
-			$this->db->delete('remembered', array('user' => $data['user']));
-		}
-		$this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate, no-transform, max-age=0, post-check=0, pre-check=0");
-        $this->output->set_header("Pragma: no-cache");
-
-		// Logout from facebook and revoke acces token
-		if($user_id = $this->facebook->getUser()) {
-			$logout_url = array( 'next' => base_url()."about/");
-			$url = $this->facebook->getLogoutUrl($logout_url);
-			redirect($url);
-		}	
-		redirect('login');
+		redirect($this->logout_model->logout());
 	}
 	
-	public function app()
-	{
-		$this->session->sess_destroy();
-		$this->load->helper('cookie');
-		if($data = get_cookie('Remembered_auth', TRUE)) {
-			$data = unserialize(urldecode($data)); 
-			delete_cookie('Remembered_auth');
-			$this->db->delete('remembered', array('user' => $data['user']));
+	public function app($type="")
+	{	
+		// Retreve the email adress of the user
+		if($type == "unlink") {
+			$query = $this->db->distinct()->select('email')->from('users')
+				->where('id', $this->session->userdata('userid'))->get();
+			$row = $query->result();
+			$email = $row[0]->email;
+			if($this->logout_model->send_new_pass($email, $this->facebook->getUser()))
+				{
+					redirect($this->logout_model->logout_fb());
+				} else {
+					redirect('settings');
+				}
 		}
-		// Logout from facebook and revoke acces token
-		if($user_id = $this->facebook->getUser()) {
-			$access_token=$this->facebook->getAccessToken();
-			$result = $this->facebook->api(array(
-				'method' => 'auth.revokeAuthorization',
-				'uid' =>$user_id,
-				'access_token'=>$access_token
-			));
-			redirect('about');
-			exit;
-		}	
-		redirect('login');
+		redirect($this->logout_model->logout_fb());
 	}
 }

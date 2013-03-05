@@ -155,4 +155,3 @@ class Simplecalendar extends CI_Model {
     }
 
 }
-

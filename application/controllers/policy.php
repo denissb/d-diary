@@ -2,13 +2,13 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Policy extends CI_Controller {
+class Policy extends MY_Controller {
 
 	public $links= array();
 
     function __construct() {
         parent::__construct();
-		$this->set_fb_lang();
+		$this->set_lang();
 		$this->lang->load('ui');
 	}
 
@@ -36,23 +36,4 @@ class Policy extends CI_Controller {
         $this->load->view('body/policy_view', $data);
         $this->load->view('footer/footer_public');
     }
-	
-	private function set_fb_lang() {
-		$lang = $this->session->userdata('language');
-		if($lang) {
-			$this->config->set_item('language',$this->session->userdata('language'));
-			switch ($lang){
-				case "latvian":
-				   $lang = "lv";
-				   break;
-				case "russian":
-				   $lang = "ru";
-				   break;   
-				default:
-				   $lang = "en";
-				   break;
-			}
-			$this->config->set_item('lang_short', $lang);
-		}	
-	}
 }	

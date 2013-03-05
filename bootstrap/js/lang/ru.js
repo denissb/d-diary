@@ -1,5 +1,7 @@
 var ui_lang = new Array();
 
+ui_lang['app_advert'] = 'Попробуйте D-diary, это полезное приложение!';
+
 ui_lang['fail'] = 'Фейл!';
 
 ui_lang['cal_added'] = 'Событие добавлено';
@@ -21,3 +23,18 @@ ui_lang['change_date'] = 'Изменить дату';
 ui_lang['server_side_error'] = 'Произошла ошибка на сервере';
 ui_lang['finish_editing'] = 'Пожалуйсто закончите редактирование';
 ui_lang['no_values'] = 'Не указаны значения';
+ui_lang['facebook_unlink'] = 'Вы уверены что хотите отсоединить facebook профиль?';
+
+/* Facebook plugins */
+ui_lang['month_names'] = [ "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", 
+    "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь" ];
+//friends birthdays	
+ui_lang['birthdays'] = 'Дни рождения';
+//friends events
+ui_lang['events'] = 'События';
+//Universal
+ui_lang['past'] = 'Прошедшые';
+ui_lang['upcoming'] = 'Грядущие';
+ui_lang['show_more'] = 'Показать еще..';	
+ui_lang['find'] = 'Поиск';
+ui_lang['no_change'] = 'Вами небыло сделано изменений';

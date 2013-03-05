@@ -2,32 +2,71 @@
 
 class Settings_model extends CI_Model {
 
-	// Array containing the list of available settings (yes, yes.. repeating fb permission names but can be different)
-	public $settings = array('friends_events', 'friends_birthday');
-
+	// Array containing the list of available settings (yes, yes.. repeating fb permission names for fb extensions but can be different)
+	public $settings = array('friends_events', 'friends_birthday', 'publish_stream');
+	public $user_settings = array('f_name', 'l_name', 'language');
+	
 	function __construct(){
         parent::__construct();
     }
 	
 	// Updates the settings of the current facebook user
 	public function update_settings($settings, $user_id) {
-		if($settings == false) {
+		if($settings == false || $settings === 'null') {
 			$this->db->set('settings', "")->where('fb_id', $user_id)->update('users');
 			$this->session->unset_userdata('settings');
 			return;
 		}
-		$settings = json_encode($settings);
+		
+		if(is_array($settings))
+			$settings = json_encode($settings);
+		
 		$this->db->set('settings', $settings)->where('fb_id', $user_id)->update('users');
 		$this->session->set_userdata('settings', $settings);
 	}
+	
+	public function update_user_settings($settings, $user_id) {
+		$data = array();
+		foreach($settings as $item => $value)
+			{
+				if(in_array($item, $this->user_settings) && $value!="") {
+					$data[$item] = trim($this->security->xss_clean($value));
+				}
+			}
+		if(!empty($data)) {
+			$this->db->where('id', $user_id)->update('users', $data);
+			// TD: remove set_fb_lang and some other methods to a new controler base class :| Unify naming convention between session and db varibale names
+			$this->session->set_userdata(array(
+                    'fname' => $data['f_name'],
+                    'lname' => $data['l_name'],
+					'language' => $data['language']
+                    ));
+			return $this->db->affected_rows() ? true : false;
+		}	
+	}
 
-	// Returns the users setings in a php array
+	// Returns the facebook setings in a php array
 	public function get_settings($user_id) {
 		$query = $this->db->select('settings')->from('users')->where('fb_id',$user_id)->get();
 		$settings = $query->result();
-		$settings = $settings[0]->settings;
-		if($settings != "") {
-			$settings = json_decode($settings, true);
+		$result = json_decode(stripslashes($settings[0]->settings), true);
+		if(is_array($result)) {
+			return $result;
+		} else if (!is_array($result)) {
+				$result = json_decode($result, true);
+				if (json_last_error() !== JSON_ERROR_NONE) {
+					return null;
+				}
+				return $result;
+			}
+	}
+	
+	// Returns user setings in a php array
+	public function get_user_settings($user_id) {
+		$query = $this->db->select(implode("," ,$this->user_settings))->from('users')->where('id',$user_id)->get();
+		$settings = $query->result();
+		if(!empty($settings)) {
+			$settings = $settings[0];
 			return $settings;
 		} 
 		return null;
@@ -50,16 +89,30 @@ class Settings_model extends CI_Model {
 	
 	// Parses an JSON object, removing permissions non existant in the application
 	public function parse_permissions($permissions) {
-		$a1 = json_decode( $this->session->userdata('settings'), true );
-		$a2 = json_decode( $permissions, true );
-		$permissions = array_merge_recursive( $a1, $a2 );
-		$result = array();
-		foreach($permissions as $key => $value) {
-			if(in_array($key, $this->settings)) {
-				$result[$key] = $value;
+		if(strlen($this->session->userdata('settings')) > 5) {
+			$a1 = json_decode(stripslashes($this->session->userdata('settings')), true);
+			if (json_last_error() !== JSON_ERROR_NONE) {
+				$a1 = array();
 			}
+		} else {
+			$a1 = array();
 		}
+		if(!is_array($permissions)) {
+			$a2 = json_decode($permissions, true );
+		} else {
+			$a2 = $permissions;
+		}
+		$merged = array_merge( $a1, $a2 );
+		
+		$result = array();
+		foreach($merged as $key => $value) {
+			if(in_array($key, $this->settings) && array_key_exists($key, $a2)) {
+				$result[$key] = $value;
+			} else {
+			
+			}
+		}	
+		
 		return json_encode($result);
 	}
-
 }

@@ -5,21 +5,21 @@
         </div>
         <div class="span4">
             <form class="well form form-vertical login" action="<?php echo base_url(); ?>login/process" method="post" name="process">
-                <h2 class="shadow">D-diary login</h2>
+                <h2 class="shadow"><?php echo lang('ui_login_msg'); ?></h2>
                 <hr />
                 <?php if (!is_null($msg)) echo $msg; ?>
-                <table>
+                <table style="margin-left: 3%;">
                     <tr>
-                        <td><label>Login:</label></td>
-                        <td><input type="text" name="username" class="input-large" placeholder="Login"></td>
+                        <td><label><?php echo lang('ui_login_name'); ?>:</label></td>
+                        <td><input type="text" name="username" class="input-large" placeholder="<?php echo lang('ui_login_name'); ?>"></td>
                     </tr>
                     <tr>
-                        <td><label>Password:</label></td>
-                        <td><input type="password" name="password" class="input-large" placeholder="Password"></td>
+                        <td><label><?php echo lang('ui_password'); ?>:</label></td>
+                        <td><input type="password" name="password" class="input-large" placeholder="<?php echo lang('ui_password'); ?>"></td>
                     </tr>
                 </table>
-                <button type="submit" class="btn btn-primary" value="login">Sign in</button>
-                <label class="remember">Stay Signed in 
+                <button type="submit" class="btn btn-primary" value="login"><?php echo lang('ui_login'); ?></button>
+                <label class="remember"><?php echo lang('ui_remember_me'); ?>
                     <input type="checkbox" name="rememberme" value="ON" >
                 </label>	
             </form>

@@ -35,7 +35,6 @@
           xfbml      : true // parse XFBML
         });
 		
-		
 		$.getScript("/bootstrap/js/fb_func.js", function(){
 			<?php if(!is_array($settings) && $settings) { ?>
 			window.active_settings = JSON.parse('<?php echo $settings; ?>');
@@ -43,7 +42,6 @@
 			window.active_settings = "";	
 			<?php } ?>
 		});
-		
 		
         // Listen to the auth.login which will be called when the user logs in
         // using the Login button

@@ -19,6 +19,16 @@ $lang['email_smtp_auth_pw'] = "Failed to authenticate password. Error: %s";
 $lang['email_smtp_data_failure'] = "Unable to send data: %s";
 $lang['email_exit_status'] = "Exit status code: %s";
 
+$lang['email_reg_subject'] = 'D-diary: apstipriniet reģistrāciju';
+$lang['email_reg_message'] = '<strong>Paldies, jūsu reģistrācija <a href="http://simplecal.loc">D-diary</a> bija veiksmīga!<br/><br/>Lai sākt lietot savu kalendāru lūdzu apstipriniet reģistrāciju izmantojot šo saiti:</strong><br/>';
+$lang['email_reg_message_2'] = '<br/> Šī aktivācijas saite ir derģa līdz ';
+$lang['email_reg_cancel'] = 'Ja jūs nejauši saņemāt šo e-pastu, jūs varat atcelt reģistrāciju izmantojot šo saiti:<br />';
+
+$lang['email_new_pass_subject']	= 'D-diary: facebook konta atsaiste';
+$lang['email_new_pass_user'] = 'Lietotājvārds: ';
+$lang['email_new_pass_pass'] = 'Parole: ';
+$lang['email_new_pass_message']	= '<span><strong>Šīs facebook profils bija veiksmīgi atslēgts no D-diary konta!<br/>Lai piekļūt savam D-diary kontam lūgums izmantot šo informāciju:<br/></span><br/>';
+$lang['email_new_pass_message_2'] = '<br/><span>Šīs facebook profils jau nevar tikt izmantots jauna D-diary konta izveidei, tikai atkal piesaistīts jūsu vecam vai citam D-diary kontam.</span>';
 
 /* End of file email_lang.php */
 /* Location: ./system/language/english/email_lang.php */

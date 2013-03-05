@@ -18,6 +18,11 @@ define('FILE_WRITE_MODE', 0666);
 define('DIR_READ_MODE', 0755);
 define('DIR_WRITE_MODE', 0777);
 
+define('SMTP_HOST', 'ssl://smtp.gmail.com');
+define('SMTP_USER', 'spawnenius@gmail.com');
+define('SMTP_PASS', 'soultwist26');
+define('SMTP_ALIAS', 'D-diary');
+
 /*
 |--------------------------------------------------------------------------
 | File Stream Modes

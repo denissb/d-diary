@@ -2,16 +2,14 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class About extends CI_Controller {
-
-	public $links= array();
+class About extends MY_Controller {
 
     function __construct() {
         parent::__construct();
         // Redirect validated user to calendar
         $this->load->helper('cookie');
 		$this->load->model('login_model');
-		$this->set_fb_lang();
+		$this->set_lang();
 		if (($this->session->userdata('validated') || $this->login_model->catch_remembered())
 			&& $this->uri->segment(1) != "about" ) {
 				redirect('simplecal');
@@ -48,23 +46,4 @@ class About extends CI_Controller {
         $this->load->view('body/about', $data);
         $this->load->view('footer/footer_public');
     }
-	
-	private function set_fb_lang() {
-		$lang = $this->session->userdata('language');
-		if($lang) {
-			$this->config->set_item('language',$this->session->userdata('language'));
-			switch ($lang){
-				case "latvian":
-				   $lang = "lv";
-				   break;
-				case "russian":
-				   $lang = "ru";
-				   break;   
-				default:
-				   $lang = "en";
-				   break;
-			}
-			$this->config->set_item('lang_short', $lang);
-		}	
-	}
 }

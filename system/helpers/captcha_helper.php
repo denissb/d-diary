@@ -190,7 +190,7 @@ if ( ! function_exists('create_captcha'))
 
 		if ($use_font == FALSE)
 		{
-			$font_size = 5;
+			$font_size = 8;
 			$x = rand(0, $img_width/($length/3));
 			$y = 0;
 		}
