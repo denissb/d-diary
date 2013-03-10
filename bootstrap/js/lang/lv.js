@@ -1,6 +1,7 @@
 var ui_lang = new Array();
 
 ui_lang['fail'] = 'Feils!';
+ui_lang['server_error'] = "Notikusi kļūda uz servera";
 
 ui_lang['app_advert'] = 'Izmēģiniet aplikāciju D-diary, ta varētu but jums lietderīga';
 
@@ -24,6 +25,7 @@ ui_lang['server_side_error'] = 'Notikusi kļūda uz servera';
 ui_lang['finish_editing'] = 'Lūdzu pabeidziet rediģēšanu';
 ui_lang['no_values'] = 'Nav vertību';
 ui_lang['facebook_unlink'] = 'Vai jūs esat parliecināti par facebook profila atsaisti?';
+ui_lang['delete_acc'] = 'Vai jūs esat parliecināti ka gribat aizvērt šo kontu?';
 
 /* Facebook plugins */
 ui_lang['month_names'] = [ "Janvāris", "Februāris", "Marts", "Aprīls", "Majs", "Jūnijs", 
@@ -38,3 +40,12 @@ ui_lang['upcoming'] = 'Tuvojušie';
 ui_lang['show_more'] = 'Radīt vairāk';
 ui_lang['find'] = 'Meklēt';
 ui_lang['no_change'] = 'Nebija izmaiņu ko saglabāt';
+
+//Validation form forms
+ui_lang['check_all_fields'] = "Lūdzu pārbaudiet vai visi nepieciešamie lauki ir aizpildīti!";
+ui_lang['invalid_email'] = "Lūdzu norādiet valīdo e-pasta adresi!";
+ui_lang['short_username'] = "Lietotajvārdam ir jāsatur vismaz 3 simbolus!";
+ui_lang['invalid_confrimation'] = "Pārbaudes lauki nav identiski aizpildīti!";
+ui_lang['short_pass'] = "Parolei ir jābūt garākai par 6 simboliem!";
+ui_lang['pass_is_same'] = "Jaunai parolei ir jaatšķirās no vecās";
+ui_lang['invalid_pass_combo'] = "Parolei ir jāsatur numuru/ciparu vai simbolu kombināciju";

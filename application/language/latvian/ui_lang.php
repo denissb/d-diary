@@ -1,6 +1,6 @@
 <?php
 $lang['ui_descr']	= "Vienkarša kalendāra aplikācija";
-$lang['ui_app_name']	= "D-diary";
+$lang['ui_app_name'] = "D-diary";
 $lang['ui_login']	= "Ielogoties";
 $lang['ui_remember_me'] = "Palikt iekšā";
 $lang['ui_login_msg'] = "Ielogoties D-diary";
@@ -61,7 +61,6 @@ $lang['ui_reg_successful'] = "Jūsu reģistrācija bija veiksmīga!";
 $lang['ui_reg_gratitude'] = "Paldies par reģistrāciju, 5 minūšu laika jūs saņemsiet e-pastu uz noradīto adresi.";
 $lang['ui_reg_use_link']="Lūgums izmantot saiti no iepriekš minēta e-pasta lai aktivizēt jūsu jauno kontu, otrādi reģistrācija tiks atcelta.";
 $lang['ui_reg_usefull']="Es ceru ka jums patiks lietot d-diary!";
-$lang['ui_reg_usefull']="Es ceru ka jums patiks lietot d-diary!";
 $lang['ui_reg_confirm_success'] = "Jūs veiksmīgi aktivizējāt savu jauno kontu!";
 $lang['ui_reg_confirm_result_success'] = "Jūsu D-diary konts ir gatavs lietošanai, bet vienkārša konta iespējas ir diezgan primitīvas - savienojiet savu kontu ar facebook un paplašiniet savu dienasgramatu ar ērtiem sociālajiem paplašinājumiem!";
 $lang['ui_reg_no_acc'] = "Nevar atrast kontu aktivizācijai!";
@@ -72,7 +71,7 @@ $lang['ui_reg_fb_in_use'] =  "Šīs facebook id jau ir aizņemts!";
 $lang['ui_reg_fb_in_use_res'] = "Ja jūs gribat izmantot šo facebook id ar jauno kontu, lūgums atslēgt to no vecā konta. To var izdarīt izmantojot sadaļu Iestatījumi → Lietotājs.";
 
 $lang['ui_friends_events'] = "Notikumi";
-$lang['ui_friends_events_info'] = "Shows the events you and your frends are planing to attend, so you wouldn't miss anything intresting.";
+$lang['ui_friends_events_info'] = "Parāda notikumus ko jūs vai jūsu draugi plāno apmeklēt, lai jūs nepalaistu garām kaut-ko interesantu.";
 $lang['ui_friends_birthdays'] = "Draugu dzimšanas dienas";
 $lang['ui_friends_birthdays_info'] = "Shows friends birthdays depending on the date selected, provides sorting and ordering so you wouldn't miss a thing.";
 $lang['ui_change_settings'] = "Mainīt iestatījumus";
@@ -84,7 +83,7 @@ $lang['ui_sec_last_login_details'] = "Informācija par pedējo sessiju:";
 $lang['ui_sec_last_login_ip'] = "Pedējās ielogošanas IP:";
 $lang['ui_sec_last_login_date'] = "Pedējās ielogošanas laiks:";
 $lang['ui_sec_pass_change'] = "Paroles maiņa:";
-$lang['ui_sec_old_pass'] = "Vecā parole";
+$lang['ui_sec_old_pass'] = "Tekošā parole";
 $lang['ui_sec_new_pass_repeat'] = "Jaunā parole velreiz";
 $lang['ui_sec_new_pass'] = "Jaunā parole";
 $lang['ui_sec_close_acc'] = "Aizvert kontu";

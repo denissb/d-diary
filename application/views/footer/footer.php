@@ -22,6 +22,9 @@
 <script src="/bootstrap/js/plugins/bootstrap-datepicker.<?php echo $this->config->item('lang_short'); ?>.js"></script>
 <script src="/bootstrap/wysiwyg/lib/wysiwyg.js"></script>
 <script src="/bootstrap/js/tinysort.js"></script>
+<?php if($this->uri->segment(1) == "settings") { ?>
+<script src="/bootstrap/js/register.js"></script>
+<?php } ?>
 <script src="/bootstrap/js/script.js"></script>
 <div class="temp"></div>
 </body>

@@ -4,7 +4,7 @@ class Settings_model extends CI_Model {
 
 	// Array containing the list of available settings (yes, yes.. repeating fb permission names for fb extensions but can be different)
 	public $settings = array('friends_events', 'friends_birthday', 'publish_stream');
-	public $user_settings = array('f_name', 'l_name', 'language');
+	public $user_settings = array('f_name', 'l_name', 'language', 'last_date', 'last_ip');
 	
 	function __construct(){
         parent::__construct();
@@ -112,7 +112,44 @@ class Settings_model extends CI_Model {
 			
 			}
 		}	
-		
 		return json_encode($result);
+	}
+	
+	public function change_password($old_pass, $new_pass, $new_pass_repeat, $user_id) {
+		$this->load->model('login_model');
+		//Check if old_pass is the users current password
+		$query = $this->db->select('username')->from('users')->where('id', $user_id)
+			->where('password', $this->login_model->prep_password($old_pass))->get();
+		 if ($query->num_rows() != 1) {
+			return json_encode(array(
+				"msg" => "The current password was not valid",
+				"success" => false
+				));
+			}			
+		//Check that the new password was repeated without errors and is difficult enough
+		$strength=0;
+		if (strlen($new_pass) > 6) { $strength++; } else { $strength--; }
+		if (preg_match("/[a-z]/", $new_pass) || preg_match("/[A-Z]/", $password)) { $strength++; }
+		if (preg_match("/[0-9]/", $new_pass)) { $strength++; }
+		if (preg_match("/.[!,@,#,$,%,^,&,*,?,_,~,-,£,(,)]/", $new_pass)) {$strength++;}
+		if ($strength > 2) {
+			if($new_pass != $new_pass_repeat) {
+				return json_encode(array(
+					"msg" => "Provided password was not repeated correctly!", 
+					"success" => false
+					));
+			}
+			//Update the password is no errors were found
+			if($this->db->where('id', $user_id)->update('users', array(
+				'password' => $this->login_model->prep_password($new_pass)
+				))) {
+				return json_encode(array(
+					"msg" => "Password changed",
+					"success" => true
+					));
+			}
+		}
+		//Otherwise return error message
+		return lang('ui_validate_pass');
 	}
 }

@@ -103,40 +103,40 @@
 								<hr/>
 								<div class="row-fluid">
 									<div class="span4" style="min-height: 0px;">
-										<b><?php echo lang('ui_sec_last_login_ip'); ?></b>
+										<b><?php echo lang('ui_sec_last_login_ip')." ".long2ip($user->last_ip); ?></b>
 									</div>
-									<div class="span4" style="min-height: 0px;">
-										<b><?php echo lang('ui_sec_last_login_date'); ?></b>
+									<div class="span5" style="min-height: 0px;">
+										<b><?php echo lang('ui_sec_last_login_date')." ".date('Y.m.d H:i:s', strtotime($user->last_date)); ?></b>
 									</div>
 								</div>
 								
 							</div>
 						</div>
 						
-						<div class="ext">
+						<div class="ext pass-change">
 								<h4><?php echo lang('ui_sec_pass_change'); ?></h4>
 								<hr/>
 								<form action="" class="form-horizontal" style="margin-bottom: 5px;" method="post" name="pass_reset" id="change_pass">
 									<div class="control-group">
 										<label class="control-label" for="old_pass"><?php echo lang('ui_sec_old_pass'); ?>:</label>
 										<div class="controls">
-											<input type="text" name="old_pass" class="input-large" required placeholder="<?php echo lang('ui_sec_old_pass'); ?>" size="50" value="">
+											<input type="password" name="old_pass" class="input-large" id="old-pass" required placeholder="<?php echo lang('ui_sec_old_pass'); ?>" size="50" value="">
 										</div>
 									</div>
 									<div class="control-group">
 										<label class="control-label" for="new_pass"><?php echo lang('ui_sec_new_pass'); ?>:</label>
 										<div class="controls">
-											<input type="text" name="new_pass" class="input-large" required placeholder="<?php echo lang('ui_sec_new_pass'); ?>" size="50" value="">
+											<input type="password" name="new_pass" class="input-large" id="pass-input" required placeholder="<?php echo lang('ui_sec_new_pass'); ?>" size="50" value="">
 										</div>
 									</div>
 									<div class="control-group">
-										<label class="control-label" for="old_pass"><?php echo lang('ui_sec_new_pass_repeat'); ?>:</label>
+										<label class="control-label" for="new_pass_repeat"><?php echo lang('ui_sec_new_pass_repeat'); ?>:</label>
 										<div class="controls">
-											<input type="text" name="old_pass" class="input-large" required placeholder="<?php echo lang('ui_sec_new_pass_repeat'); ?>" size="50" value="">
+											<input type="password" name="new_pass_repeat" class="input-large" id="pass-confirm" required placeholder="<?php echo lang('ui_sec_new_pass_repeat'); ?>" size="50" value="">
 										</div>
 									</div>
 									<div class="controls">
-										<button type="submit" class="btn btn-primary" id="userSettings"><?php echo lang('ui_apply_changes'); ?></a>
+										<button type="submit" class="btn btn-primary" id="change_password"><?php echo lang('ui_apply_changes'); ?></a>
 									</div>
 								</form>
 						</div>
@@ -151,9 +151,11 @@
 											<label class="control-label" for="f_name"><?php echo lang('ui_sec_if_issues'); ?>:</label>
 											<div class="controls">
 												<?php if (!$fb_id) { ?>
-												<a class="btn btn-primary" style="margin-right: 15px;" target="_blank" href="<?php echo site_url("logout/app/delete"); ?>"><?php echo lang('ui_sec_close_acc'); ?></a>
+												<a class="btn btn-primary" style="margin-right: 15px;" target="_blank" id="delete_acc_button" 
+													href="<?php //echo site_url("logout/app/delete"); ?>"><?php echo lang('ui_sec_close_acc'); ?></a>
 												<?php } else { ?>
-												<a style="margin: 3px 0 3px;" class="fb_button fb_button_medium" href="<?php echo site_url("logout/app/delete"); ?>"><span class="fb_button_text"><?php echo lang('ui_sec_close_acc'); ?></span></a>
+												<a style="margin: 3px 0 3px;" class="fb_button fb_button_medium" id="delete_acc_button" 
+													href="<?php echo site_url("logout/app/delete"); ?>"><span class="fb_button_text"><?php echo lang('ui_sec_close_acc'); ?></span></a>
 												<?php } ?>
 											</div>
 										</div>

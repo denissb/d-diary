@@ -63,7 +63,6 @@ FB.getLoginStatus(function(response) {
 			Plugins.FriendsEvents.displayEvents(3);
 			Plugins.FriendsEvents.addEventHandlers();
 		});
-		removeLoading();
 		hide_hidden();
 	} else if (response.status == 'not_authorized') {
 		// the user is logged in to Facebook, 
@@ -153,6 +152,7 @@ Plugins.FriendsBirthdays = (function(){
 				'<a class="btn btn-mini disabled" id="bd_after" href="#bd_after">' + ui_lang['upcoming']+ '</a></div>');
 			$("div#friends_birthdays").children(".well").first().addDiv("","","result_birthdays");	
 			$("div#friends_birthdays").children(".well").append('<div class="plugin_buttons bottom"><a class="btn btn-mini" id="bd_more" href="#show_more">' + ui_lang['show_more'] + '</a></div><div class="clearfix"></div>');
+			removeLoading();
 		},
 		getOrderedBirthdays: function(date, condition) {
 			var birthdays = $.totalStorage('friends_data');
@@ -341,6 +341,7 @@ Plugins.FriendsEvents = (function() {
 				'<a class="btn btn-mini disabled" id="evt_after" href="#evt_after">' + ui_lang['upcoming'] + '</a></div>');
 			$("div#friends_events").children(".well").first().addDiv("","","result_events");
 			$("div#friends_events").children(".well").append('<div class="plugin_buttons bottom"><a class="btn btn-mini" id="evt_more" href="#show_more">' + ui_lang['show_more'] + '</a></div><div class="clearfix"></div>');
+			removeLoading();
 		},
 		getOrderedEvents: function(date, condition) {
 			events = $.totalStorage('events_data');

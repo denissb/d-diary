@@ -83,7 +83,7 @@ class Simplecalendar extends CI_Model {
                             ->where('time', $time)->where('id !=', $id)->count_all_results()) {
                 return "reserved";
             } else {
-                if ($this->db->where('id', $id)
+                if ($this->db->where('id', $id)->where('user_id', $this->userid)
                                 ->update('events', array(
                                     'date' => $date,
                                     'time' => $time,

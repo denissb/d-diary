@@ -114,6 +114,18 @@ class Settings extends MY_Controller {
 		}
 	}
 	
+	//Ajax method
+	public function change_pass() {
+		if(count($_POST) && $this->session->userdata('userid')) {
+			$old_pass = $this->security->xss_clean($this->input->post('old_pass'));
+			$new_pass = $this->security->xss_clean($this->input->post('new_pass'));
+			$new_pass_repeat = $this->security->xss_clean($this->input->post('new_pass_repeat'));
+			$this->output->set_output($this->settings_model->change_password($old_pass, $new_pass, $new_pass_repeat, $this->session->userdata('userid')));
+		} else {
+			$this->output->set_output(lang('ui_error_settings'));
+		}
+	}
+	
 	public function added() {
 		// Save new ADDED settings
 		try {

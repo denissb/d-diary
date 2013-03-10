@@ -474,6 +474,15 @@ $(document).ready(function() {
 		set_hidden(el);
 	});
 	
+	$('#delete_acc_button').click(function() {
+	var answer = confirm(ui_lang['delete_acc']);
+		if (answer){
+			window.location = "http://ddiary.loc/logout/app/delete";
+		} else {
+			return false;
+		}
+	});
+
 // End document.ready
 });
 

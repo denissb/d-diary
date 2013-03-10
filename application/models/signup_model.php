@@ -187,7 +187,7 @@ class Signup_model extends CI_Model {
         }
         //Check password strength
         $strength=0;
-		if (strlen($password) > 6) { $strength++; }
+		if (strlen($password) > 6) { $strength++; } else { $strength--; }
 		if (preg_match("/[a-z]/", $password) || preg_match("/[A-Z]/", $password)) { $strength++; }
 		if (preg_match("/[0-9]/", $password)) { $strength++; }
 		if (preg_match("/.[!,@,#,$,%,^,&,*,?,_,~,-,£,(,)]/", $password)) { $strength++; }

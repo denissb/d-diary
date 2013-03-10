@@ -87,7 +87,7 @@ class Login_model extends CI_Model{
                     );
             $this->session->set_userdata($data);
 			$this->facebook->setExtendedAccessToken();
-			$this->log_ip($row->id);
+			$this->log_ip_and_date($row->id);
 			// Remember user to keep them signed in
             return true;
         } 
@@ -158,7 +158,7 @@ class Login_model extends CI_Model{
 								'with_fb' => $row->fb_id ? true : false
 								);
 						$this->session->set_userdata($data);
-						$this->log_ip($row->id);
+						$this->log_ip_and_date($row->id);
 						// Set a new cookie
 						$this->remember($row->username);
 						return true;
@@ -172,15 +172,20 @@ class Login_model extends CI_Model{
 		return false;
 	}
 	
-	private function prep_password($password)
+	public function prep_password($password)
 	{
 		return sha1($password.$this->config->item('encryption_key'));
 	}
 	
 	// Saves the users ip in a database encoded as a long integer
-	public function log_ip($user_id) {
+	public function log_ip_and_date($user_id) {
 		$ip = ip2long($this->input->ip_address());
-		$this->db->set('last_ip', $ip)->where('id', $user_id)->update('users');
+		$date = date('Y-m-d H:i:s', time());
+		$data = array(
+			'last_ip' => $ip,
+			'last_date' => $date
+		);
+		$this->db->set($data)->where('id', $user_id)->update('users');
 	}	
 }
 ?>
