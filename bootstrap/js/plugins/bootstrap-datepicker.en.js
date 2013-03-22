@@ -274,7 +274,7 @@
 						if (this.viewMode !== 0) {
 							this.date = new Date(this.viewDate);
 							this.element.trigger({
-								type: 'changeDate',
+								type: 'changeMonth',
 								date: this.date,
 								viewMode: DPGlobal.modes[this.viewMode].clsName
 							});

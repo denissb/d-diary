@@ -142,6 +142,16 @@ class Ajax extends MY_Controller {
 		}
 	}
 	
+	public function not_done() {
+		if( $id = $this->input->post('id') ) {
+			$this->load->model('Simplecalendar');
+			$result = $this->Simplecalendar->not_done_event($id);
+			$this->output->set_output($result ? 'done' : 'Error marking event'); }
+		else {
+			$this->output->set_output('Error marking event');
+		}
+	}
+	
 	// Check if user logged in!
 	private function check_isvalidated(){
         if(!$this->session->userdata('validated')){

@@ -1,4 +1,4 @@
 simplecalendar
 ==============
 
-A project fro my class using Codeigniter and Jquery
+A project for my class using Codeigniter and Jquery 1.7.1

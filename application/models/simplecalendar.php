@@ -142,6 +142,17 @@ class Simplecalendar extends CI_Model {
             return false;
         }
     }
+	
+	// Mark event as not done
+    public function not_done_event($id) {
+        if (is_int(intval($id))) {
+            $data = array('done' => 0);
+            $query = $this->db->where('user_id', $this->userid)->where('id', $id)->update('events', $data);
+            return ($this->db->affected_rows() > 0 ? true : false);
+        } else {
+            return false;
+        }
+    }
 
     // Validate event form
     private function validate($date, $time, $title) {

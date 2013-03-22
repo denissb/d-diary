@@ -8,6 +8,7 @@ config.edit = config.home + 'ajax/editevent';
 config.changedate = config.home + 'ajax/changedate';
 config.remove = config.home + 'ajax/delete';
 config.done = config.home+ 'ajax/done';
+config.not_done = config.home+ 'ajax/not_done';
 config.loc = window.location.pathname.split( '/' );
 if(config.loc.length > 3) {
     config.add_event += '/' + config.loc[3] + '/' +config.loc[4];
@@ -232,8 +233,8 @@ $(document).ready(function() {
                 success: function(data) { 
                     if( data == 'done' ) {
                         event.find('h3.event-name').addClass('event-done');
-                        event.find('a.done-event').remove();
-                        event.find('.divider').remove();
+                        event.find('a.done-event').addClass('hide');
+						event.find('a.not-done-event').removeClass('hide');
                     }
                     else {
                         event.response(data, false);
@@ -246,7 +247,37 @@ $(document).ready(function() {
         } else {
             alert(ui_lang['finish_editing']);
         }
-    });	
+    });
+	
+	// Mark done event back to not done
+    $('a.not-done-event').live('click', function() {
+        var event = $(this).parents(':eq(4)');
+        var id = event.find('button.edit-event').attr('id');
+        if(id != undefined) {
+            $.ajax({
+                type: 'POST',
+                url: config.not_done,
+                data: {
+                    id: id
+                },
+                success: function(data) { 
+                    if( data == 'done' ) {
+                        event.find('h3.event-name').removeClass('event-done');
+                        event.find('a.done-event').removeClass('hide');
+						event.find('a.not-done-event').addClass('hide');
+                    }
+                    else {
+                        event.response(data, false);
+                    }
+                },
+                fail: function() {
+                    alert(ui_lang['fail']);
+                }
+            });
+        } else {
+            alert(ui_lang['finish_editing']);
+        }
+    });
 	
     // Save event
     $('button.save-event').live('click', function() {

@@ -35,7 +35,11 @@
                         </button>
                         <ul class="dropdown-menu">
 						<?php if ($row->done == false) { ?>	
-                                <li><a href='javascript:void(0)' class="done-event"><?php echo lang('cal_done'); ?></a></li>
+							<li><a href='javascript:void(0)' class="done-event"><?php echo lang('cal_done'); ?></a></li>
+							<li><a href='javascript:void(0)' class="not-done-event hide"><?php echo lang('cal_not_done'); ?></a></li>
+						<?php } else { ?>
+							 <li><a href='javascript:void(0)' class="done-event hide"><?php echo lang('cal_done'); ?></a></li>
+							 <li><a href='javascript:void(0)' class="not-done-event"><?php echo lang('cal_not_done'); ?></a></li>
 						<?php } ?>
 							<li><a href='#' class="change-event" data-date-format="yyyy-mm-dd" 
 								data-date="<?php echo $year.'-'.$month.'-'.$day; ?>" ><?php echo lang('cal_change_date'); ?></a></li>

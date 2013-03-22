@@ -35,9 +35,9 @@
           xfbml      : true // parse XFBML
         });
 		
-		$('#fbLogin').click(function() {
-			fb_login();
-		});
+		var fbLogin = document.getElementById("fbLogin");
+		
+		fbLogin.onclick = function() { fb_login(); }
 		
 		function fb_login(params) {
 			FB.login(function(response) {

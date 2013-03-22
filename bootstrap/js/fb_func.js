@@ -1,5 +1,7 @@
 // Event handlers and GLOBAL events
 
+var loading_queue = 0;
+
 $('#fbLogin').click(function() {
 	fb_login();
 });
@@ -45,23 +47,33 @@ function setLoading() {
 	var elem = $("div.part_one");
 	elem.hide();
 	elem.before('<div class="progress progress-striped active"><div class="bar"></div></div>');
+	$('div.part_one').on('data_fetch', function(event) {
+	  if(window.loading_queue <= 1) {
+		removeLoading();
+	  } else {
+		window.loading_queue--;
+	  }
+	});
 }
 
 //Checks if the user is logged in and retrives required information depending on the settings
 FB.getLoginStatus(function(response) {
 	if (response.status === 'connected') {
+		window.loading_queue = Object.keys(window.active_settings).length;
 		setLoading();
 		getFriendsData(function() {
 			Plugins.FriendsBirthdays.initBirthdays("div.part_one");
 			Plugins.FriendsBirthdays.getOrderedBirthdays(getSelDate(), "after");
 			Plugins.FriendsBirthdays.displayBirthdays(3);
 			Plugins.FriendsBirthdays.addEventHandlers();
+			$('div.part_one').trigger('data_fetch');
 		});
 		getEventsData(function() {
 			Plugins.FriendsEvents.initEvents("div.part_one");
 			Plugins.FriendsEvents.getOrderedEvents(getSelDate(), "after");
 			Plugins.FriendsEvents.displayEvents(3);
 			Plugins.FriendsEvents.addEventHandlers();
+			$('div.part_one').trigger('data_fetch');
 		});
 		hide_hidden();
 	} else if (response.status == 'not_authorized') {
@@ -152,7 +164,6 @@ Plugins.FriendsBirthdays = (function(){
 				'<a class="btn btn-mini disabled" id="bd_after" href="#bd_after">' + ui_lang['upcoming']+ '</a></div>');
 			$("div#friends_birthdays").children(".well").first().addDiv("","","result_birthdays");	
 			$("div#friends_birthdays").children(".well").append('<div class="plugin_buttons bottom"><a class="btn btn-mini" id="bd_more" href="#show_more">' + ui_lang['show_more'] + '</a></div><div class="clearfix"></div>');
-			removeLoading();
 		},
 		getOrderedBirthdays: function(date, condition) {
 			var birthdays = $.totalStorage('friends_data');
@@ -341,7 +352,6 @@ Plugins.FriendsEvents = (function() {
 				'<a class="btn btn-mini disabled" id="evt_after" href="#evt_after">' + ui_lang['upcoming'] + '</a></div>');
 			$("div#friends_events").children(".well").first().addDiv("","","result_events");
 			$("div#friends_events").children(".well").append('<div class="plugin_buttons bottom"><a class="btn btn-mini" id="evt_more" href="#show_more">' + ui_lang['show_more'] + '</a></div><div class="clearfix"></div>');
-			removeLoading();
 		},
 		getOrderedEvents: function(date, condition) {
 			events = $.totalStorage('events_data');
