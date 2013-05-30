@@ -12,7 +12,6 @@
 		<div class="tab-content">
 			<div class="tab-pane active" id="extensions">
 				<?php if ($this->session->userdata('with_fb')) { ?>
-				<div>
 				<form action="" method="post" name="process" id="widget_settings" style="margin-top: 7px;">
 					<div class="ext">
 						<label class="checkbox">
@@ -28,12 +27,17 @@
 					</div>
 					<div class="ext">
 						<label class="checkbox">
-						  <input type="checkbox" class="widget" name="notes" value="publish_stream" <?php if(isset($enabled['notes'])) echo "checked"; ?>><h4>Publish notes</h4>
+						  <input type="checkbox" class="widget" name="notes" value="publish_stream" <?php if(isset($enabled['publish_stream'])) echo "checked"; ?>><h4><?php echo lang('ui_publish_notes'); ?></h4>
 						</label>
-						<p><?php echo lang('ui_friends_birthdays_info'); ?></p>
+						<p><?php echo lang('ui_publish_notes_info'); ?></p>
+					</div>
+					<div class="ext">
+						<label class="checkbox">
+						  <input type="checkbox" class="widget" name="pictures" value="user_photos" <?php if(isset($enabled['user_photos'])) echo "checked"; ?>><h4><?php echo lang('ui_user_photos'); ?></h4>
+						</label>
+						<p><?php echo lang('ui_publish_notes_info'); ?></p>
 					</div>
 				</form>
-				</div>
 				<div style="padding: 8px 7px 0 0;"><span id="addWidgets"><a class="fb_button fb_button_medium"><span class="fb_button_text"><?php echo lang('ui_change_settings'); ?></span></a></span></div>
 				<?php } else { ?>
 				<div style="padding: 7px 0;">
@@ -84,7 +88,7 @@
 					  <div class="control-group" style="margin-bottom: 10px;">
 						<label class="control-label" for="f_name"><?php echo lang('ui_linked_profile'); ?>:</label>
 						<div class="controls">
-						  <a class="btn btn-primary" style="margin-right: 15px;" target="_blank" href="http://facebook.com/<?php echo $fb_id; ?>"><?php echo $fb_id; ?></a>
+						  <a class="btn btn-info" style="margin-right: 15px;" target="_blank" href="http://facebook.com/<?php echo $fb_id; ?>"><?php echo $fb_id; ?></a>
 						  <a style="margin: 3px 0 3px;" class="fb_button fb_button_medium" id="unlink_button" href="<?php echo site_url("logout/app/unlink"); ?>"><span class="fb_button_text"><?php echo lang('ui_unlink_acc'); ?></span></a>
 						</div>
 						</div>
@@ -107,6 +111,32 @@
 									</div>
 									<div class="span5" style="min-height: 0px;">
 										<b><?php echo lang('ui_sec_last_login_date')." ".date('Y.m.d H:i:s', strtotime($user->last_date)); ?></b>
+									</div>
+									<div class="controls">
+										<a class="btn btn-small btn-info" id="access_log" href="javascript:void(0);"><?php echo lang('ui_sec_access_log'); ?></a>
+									</div>
+									<!-- Access log modal -->
+									<div id="accessModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="accessModalLabel" aria-hidden="true">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+											<h3 id="acccessModalHeader"><?php echo lang('ui_sec_access_log'); ?></h3>
+										</div>
+										<div class="modal-body">
+											<table class="table table-bordered" id="accessTable">
+												<thead>
+													<tr>
+														<th>IP address</th>
+														<th>Time</th>
+														<th>Client</th>
+													</tr>
+												</thead>
+												<tbody>
+												</tbody>
+											</table>
+										</div>
+										<div class="modal-footer">
+											<button class="btn" data-dismiss="modal" aria-hidden="true"><?php echo lang('ui_close'); ?></button>
+										</div>
 									</div>
 								</div>
 								
@@ -136,7 +166,7 @@
 										</div>
 									</div>
 									<div class="controls">
-										<button type="submit" class="btn btn-primary" id="change_password"><?php echo lang('ui_apply_changes'); ?></a>
+										<button type="submit" class="btn btn-primary" id="change_password"><?php echo lang('ui_apply_changes'); ?></button>
 									</div>
 								</form>
 						</div>
@@ -160,7 +190,7 @@
 											</div>
 										</div>
 									</form>
-									<p style="margin: 5px 12px 0;" class="opt"><?php echo lang('ui_sec_close_info'); ?></p>
+									<p style="margin: 6px 9px 0;" class="opt"><?php echo lang('ui_sec_close_info'); ?></p>
 								</div>
 							</div>
 						</div>

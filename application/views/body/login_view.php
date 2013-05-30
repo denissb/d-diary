@@ -19,8 +19,8 @@
                     </tr>
                 </table>
                 <button type="submit" class="btn btn-primary" value="login"><?php echo lang('ui_login'); ?></button>
-                <label class="remember"><?php echo lang('ui_remember_me'); ?>
-                    <input type="checkbox" name="rememberme" value="ON" >
+                <label class="remember" style="position:relative; top: 1px;"><?php echo lang('ui_remember_me'); ?>
+                    <input type="checkbox" name="rememberme" value="ON" />
                 </label>	
             </form>
         </div><!--/span-->

@@ -1,6 +1,6 @@
 <div class="date-unit">
     <h2 id="active-date"><?php echo $day ?>.</h2>
-    <span><?php echo $month_name; ?></span>
+    <span class='month-name'><?php echo $month_name; ?></span>
     <span class='year'><?php echo $year; ?></span>
     <hr />
     <div class='event-item' id="add-section">

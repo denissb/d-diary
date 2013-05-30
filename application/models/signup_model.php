@@ -259,7 +259,7 @@ class Signup_model extends CI_Model {
 		$vals = array(
 			'img_path' => './bootstrap/img/capatcha/',
 			'img_url' => base_url().'bootstrap/img/capatcha/',
-			'font_path' => './bootstrap/fonts/AirstreamNF.ttf', 
+			'font_path' => './bootstrap/fonts/ArchitectsDaughter.ttf', 
 			'img_width' => 150,
 			'img_height' => 32
 			);

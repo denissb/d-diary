@@ -32,6 +32,8 @@ ui_lang['month_names'] = [ "Janvāris", "Februāris", "Marts", "Aprīls", "Majs"
     "Jūlijs", "Augusts", "Septembris", "Oktobris", "Novembris", "Decembris" ];
 //friends birthdays	
 ui_lang['birthdays'] = 'Dzimšanas dienas';
+//Photos
+ui_lang['day_photos'] = 'Bildes';
 //friends events
 ui_lang['events'] = 'Notikumi';
 //Universal
@@ -40,6 +42,10 @@ ui_lang['upcoming'] = 'Tuvojušie';
 ui_lang['show_more'] = 'Radīt vairāk';
 ui_lang['find'] = 'Meklēt';
 ui_lang['no_change'] = 'Nebija izmaiņu ko saglabāt';
+// Facebook notes
+ui_lang['fb_add_note'] = 'Publiskot facebookā';
+ui_lang['fb_note_added'] = 'Zīme ievietota jūsu facebook kontā';
+ui_lang['fb_note_failed'] = 'Notikusi kļūda - neizdevās ievietot zīmi facebook';
 
 //Validation form forms
 ui_lang['check_all_fields'] = "Lūdzu pārbaudiet vai visi nepieciešamie lauki ir aizpildīti!";

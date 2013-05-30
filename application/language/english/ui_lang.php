@@ -18,6 +18,7 @@ $lang['ui_security'] = "Security";
 $lang['ui_calendar'] = "calendar";
 $lang['ui_decl'] = "'s";
 $lang['ui_reload'] = "reload";
+$lang['ui_close'] = "Close";
 
 $lang['ui_registration'] = "Registration";
 $lang['ui_login_name'] = "Login";
@@ -90,4 +91,10 @@ $lang['ui_sec_new_pass'] = "New password";
 $lang['ui_sec_close_acc'] = "Close account";
 $lang['ui_sec_if_issues'] = "If you have issues";
 $lang['ui_sec_close_acc'] = "Close this account";
-$lang['ui_sec_close_info'] ="Closing this account will permenantly deny all access to D-diary from it and revoke all facebook permissions, if any were given to the app.";		
+$lang['ui_sec_close_info'] = "Closing this account will permenantly deny all access to D-diary from it and revoke all facebook permissions, if any were given to the app.";
+$lang['ui_sec_access_log'] = "Access history";
+// Notes extension
+$lang['ui_publish_notes'] = "Publish notes";
+$lang['ui_publish_notes_info'] = "This extension will allow you to publish entries from your diary directly to your facebook wall. Your entries will be published as notes, so they won't have a character length restriction.";
+// Pictures extenison
+$lang['ui_user_photos'] = "My photos";

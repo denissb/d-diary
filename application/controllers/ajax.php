@@ -152,6 +152,13 @@ class Ajax extends MY_Controller {
 		}
 	}
 	
+	//Return a JSON array of access history
+	public function access() {
+		$this->load->model('Access_model');
+		$result = $this->Access_model->get_access_history($this->session->userdata('userid'));
+		$this->output->set_output($result);
+	}
+	
 	// Check if user logged in!
 	private function check_isvalidated(){
         if(!$this->session->userdata('validated')){

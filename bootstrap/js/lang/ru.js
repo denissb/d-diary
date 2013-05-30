@@ -34,12 +34,18 @@ ui_lang['month_names'] = [ "Январь", "Февраль", "Март", "Апр
 ui_lang['birthdays'] = 'Дни рождения';
 //friends events
 ui_lang['events'] = 'События';
+//Photos
+ui_lang['day_photos'] = 'Фотографии';
 //Universal
 ui_lang['past'] = 'Прошедшые';
 ui_lang['upcoming'] = 'Грядущие';
 ui_lang['show_more'] = 'Показать еще..';	
 ui_lang['find'] = 'Поиск';
 ui_lang['no_change'] = 'Вами небыло сделано изменений';
+// Facebook notes
+ui_lang['fb_add_note'] = 'Обубликовать на facebook';
+ui_lang['fb_note_added'] = 'Заметка обубликована в facebook';
+ui_lang['fb_note_failed'] = 'Произошла ошибка - неудалось опубликовать заметку';
 
 // Validation for forms
 ui_lang['check_all_fields'] = "Пожалуйсто проверте все необходимые поля!";

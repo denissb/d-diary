@@ -3,7 +3,7 @@
     <span class="copy">&copy; <?php echo lang('ui_app_name'); ?></span>
 	<a class="terms" href="<?php echo base_url()."policy"; ?>" ><?php echo lang('ui_terms'); ?></a>
 	<fb:like data-href="https://apps.facebook.com/d-diary/" width="350" layout="button_count" 
-		style="position: relative; top: 4px; height: 20px;"/>
+		style="position: relative; top: 8px; height: 24px;"/>
 </footer>
 
 </div> <!-- /container fluid-->

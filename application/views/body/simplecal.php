@@ -18,12 +18,6 @@
 				
 			<?php if(!is_array($settings)) { ?>	
 			<div class="row-fluid part_two">
-				<div class="span6">
-					<div class="well"></div>
-				</div>
-				<div class="span6">
-					<div class="well"></div>
-				</div>
 			</div>
 			<?php } ?>
         </div><!--/span-->

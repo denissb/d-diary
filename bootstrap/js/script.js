@@ -9,6 +9,7 @@ config.changedate = config.home + 'ajax/changedate';
 config.remove = config.home + 'ajax/delete';
 config.done = config.home+ 'ajax/done';
 config.not_done = config.home+ 'ajax/not_done';
+config.access = config.home+ 'ajax/access';
 config.loc = window.location.pathname.split( '/' );
 if(config.loc.length > 3) {
     config.add_event += '/' + config.loc[3] + '/' +config.loc[4];
@@ -513,6 +514,28 @@ $(document).ready(function() {
 			return false;
 		}
 	});
+	
+	$('#access_log').click(function() {
+		// Load in access log data asynch
+		$.get(config.access, function(data) {
+			var result = eval(data);
+			if(result[0].message) {
+				// Error handling 
+			} else {
+				//We should open a popup and populate it with data
+				if($('#accessTable tr').length < 2) {
+					result.forEach(function(entry) {
+						$('#accessTable').append(
+							'<tr><td>'+ entry.ip +'</td>'
+							+'<td>'+ entry.time +'</td>'
+							+'<td>'+ entry.client +'</td></tr>'
+							);
+					});
+				}
+				$('#accessModal').modal('show');
+			}
+		});
+	});
 
 // End document.ready
 });
@@ -639,7 +662,8 @@ function load_events(el, day) {
             },
             success: function(data) { 
                 el.html(data); 
-                desc_button(); 
+                desc_button();
+				$("#day-events").trigger("data_fetch");
             },
             fail: function() {
                 el.html('<p>'+ ui_lang['server_side_error']+'</p>');

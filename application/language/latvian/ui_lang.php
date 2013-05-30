@@ -18,6 +18,7 @@ $lang['ui_security'] = "Drošība";
 $lang['ui_calendar'] = "kalendārs:";
 $lang['ui_decl'] = ", tavs ";
 $lang['ui_reload'] = "parlādēt";
+$lang['ui_close'] = "Aizvert";
 
 $lang['ui_registration'] = "Reģistrācija";
 $lang['ui_login_name'] = "Lietotāja vārds";
@@ -89,4 +90,11 @@ $lang['ui_sec_new_pass'] = "Jaunā parole";
 $lang['ui_sec_close_acc'] = "Aizvert kontu";
 $lang['ui_sec_if_issues'] = "Ja jūs esat neapmierināti";
 $lang['ui_sec_close_acc'] = "Aizvert šo kontu";
-$lang['ui_sec_close_info'] = "Šī konta aizveršana permanenti aizliegs pieeju D-diary no tās un noņems visas facebook pieejas kas bija dotas aplikācijai(ja tādas bija dotas).";			
+$lang['ui_sec_close_info'] = "Šī konta aizveršana permanenti aizliegs pieeju D-diary no tās un noņems visas facebook pieejas kas bija dotas aplikācijai(ja tādas bija dotas).";
+$lang['ui_sec_access_log'] = "Apmeklējumu vēsture";
+
+// Notes extension
+$lang['ui_publish_notes'] = "Publiskot piezīmes";
+$lang['ui_publish_notes_info'] = "Šīs paplašinājums ļaujs jums publiskot piezīmes no d-diary dienasgrāmatas tieši uz jūsu facebook sienu. Jūsu ieraksti būs publiskoti ka facebook piezīmes - praktiski bez simbolu skaita ierobežojuma.";
+// Pictures extenison
+$lang['ui_user_photos'] = "Manas fotogrāfijas";	

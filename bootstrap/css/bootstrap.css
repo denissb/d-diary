@@ -4452,7 +4452,7 @@ input[type="submit"].btn.btn-mini {
 }
 
 .popover-inner.small {
-	width: 246px;
+	width: 250px;
 }
 
 .popover-title, .popover-add {
@@ -5047,7 +5047,7 @@ span.events {
 	font-size: 1.4em;
 	font-style: italic;
 	position: absolute;
-	padding: 8px 0 0 5px;
+	padding: 8px 0 0 4px;
 	text-align: right;
 }
 
@@ -5094,6 +5094,8 @@ span.events {
 .lb_event, .login label {
 	display:inline;
 	font-size: 1.1em;
+	position:relative;
+	top: -4px;
 }
 
 #event {font-size: 1.1em;}
@@ -5170,6 +5172,7 @@ span.events {
  @media all and (-webkit-min-device-pixel-ratio:10000), not all and (-webkit-min-device-pixel-ratio:0) {
     .controlls { position:relative; top: -20px;}
 	.show-desc { position: absolute; right:50px; z-index: 100;}
+	.add-fb-note { position: absolute; right:80px; z-index: 100;}
 }
 
 .event-item .description {
@@ -5180,6 +5183,14 @@ span.events {
 
 .show-desc {
 	float: right;
+}
+
+.add-fb-note{
+	float: right;
+	margin-right: 4px;
+	font-weight: bold;
+	font-family: Helvetica;
+	font-size: 21px;
 }
 
 .description.closed {
@@ -5338,7 +5349,7 @@ span.copy, #sendRequests {
 /* Facebook experiments */
 
 .fb_button .fb_button_text, .fb_button_rtl .fb_button_text {
-background: #5F78AB url(http://static.ak.fbcdn.net/rsrc.php/v2/yl/x/FGFbc80dUKj.png);
+background: #5F78AB url(../img/fb_buttons.png);
 border-top: solid 1px #879AC0;
 border-bottom: solid 1px #1A356E;
 color: white;
@@ -5373,8 +5384,16 @@ a.fb_button, a.fb_button_rtl, .fb_button, .fb_button_rtl {
 text-decoration: none;
 }
 
+.fb_button.fb_button_medium {
+	background-position: 0 -188px;
+}
+
+.fb_button.fb_button_small {
+	background-position: 0 -232px;
+}
+
 .fb_button, .fb_button_rtl {
-	background: #29447E url(http://static.ak.fbcdn.net/rsrc.php/v2/yl/x/FGFbc80dUKj.png);
+	background: #29447E url(../img/fb_buttons.png);
 	background-repeat: no-repeat;
 	cursor: pointer;
 	display: inline-block;
@@ -5393,11 +5412,11 @@ text-decoration: none;
 
 /* Plugins */
 
-#friends_events .well, #friends_birthdays .well { padding: 2px 15px;}
+#friends_events .well, #friends_birthdays .well , #user_photos .well { padding: 2px 15px;}
 
-#friends_events h3, #friends_birthdays h3 { display:inline;}
+#friends_events h3, #friends_birthdays h3 , #user_photos h3{ display:inline;}
 
-#result_events span, #result_birthdays span {
+#result_events span, #result_birthdays span, #user_photos span {
 	display: block;
 	text-shadow: 1px 1px 1px #d0d0d0;
 }
@@ -5411,7 +5430,7 @@ span.name {
 
 span.date, span.place { font-size: 14px; line-height: 1.4em;}
 
-#friends_events a.btn-mini, #friends_birthdays a.btn-mini { position: relative; top: 2px; margin-left: 7px;}
+#friends_events a.btn-mini, #friends_birthdays a.btn-mini, #user_photos a.btn-mini { position: relative; top: 2px; margin-left: 7px;}
 
 .plugin_buttons {float: right;}
 
@@ -5433,6 +5452,15 @@ div.birthday.is_today { border: solid 1px #0074cc; }
 
 #result_events i { margin-right: 5px;}
 
-div.img_holder { float: left; margin: 5px 10px 5px 5px; max-height: 82px; overflow:hidden; min-height: 52px; min-width: 50px;}
+div.img_holder { float: left; margin: 5px 10px 5px 5px; max-height: 82px; max-width: 82px; overflow:hidden; min-height: 52px; min-width: 50px;}
 
 a.img_holder { max-height: 82px; overflow:hidden;}
+
+/* Day photos */
+#result_photos { margin-left: -4px;}
+#result_photos .img_holder { max-height: 84px; max-width: none; border-radius: 4px; background: #fff; padding: 6px;}
+#result_photos .img_holder.is_today { padding: 5px; border: solid 1px #0074cc;}
+
+/* Settings */
+#accessModal { display: none; width: 700px; left: 45%;}
+#accessTable tr td { min-width: 100px; text-align:center;}

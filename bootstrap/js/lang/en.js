@@ -35,12 +35,18 @@ ui_lang['month_names'] = [ "January", "February", "March", "April", "May", "June
 ui_lang['birthdays'] = 'Birthdays';
 //friends events
 ui_lang['events'] = 'Events';
+//Photos
+ui_lang['day_photos'] = 'Photos';
 //Universal
 ui_lang['past'] = 'Past';
 ui_lang['upcoming'] = 'Upcoming';
 ui_lang['show_more'] = 'Show more';
 ui_lang['find'] = 'Search';
 ui_lang['no_change'] = 'No changes were made to save';	
+// Facebook notes
+ui_lang['fb_add_note'] = 'Post to facebook';
+ui_lang['fb_note_added'] = 'Note posted to facebook';
+ui_lang['fb_note_failed'] = 'An error accured - could not post note to facebook';
 
 //Validation form forms
 ui_lang['check_all_fields'] = "Please check all fields!";

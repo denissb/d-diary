@@ -180,12 +180,21 @@ class Login_model extends CI_Model{
 	// Saves the users ip in a database encoded as a long integer
 	public function log_ip_and_date($user_id) {
 		$ip = ip2long($this->input->ip_address());
+		
 		$date = date('Y-m-d H:i:s', time());
 		$data = array(
 			'last_ip' => $ip,
 			'last_date' => $date
 		);
 		$this->db->set($data)->where('id', $user_id)->update('users');
+		
+		//Updating the entries table
+		$log_data['user_id'] = $user_id;
+		$log_data['time'] = $data['last_date'];
+		$log_data['ip'] = $data['last_ip'];
+		$log_data['client'] = $this->input->user_agent();
+		
+		$this->db->insert('access', $log_data);
 	}	
 }
 ?>

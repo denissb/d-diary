@@ -75,7 +75,20 @@ FB.getLoginStatus(function(response) {
 			Plugins.FriendsEvents.addEventHandlers();
 			$('div.part_one').trigger('data_fetch');
 		});
-		hide_hidden();
+		getPhotosData(function() {
+			Plugins.DayPhotos.initPhotos("div.part_two");
+			Plugins.DayPhotos.getOrderedPhotos(getSelDate(), "before");
+			Plugins.DayPhotos.displayPhotos(3);
+			Plugins.DayPhotos.addEventHandlers();
+			$('div.part_one').trigger('data_fetch');
+		});
+		
+		if (window.active_settings.hasOwnProperty('publish_stream')) {
+			Plugins.PublishNotes.initNotes();
+			$('div.part_one').trigger('data_fetch'); //trigering data fetch to notify that all plugins are loaded
+		}
+		
+		hide_hidden(); // Hiding hidden parts
 	} else if (response.status == 'not_authorized') {
 		// the user is logged in to Facebook, 
 		// but has not authenticated this app
@@ -108,7 +121,7 @@ Date.prototype.getMonthName = function() {
 
 // Retreving friends data - based on totalStorage plugin
 function getFriendsData(callback) {
-	if(window.active_settings.hasOwnProperty('friends_birthday')) {
+	if (window.active_settings.hasOwnProperty('friends_birthday')) {
 		var timenow = new Date().getTime();
 		var recived = (timenow - $.totalStorage('recived_friends'))/1000;
 		if(!$.totalStorage('friends_data') || recived > 3600 || $.totalStorage('friends_data').error) {
@@ -125,7 +138,7 @@ function getFriendsData(callback) {
 
 // Retreving events data
 function getEventsData(callback) {
-	if(window.active_settings.hasOwnProperty('friends_events')) {
+	if (window.active_settings.hasOwnProperty('friends_events')) {
 		var timenow = new Date().getTime();
 		var recived = (timenow - $.totalStorage('recived_events'))/1000;
 		if(!$.totalStorage('events_data') || $.totalStorage('events_data').error || recived > 3600) {
@@ -145,25 +158,46 @@ function getEventsData(callback) {
 	}	
 }
 
+function getPhotosData(callback) {
+	if (window.active_settings.hasOwnProperty('user_photos')) {
+		var timenow = new Date().getTime();
+		var recived = (timenow - $.totalStorage('recived_photos'))/1000;
+		if(!$.totalStorage('photos_data') || $.totalStorage('photos_data').error || recived > 360) {
+			FB.api(
+			{
+				method: "fql.query",
+				query: "SELECT created, src, src_big, link, caption FROM photo WHERE aid IN (SELECT aid FROM album WHERE owner=me()) OR pid IN (SELECT pid FROM photo_tag WHERE subject = me())"
+			},
+			function(response) {
+				$.totalStorage('photos_data', response);
+				$.totalStorage('recived_photos', timenow);
+				callback();
+			});
+		} else {
+			callback();
+		}
+	}	
+}
+
 var Plugins = {}; //namespace
 
 /* Friends birthdays plugin */
 
-Plugins.FriendsBirthdays = (function(){ 
+Plugins.FriendsBirthdays = (function($){ 
 	
 	var orderedBirthdays =[];
 	
-    return{
+    return {
         //Public members
 		initBirthdays: function(parent) {
 			$(parent).addDiv("span6","","friends_birthdays");
 			$("div#friends_birthdays").addDiv("well");
 			$("div#friends_birthdays").children(".well").first()
 				.html('<h3>'+ ui_lang['birthdays']+ '</h3><div class="plugin_buttons"><a class="btn btn-mini bt_hide" href="#result_birthdays" title="hide"><i class="icon-chevron-up"></i></a>'+
-				'<a class="btn btn-mini" id="bd_before" href="#bd_before">' + ui_lang['past'] + '</a>' +
-				'<a class="btn btn-mini disabled" id="bd_after" href="#bd_after">' + ui_lang['upcoming']+ '</a></div>');
+				'<a class="btn btn-mini" id="bd_before" href="javascript:void(0)">' + ui_lang['past'] + '</a>' +
+				'<a class="btn btn-mini disabled" id="bd_after" href="javascript:void(0)">' + ui_lang['upcoming']+ '</a></div>');
 			$("div#friends_birthdays").children(".well").first().addDiv("","","result_birthdays");	
-			$("div#friends_birthdays").children(".well").append('<div class="plugin_buttons bottom"><a class="btn btn-mini" id="bd_more" href="#show_more">' + ui_lang['show_more'] + '</a></div><div class="clearfix"></div>');
+			$("div#friends_birthdays").children(".well").append('<div class="plugin_buttons bottom"><a class="btn btn-mini" id="bd_more" href="javascript:void(0)">' + ui_lang['show_more'] + '</a></div><div class="clearfix"></div>');
 		},
 		getOrderedBirthdays: function(date, condition) {
 			var birthdays = $.totalStorage('friends_data');
@@ -276,9 +310,9 @@ Plugins.FriendsBirthdays = (function(){
 		var day = clean[1];
 		return new Date(now.getFullYear(), month - 1, day);
 	}
-})();
+})(jQuery);
 
-Plugins.FriendsEvents = (function() {
+Plugins.FriendsEvents = (function($) {
 	
 	var orderedEvents = [];
 	var events = [];
@@ -347,11 +381,11 @@ Plugins.FriendsEvents = (function() {
 			$("div#friends_events").addDiv("well");
 			$("div#friends_events").children(".well").first()
 				.html('<h3>' + ui_lang['events'] + '</h3><div class="plugin_buttons"><a class="btn btn-mini bt_hide" href="#result_events" title="hide"><i class="icon-chevron-up"></i></a>'+
-				'<a class="btn btn-mini" id="evt_search" href="#evt_search"><i class="icon-search"></i></a>' +
-				'<a class="btn btn-mini" id="evt_before" href="#evt_before">' + ui_lang['past'] + '</a>' +
-				'<a class="btn btn-mini disabled" id="evt_after" href="#evt_after">' + ui_lang['upcoming'] + '</a></div>');
+				'<a class="btn btn-mini" id="evt_search" href="javascript:void(0)"><i class="icon-search"></i></a>' +
+				'<a class="btn btn-mini" id="evt_before" href="javascript:void(0)">' + ui_lang['past'] + '</a>' +
+				'<a class="btn btn-mini disabled" id="evt_after" href="javascript:void(0)">' + ui_lang['upcoming'] + '</a></div>');
 			$("div#friends_events").children(".well").first().addDiv("","","result_events");
-			$("div#friends_events").children(".well").append('<div class="plugin_buttons bottom"><a class="btn btn-mini" id="evt_more" href="#show_more">' + ui_lang['show_more'] + '</a></div><div class="clearfix"></div>');
+			$("div#friends_events").children(".well").append('<div class="plugin_buttons bottom"><a class="btn btn-mini" id="evt_more" href="javascript:void(0)">' + ui_lang['show_more'] + '</a></div><div class="clearfix"></div>');
 		},
 		getOrderedEvents: function(date, condition) {
 			events = $.totalStorage('events_data');
@@ -451,4 +485,163 @@ Plugins.FriendsEvents = (function() {
 			});
 		}
 	}
-})();
+})(jQuery);
+
+Plugins.PublishNotes = (function($) {
+
+	return {
+		initNotes: function() {
+			$("#day-events").on('data_fetch', function(event) {
+				$('div.desc-field').before('<button class="btn add-fb-note" title="'+ ui_lang['fb_add_note'] +'">f</button>');
+			});	
+			$('.add-fb-note').live('click', function() {
+				// Prvoiding parameters
+				var params = {};
+				var parent = $(this).parents('.event-item');
+				params['subject'] = parent.find('h3.event-name').html();
+				params['message'] = parent.find('.desc-field').html().trim();
+				//Providing date to parameters..
+				var date = {}; 
+				date['date'] = $('#active-date').html();
+				date['month'] = $('.month-name').html();
+				date['year'] = $('.year').html();
+				params['subject'] = params['subject'].concat(" (",date['date'],date['month'],", ",date['year'],")");
+				// Triggering facebooks API call
+				console.log(params);
+				if(params['subject'])
+				{	
+					FB.api(
+					'/me/notes',
+					'post', 
+					params,
+					function(response) {
+						 if (!response || response.error) {
+							$('div#event-container').response(ui_lang['fb_note_failed'], false); 
+						 } else {
+							$('div#event-container').response(ui_lang['fb_note_added'], true); 
+						 }
+					});
+				}
+			});
+		}
+	}
+})(jQuery);
+
+Plugins.DayPhotos = (function($) {
+	//Instance variables
+	var orderedPhotos = [];
+	var photos = [];
+	
+	function initHtml(parent) {
+		$(parent).addDiv("span12","","user_photos");
+			$("div#user_photos").addDiv("well");
+			$("div#user_photos").children(".well").first()
+				.html('<h3>' + ui_lang['day_photos'] + '</h3><div class="plugin_buttons"><a class="btn btn-mini bt_hide" href="#result_photos" title="hide"><i class="icon-chevron-up"></i></a>' +
+				'<a class="btn btn-mini disabled" id="photos_before" href="javascript:void(0)">' + ui_lang['past'] + '</a>' +
+				'<a class="btn btn-mini" id="photos_after" href="javascript:void(0)">' + ui_lang['upcoming'] + '</a></div>');
+			//The div that will contain results	
+			$("div#user_photos").children(".well").first().addDiv("","","result_photos");
+			$("div#user_photos").children(".well").append('<div class="plugin_buttons bottom"><a class="btn btn-mini" id="photo_more" href="javascript:void(0)">' + ui_lang['show_more'] + '</a></div><div class="clearfix"></div>');
+			$("#photos_after").hide();
+			
+	}
+	
+	function showPhotos(result) {
+		var output = "";
+		var is_today = "";
+		if (result.length == 0) {
+			output += "<p>" + "No photos present!" + "</p>";
+			$("#photo_more").hide();
+		} else {
+			for(var i in result) {
+				if(result[i].hasOwnProperty('is_today')) {
+					is_today = " is_today";
+				} else {
+					is_today = "";
+				}
+				output += "<div class='photo'>";
+				output += "<div class='img_holder" + is_today + "'><a href='" + result[i].link + "' title='"+ result[i].caption +"' target='_blank'><img src='"+ result[i].src +"'/></a></div>";
+				output += "</div>";
+			}
+			output += "<div class='clearfix'></div>";
+			$("#photo_more").show();
+		}
+		$("div#result_photos").append(output);
+	}
+
+	return {
+		initPhotos: function(parent) {
+			initHtml(parent);
+		},
+		getOrderedPhotos: function(date, condition) {
+			photos = $.totalStorage('photos_data');
+			var now = (date) ? date : new Date();
+			var iter = 0; //counter
+			var result = [];
+			for (i in photos) {
+				var createdTime = new Date(photos[i].created * 1000);
+				// setting time to 0 to compate the date by day
+				if(createdTime.setHours(0,0,0,0) == now.setHours(0,0,0,0)) {
+					photos[i].is_today = true;
+				}
+				createdTime -= (86400) * 1000; // we need to go one day before
+				if (iter > 500) { break; } else { iter++; }
+				if (condition == "after") {
+					if (createdTime > now) {
+						result.push(photos[i]);
+					}
+				} else {
+					if (createdTime < now) {
+						result.push(photos[i]);
+					}
+				}		
+			}	
+			//Sorting the photos
+			if(condition == "after")
+			{
+				result = result.sort(function(a, b) { return new Date(a.created * 1000)- new Date(b.created * 1000); });
+			} else {
+				result = result.sort(function(a, b) { return new Date(b.created * 1000) - new Date(a.created * 1000); });
+			}
+			orderedPhotos = result;
+		},
+		displayPhotos: function(length) {
+			var result = orderedPhotos.splice(0, length);
+			showPhotos(result);
+		},
+		addEventHandlers: function() {
+			$('div.cal-cell').click(function() {
+				$("div#result_photos").empty();
+				Plugins.DayPhotos.getOrderedPhotos(getSelDate(), "before");
+				Plugins.DayPhotos.displayPhotos(3);
+				$("#photos_before").addClass('disabled');
+				$("#photos_after").removeClass('disabled');
+				if(getSelDate() < new Date().setHours(0,0,0,0)) {
+					$("#photos_after").show();
+				} else {
+					$("#photos_after").hide();
+				}
+			});
+			
+			$('#photo_more').live('click', function() {
+				Plugins.DayPhotos.displayPhotos(3);
+			});
+			
+			$('#photos_after').live('click', function() {
+				$("div#result_photos").empty();
+				Plugins.DayPhotos.getOrderedPhotos(getSelDate(), "after");
+				Plugins.DayPhotos.displayPhotos(3);
+				$(this).addClass('disabled');
+				$("#photos_before").removeClass('disabled');
+			});
+
+			$('#photos_before').live('click', function() {
+				$("div#result_photos").empty();
+				Plugins.DayPhotos.getOrderedPhotos(getSelDate(), "before");
+				Plugins.DayPhotos.displayPhotos(3);
+				$(this).addClass('disabled');
+				$("#photos_after").removeClass('disabled');
+			});
+		}	
+	}
+})(jQuery);

@@ -18,6 +18,7 @@ $lang['ui_calendar'] = "календарь:";
 $lang['ui_security'] = "Безопасность";
 $lang['ui_decl'] = ", твой";
 $lang['ui_reload'] = "перезагрузить";
+$lang['ui_close'] = "Закрыть";
 
 $lang['ui_registration'] = "Регистрация";
 $lang['ui_login_name'] = "Логин";
@@ -87,3 +88,10 @@ $lang['ui_sec_close_acc'] = "Закрать учетную запись";
 $lang['ui_sec_if_issues'] = "Если вы недовольны";
 $lang['ui_sec_close_acc'] = "Закрыть эту учетную запись";
 $lang['ui_sec_close_info'] = "Закрытие этой учетной записи перманентно закроет доступ к D-diary, и ликвидирует любой доступ данный ей через facebook.";
+$lang['ui_sec_access_log'] = "История посещений";
+
+// Notes extension
+$lang['ui_publish_notes'] = "Публиковать заметки";
+$lang['ui_publish_notes_info'] = "Это расширение даст вам возможность публиковать записи из дневника прямо на вашу facebook стену. Поскольку записи будут опубликованы как facebook заметки у них практически небудет ограничения по количеству символов.";
+// Pictures extenison
+$lang['ui_user_photos'] = "Мои фотографии";	

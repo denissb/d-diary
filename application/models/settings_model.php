@@ -3,7 +3,7 @@
 class Settings_model extends CI_Model {
 
 	// Array containing the list of available settings (yes, yes.. repeating fb permission names for fb extensions but can be different)
-	public $settings = array('friends_events', 'friends_birthday', 'publish_stream');
+	public $settings = array('friends_events', 'friends_birthday', 'publish_stream', 'user_photos');
 	public $user_settings = array('f_name', 'l_name', 'language', 'last_date', 'last_ip');
 	
 	function __construct(){

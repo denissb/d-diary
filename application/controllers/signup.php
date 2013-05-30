@@ -137,7 +137,7 @@ class Signup extends MY_Controller {
 		if(!$this->session->userdata('validated')) {
 			$links[] = 	"<div style=\"padding-top: 8px;\"><span id=\"fbLogin\"><a class=\"fb_button fb_button_medium\"><span class=\"fb_button_text\">".lang('ui_login')."</span></a></span></div>";
 			$links[] =	"<a href=\"".base_url()."login\">".lang('ui_login_no_fb')."</a></li>";
-			$links[] = 	"<a href=\"".base_url()."signup\">".lang('ui_signup')."</a>";
+			$links[] = 	"<a href=\"".base_url()."signup\" id=\"menu-active\">".lang('ui_signup')."</a>";
 		} 
 		$links[] = "<a href=\"".base_url()."about\">".lang('ui_about')."</a>";
 		if ($this->session->userdata('validated') && !$this->session->userdata('with_fb')) {
