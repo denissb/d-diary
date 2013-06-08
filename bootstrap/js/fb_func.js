@@ -1,5 +1,4 @@
 // Event handlers and GLOBAL events
-
 var loading_queue = 0;
 
 $('#fbLogin').click(function() {
@@ -280,11 +279,11 @@ Plugins.FriendsBirthdays = (function($){
 				$("#bd_before").removeClass('disabled');
 			});
 		
-			$('#bd_more').live('click', function() {
+			$('#bd_more').on('click', function() {
 				Plugins.FriendsBirthdays.displayBirthdays(3);
 			});
 			
-			$('#bd_after').live('click', function() {
+			$('#bd_after').on('click', function() {
 				$("div#result_birthdays").empty();
 				Plugins.FriendsBirthdays.getOrderedBirthdays(getSelDate(), "after");
 				Plugins.FriendsBirthdays.displayBirthdays(3);
@@ -292,7 +291,7 @@ Plugins.FriendsBirthdays = (function($){
 				$("#bd_before").removeClass('disabled');
 			});
 			
-			$('#bd_before').live('click', function() {
+			$('#bd_before').on('click', function() {
 				$("div#result_birthdays").empty();
 				Plugins.FriendsBirthdays.getOrderedBirthdays(getSelDate(), "before");
 				Plugins.FriendsBirthdays.displayBirthdays(3);
@@ -435,11 +434,11 @@ Plugins.FriendsEvents = (function($) {
 				$("#evt_before").removeClass('disabled');
 			});
 
-			$('#evt_more').live('click', function() {
+			$('#evt_more').on('click', function() {
 				Plugins.FriendsEvents.displayEvents(3);
 			});
 
-			$('#evt_after').live('click', function() {
+			$('#evt_after').on('click', function() {
 				$("div#result_events").empty();
 				Plugins.FriendsEvents.getOrderedEvents(getSelDate(), "after");
 				Plugins.FriendsEvents.displayEvents(3);
@@ -447,7 +446,7 @@ Plugins.FriendsEvents = (function($) {
 				$("#evt_before").removeClass('disabled');
 			});
 
-			$('#evt_before').live('click', function() {
+			$('#evt_before').on('click', function() {
 				$("div#result_events").empty();
 				Plugins.FriendsEvents.getOrderedEvents(getSelDate(), "before");
 				Plugins.FriendsEvents.displayEvents(3);
@@ -543,7 +542,10 @@ Plugins.DayPhotos = (function($) {
 			$("div#user_photos").children(".well").first().addDiv("","","result_photos");
 			$("div#user_photos").children(".well").append('<div class="plugin_buttons bottom"><a class="btn btn-mini" id="photo_more" href="javascript:void(0)">' + ui_lang['show_more'] + '</a></div><div class="clearfix"></div>');
 			$("#photos_after").hide();
-			
+			$("div#user_photos").append("<div id='photoModal' class='modal hide fade' tabindex='-1' role='dialog' aria-labelledby='accessModalLabel' aria-hidden='true'><div class='modal-header'>" +
+				"<h3 id='photoModalHeader'></h3><button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button>" +
+				"</div><div class='modal-body'></div></div>"
+			);
 	}
 	
 	function showPhotos(result) {
@@ -560,7 +562,8 @@ Plugins.DayPhotos = (function($) {
 					is_today = "";
 				}
 				output += "<div class='photo'>";
-				output += "<div class='img_holder" + is_today + "'><a href='" + result[i].link + "' title='"+ result[i].caption +"' target='_blank'><img src='"+ result[i].src +"'/></a></div>";
+				output += "<div class='img_holder" + is_today + "'><a href='" + result[i].link + "' title='"+ result[i].caption +"' target='_blank'><div class='img_container'><img src='"+ result[i].src +"'/></div></a>";
+				output += "<a class='btn btn-mini zoom-in' href='javascript:void(0)' data-image='" + result[i].src_big + "' data-caption='" + result[i].caption+ "'><i class='icon-zoom-in'></i></a></div>";
 				output += "</div>";
 			}
 			output += "<div class='clearfix'></div>";
@@ -623,11 +626,11 @@ Plugins.DayPhotos = (function($) {
 				}
 			});
 			
-			$('#photo_more').live('click', function() {
+			$('#photo_more').on('click', function() {
 				Plugins.DayPhotos.displayPhotos(3);
 			});
 			
-			$('#photos_after').live('click', function() {
+			$('#photos_after').on('click', function() {
 				$("div#result_photos").empty();
 				Plugins.DayPhotos.getOrderedPhotos(getSelDate(), "after");
 				Plugins.DayPhotos.displayPhotos(3);
@@ -635,12 +638,34 @@ Plugins.DayPhotos = (function($) {
 				$("#photos_before").removeClass('disabled');
 			});
 
-			$('#photos_before').live('click', function() {
+			$('#photos_before').on('click', function() {
 				$("div#result_photos").empty();
 				Plugins.DayPhotos.getOrderedPhotos(getSelDate(), "before");
 				Plugins.DayPhotos.displayPhotos(3);
 				$(this).addClass('disabled');
 				$("#photos_after").removeClass('disabled');
+			});
+			
+			$('div.img_holder').live({
+				mouseenter: function() {
+					$(this).find("a.zoom-in").show();
+				},
+				mouseleave: function() {
+					$(this).find("a.zoom-in").hide();
+				}
+			});
+			
+			$("a.zoom-in").live('click', function() {
+				// Get the title and link as data attributes
+				var caption = $(this).attr('data-caption');
+				if(!caption) {
+					caption = "&nbsp;";
+				}
+				var img = "<img src='" + $(this).attr('data-image') + "' title='" + caption + "'/>";
+				// Adding content and showing the modal
+				$('#photoModalHeader').html(caption);
+				$('#photoModal > .modal-body').html(img);
+				$('#photoModal').modal('show');
 			});
 		}	
 	}

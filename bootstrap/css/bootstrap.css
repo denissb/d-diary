@@ -5458,8 +5458,13 @@ a.img_holder { max-height: 82px; overflow:hidden;}
 
 /* Day photos */
 #result_photos { margin-left: -4px;}
-#result_photos .img_holder { max-height: 84px; max-width: none; border-radius: 4px; background: #fff; padding: 6px;}
-#result_photos .img_holder.is_today { padding: 5px; border: solid 1px #0074cc;}
+#result_photos .img_holder { max-width: none; border-radius: 4px; background: #fff; padding: 6px 6px 8px;}
+#result_photos .img_holder.is_today { padding: 5px 5px 7px; border: solid 1px #0074cc;}
+#result_photos .img_container { max-height: 84px; overflow: hidden;}
+#result_photos a.zoom-in { margin-top: 4px; position:relative; top: -26px; display: none;}
+#photoModal { width: auto; max-width: 720px; left: 45%; margin-top: -262px;}
+#photoModal .modal-body { height: auto; max-height: 480px; }
+#photoModal .modal-body img { max-height: 480px;}
 
 /* Settings */
 #accessModal { display: none; width: 700px; left: 45%;}
