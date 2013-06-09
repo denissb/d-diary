@@ -380,7 +380,9 @@ $(document).ready(function() {
 							if( data == 'changed' ) {
 								event.parent().response(ui_lang['cal_date_changed'] + newdate , true);
 								change_count("-");
-								find_increment(ev.date.getDate());
+								if (ev.date.getMonth() == getSelDate().getMonth()) {
+									find_increment(ev.date.getDate());
+								}
 								event.remove(); 
 							}
 							else {

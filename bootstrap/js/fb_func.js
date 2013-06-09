@@ -566,7 +566,6 @@ Plugins.DayPhotos = (function($) {
 				output += "<a class='btn btn-mini zoom-in' href='javascript:void(0)' data-image='" + result[i].src_big + "' data-caption='" + result[i].caption+ "'><i class='icon-zoom-in'></i></a></div>";
 				output += "</div>";
 			}
-			output += "<div class='clearfix'></div>";
 			$("#photo_more").show();
 		}
 		$("div#result_photos").append(output);
@@ -661,11 +660,16 @@ Plugins.DayPhotos = (function($) {
 				if(!caption) {
 					caption = "&nbsp;";
 				}
-				var img = "<img src='" + $(this).attr('data-image') + "' title='" + caption + "'/>";
+				var img = "<img src='" + $(this).attr('data-image') + "' title='" + caption + "' class='modal-img'/>";
 				// Adding content and showing the modal
 				$('#photoModalHeader').html(caption);
 				$('#photoModal > .modal-body').html(img);
+				$('#photoModal > .modal-body').append('<div class="progress progress-striped active photo"><div class="bar"></div></div>');
 				$('#photoModal').modal('show');
+				$('.modal-img').load(function() {
+					$("div.progress").remove();
+					$(this).show();
+				});
 			});
 		}	
 	}

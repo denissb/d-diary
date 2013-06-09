@@ -27,13 +27,13 @@
 					</div>
 					<div class="ext">
 						<label class="checkbox">
-						  <input type="checkbox" class="widget" name="notes" value="publish_stream" <?php if(isset($enabled['publish_stream'])) echo "checked"; ?>><h4><?php echo lang('ui_publish_notes'); ?></h4>
+						  <input type="checkbox" class="widget" name="pictures" value="user_photos" <?php if(isset($enabled['user_photos'])) echo "checked"; ?>><h4><?php echo lang('ui_user_photos'); ?></h4>
 						</label>
-						<p><?php echo lang('ui_publish_notes_info'); ?></p>
+						<p><?php echo lang('ui_user_photos_info'); ?></p>
 					</div>
 					<div class="ext">
 						<label class="checkbox">
-						  <input type="checkbox" class="widget" name="pictures" value="user_photos" <?php if(isset($enabled['user_photos'])) echo "checked"; ?>><h4><?php echo lang('ui_user_photos'); ?></h4>
+						  <input type="checkbox" class="widget" name="notes" value="publish_stream" <?php if(isset($enabled['publish_stream'])) echo "checked"; ?>><h4><?php echo lang('ui_publish_notes'); ?></h4>
 						</label>
 						<p><?php echo lang('ui_publish_notes_info'); ?></p>
 					</div>

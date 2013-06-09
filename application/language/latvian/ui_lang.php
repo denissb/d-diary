@@ -74,7 +74,7 @@ $lang['ui_reg_fb_in_use_res'] = "Ja jūs gribat izmantot šo facebook id ar jaun
 $lang['ui_friends_events'] = "Notikumi";
 $lang['ui_friends_events_info'] = "Parāda notikumus ko jūs vai jūsu draugi plāno apmeklēt, lai jūs nepalaistu garām kaut-ko interesantu.";
 $lang['ui_friends_birthdays'] = "Draugu dzimšanas dienas";
-$lang['ui_friends_birthdays_info'] = "Shows friends birthdays depending on the date selected, provides sorting and ordering so you wouldn't miss a thing.";
+$lang['ui_friends_birthdays_info'] = "Parāda draugu dzimšanas dienas atkaribā no izvelēta datuma, nodrošina kartošanu pēc nakotnes/pagatnes lai jūs varētu būt parliecināti par to ka neviens jūsu draugs nebija atstāts bez apsveikuma.";
 $lang['ui_change_settings'] = "Mainīt iestatījumus";
 $lang['ui_extensions_use_facebook'] = "Paplašinājumu lietošanai ir nepieciešams pieslegties ar facebook kontu";
 $lang['ui_acc_unlink_fb'] = "Šī facebook konta atsaiste noņems visus iestatījumus kas ir atkarīgi no facebook, atslēgs visus pieslēgtus paplašinājumus un aizvers šo sesiju,
@@ -97,4 +97,6 @@ $lang['ui_sec_access_log'] = "Apmeklējumu vēsture";
 $lang['ui_publish_notes'] = "Publiskot piezīmes";
 $lang['ui_publish_notes_info'] = "Šīs paplašinājums ļaujs jums publiskot piezīmes no d-diary dienasgrāmatas tieši uz jūsu facebook sienu. Jūsu ieraksti būs publiskoti ka facebook piezīmes - praktiski bez simbolu skaita ierobežojuma.";
 // Pictures extenison
-$lang['ui_user_photos'] = "Manas fotogrāfijas";	
+$lang['ui_user_photos'] = "Manas fotogrāfijas";
+$lang['ui_user_photos_info'] = "Rāda visas jūsu fotogrāfijas atkaribā no izvelēta datuma un nodrošina kartošanu pēc pievienošanas datuma kas varētu būt nakotnē vai pagatnē. 
+Izcila lieta lai atsvaidzināt svarīgas sev atmiņas, tadēļ bildes var apskatīt gan pa taisno šeit, gan atverot tos facebook'ā";

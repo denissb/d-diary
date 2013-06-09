@@ -16,17 +16,11 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script type="text/javascript"> window.jQuery || document.write('<script src="js/libs/jquery-1.7.2.min.js">\x3C/script>')</script>
-<script src="/bootstrap/js/lang/<?php echo $this->config->item('lang_short'); ?>.js"></script>
-<script src="/bootstrap/js/bootstrap.js"></script>
-<script src="/bootstrap/js/plugins/jquery.cookie.js"></script>
-<script src="/bootstrap/js/plugins/jquery.total-storage.min.js"></script>
-<script src="/bootstrap/js/plugins/bootstrap-datepicker.<?php echo $this->config->item('lang_short'); ?>.js"></script>
-<script src="/bootstrap/wysiwyg/lib/wysiwyg.js"></script>
-<script src="/bootstrap/js/tinysort.js"></script>
+<script src="/bootstrap/js/compiled/<?php echo $this->config->item('lang_short'); ?>.min.js"></script>
+<script src="/bootstrap/js/compiled/script.min.js"></script>
 <?php if($this->uri->segment(1) == "settings") { ?>
 <script src="/bootstrap/js/register.js"></script>
 <?php } ?>
-<script src="/bootstrap/js/script.js"></script>
 <div class="temp"></div>
 </body>
 </html>

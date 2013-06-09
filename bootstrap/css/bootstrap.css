@@ -5463,8 +5463,10 @@ a.img_holder { max-height: 82px; overflow:hidden;}
 #result_photos .img_container { max-height: 84px; overflow: hidden;}
 #result_photos a.zoom-in { margin-top: 4px; position:relative; top: -26px; display: none;}
 #photoModal { width: auto; max-width: 720px; left: 45%; margin-top: -262px;}
-#photoModal .modal-body { height: auto; max-height: 480px; }
+#photoModal .modal-body { height: auto; max-height: 480px;  text-align: center;}
 #photoModal .modal-body img { max-height: 480px;}
+.modal-img { display: none; }
+.progress.photo { width: 480px;}
 
 /* Settings */
 #accessModal { display: none; width: 700px; left: 45%;}

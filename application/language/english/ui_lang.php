@@ -75,7 +75,7 @@ $lang['ui_reg_fb_in_use_res'] = "If you want to use this facebook id with a new 
 $lang['ui_friends_events'] = "Upcoming events";
 $lang['ui_friends_events_info'] = "Shows the events you and your frends are planing to attend, so you wouldn't miss anything intresting.";
 $lang['ui_friends_birthdays'] = "Frends birthdays";
-$lang['ui_friends_birthdays_info'] = "Shows friends birthdays depending on the date selected, provides sorting and ordering so you wouldn't miss a thing.";
+$lang['ui_friends_birthdays_info'] = "Shows friends birthdays depending on the date selected, provides sorting and ordering so you wouldn't miss a single one.";
 $lang['ui_change_settings'] = "Change settings";
 $lang['ui_extensions_use_facebook'] = "To use extensions please log in with Facebook";
 $lang['ui_acc_unlink_fb'] = "Unlinking the facebook user account will revoke all settings asociated with facebook, 
@@ -98,3 +98,4 @@ $lang['ui_publish_notes'] = "Publish notes";
 $lang['ui_publish_notes_info'] = "This extension will allow you to publish entries from your diary directly to your facebook wall. Your entries will be published as notes, so they won't have a character length restriction.";
 // Pictures extenison
 $lang['ui_user_photos'] = "My photos";
+$lang['ui_user_photos_info'] = "Shows your photos depending on the date selected and provides sorting by either date added in the past or in the future. Great for refreshing your memory about those important moments, so photos can be viewed directly or opened on facebook.";

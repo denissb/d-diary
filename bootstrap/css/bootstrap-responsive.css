@@ -196,6 +196,12 @@
     display: inline-block;
     width: auto;
   }
+  
+  #photoModal { width: auto; max-width: 460px; left: 59%; margin-top: -262px;}
+  #photoModal .modal-body { max-height: 550px; text-align: center; overflow:hidden;}
+  #photoModal .modal-body img { max-height: 500px; max-width: 430px;}
+  .modal-img { display: none; }
+  .progress.photo { width: 350px;}
 }
 
 @media (min-width: 768px) and (max-width: 979px) {
