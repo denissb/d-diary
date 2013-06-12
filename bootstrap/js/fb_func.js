@@ -647,10 +647,10 @@ Plugins.DayPhotos = (function($) {
 			
 			$('div.img_holder').live({
 				mouseenter: function() {
-					$(this).find("a.zoom-in").show();
+					$(this).find("a.zoom-in").css("visibility","visible");
 				},
 				mouseleave: function() {
-					$(this).find("a.zoom-in").hide();
+					$(this).find("a.zoom-in").css("visibility","hidden");
 				}
 			});
 			

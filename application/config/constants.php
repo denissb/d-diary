@@ -19,9 +19,9 @@ define('DIR_READ_MODE', 0755);
 define('DIR_WRITE_MODE', 0777);
 
 define('SMTP_HOST', 'ssl://smtp.gmail.com');
-define('SMTP_USER', 'spawnenius@gmail.com');
-define('SMTP_PASS', 'soultwist26');
-define('SMTP_ALIAS', 'D-diary');
+define('SMTP_USER', getenv('SMTP_USER'));
+define('SMTP_PASS', getenv('SMTP_PASS'));
+define('SMTP_ALIAS', getenv('SMTP_ALIAS'));
 
 /*
 |--------------------------------------------------------------------------
