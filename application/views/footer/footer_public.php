@@ -51,8 +51,7 @@
       }(document, 'script', 'facebook-jssdk'));
     </script>
 <script src="/bootstrap/js/lang/<?php echo $this->config->item('lang_short'); ?>.min.js"></script>
-<script src="/bootstrap/js/bootstrap.js"></script>
-<script src="/bootstrap/js/register.js"></script>	
+<script src="/bootstrap/js/compiled/script.min.js"></script>
 <div class="temp"></div>
 </body>
 </html>

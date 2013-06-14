@@ -160,8 +160,8 @@ body {
   padding-top: 55px;
   padding-bottom: 40px;
   margin: 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 13px;
+  font-family: Calibri, Helvetica, Arial, sans-serif;
+  font-size: 14px;
   line-height: 18px;
   color: #333333;
   background-color: #ffffff;
@@ -430,7 +430,7 @@ p {
 }
 
 p small {
-  font-size: 11px;
+  font-size: 12px;
   color: #999999;
 }
 
@@ -512,7 +512,7 @@ h5 {
 }
 
 h6 {
-  font-size: 11px;
+  font-size: 12px;
   color: #999999;
   text-transform: uppercase;
 }
@@ -761,7 +761,7 @@ input,
 button,
 select,
 textarea {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: normal;
   line-height: 18px;
 }
@@ -770,7 +770,7 @@ input,
 button,
 select,
 textarea {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Calibri, Helvetica, Arial, sans-serif;
 }
 
 label {
@@ -799,7 +799,7 @@ input[type="color"],
   height: 18px;
   padding: 4px;
   margin-bottom: 9px;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 18px;
   color: #555555;
 }
@@ -2605,7 +2605,7 @@ button.close {
   padding: 4px 10px 4px;
   margin-bottom: 0;
   *margin-left: .3em;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 18px;
   *line-height: 20px;
   color: #333333;
@@ -2715,7 +2715,7 @@ button.close {
 
 .btn-small {
   padding: 5px 9px;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 16px;
 }
 
@@ -2725,7 +2725,7 @@ button.close {
 
 .btn-mini {
   padding: 2px 6px;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 14px;
 }
 
@@ -3248,7 +3248,7 @@ input[type="submit"].btn.btn-mini {
 .nav .nav-header {
   display: block;
   padding: 3px 15px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: bold;
   line-height: 18px;
   color: #999999;
@@ -3645,8 +3645,8 @@ input[type="submit"].btn.btn-mini {
   float: left;
   padding: 8px 20px 12px;
   margin-left: -20px;
-  font-size: 20px;
-  font-weight: 200;
+  font-size: 21px;
+  font-weight: 600;
   line-height: 1;
   color: #999999;
 }
@@ -3691,7 +3691,6 @@ input[type="submit"].btn.btn-mini {
 .navbar-form input,
 .navbar-form select,
 .navbar-form .radio,
-.navbar-form .checkbox {
   margin-top: 5px;
 }
 
@@ -3727,8 +3726,8 @@ input[type="submit"].btn.btn-mini {
 
 .navbar-search .search-query {
   padding: 4px 9px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 13px;
+  font-family: Calibri, Helvetica, Arial, sans-serif;
+  font-size: 14px;
   font-weight: normal;
   line-height: 1;
   color: #ffffff;
@@ -4289,7 +4288,7 @@ input[type="submit"].btn.btn-mini {
   z-index: 1020;
   display: block;
   padding: 5px;
-  font-size: 11px;
+  font-size: 12px;
   opacity: 0;
   filter: alpha(opacity=0);
   visibility: visible;
@@ -5018,10 +5017,22 @@ a.badge:hover {
 }
 
 /* My styles */
-
-
 div.advert img {
 	float: left;
+	padding: 0 15px 7px 0px;
+}
+
+div.advert h2 {
+	margin-bottom: 5px;
+	font-size: 1.8em;
+}
+
+div.advert p, div.advert li {
+	font-size: 1.1em;
+}
+
+div.advert li {
+	padding: 4px ;
 }
 
 h2.topic {
@@ -5075,7 +5086,7 @@ span.events {
 
 #time {
 	font-size: 1.8em;
-	height: 20px;
+	height: 21px;
 	line-height: 1.2em;
 }
 
@@ -5132,7 +5143,7 @@ span.events {
 	text-align: left;
 	padding: 15px 10px;
 	font-size: 4.1em;
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: Calibri, Helvetica, Arial, sans-serif;
 	font-weight:normal;
 	display:inline;
 }
@@ -5367,7 +5378,7 @@ text-shadow: none;
 }
 
 .fb_button_medium, .fb_button_medium_rtl {
-font-size: 11px;
+font-size: 12px;
 line-height: 14px;
 }
 

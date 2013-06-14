@@ -71,6 +71,36 @@ $lang['ui_reg_cancel_fail'] = "Nevar atrast reģistrāciju pēc norāditā koda!
 $lang['ui_reg_fb_in_use'] =  "Šīs facebook id jau ir aizņemts!";
 $lang['ui_reg_fb_in_use_res'] = "Ja jūs gribat izmantot šo facebook id ar jauno kontu, lūgums atslēgt to no vecā konta. To var izdarīt izmantojot sadaļu Iestatījumi → Lietotājs.";
 
+//Front page
+$lang['ui_front_slogan'] = "D-diary - vienkarš veids ka organizēt tavu dienu!";
+$lang['ui_features'][] = "Parasts un elegants dizains";
+$lang['ui_features'][] = "Vienkāršs lietošanā";
+$lang['ui_features'][] = "Paplašinams ar papildus funkcionalitāti";
+$lang['ui_features'][] = "Nav parslogots ar lieko jums funkcionalitāti";
+$lang['ui_features'][] = "Vienkārša sienas kalendāra noskaņa";
+
+$lang['ui_facebook'] = "facebook";
+$lang['ui_facebook_slogan'] = "Vienkarša lietošanā dienasgrāmata kas ir integrēta facebook'ā:";
+$lang['ui_fb_features'][] = "Vienkarša piekļuva un reģistrācija izmantojot facebook";
+$lang['ui_fb_features'][] = "Iespēja izmantot ārpus facebook";
+$lang['ui_fb_features'][] = "Piekļuve un lietošana bez pieejas facebook kontam";
+$lang['ui_fb_features'][] = "Iespēja savienot ar citu facebook kontu pēc reģistrācijas";
+
+$lang['ui_plugins'] = "Paplašinājumi";
+$lang['ui_plugins_slogan'] = "Paplašiniet savu dienasgrāmatu ar funkcijām kas ir nepieciešami tieši jums";
+$lang['ui_plugins_features'][] = "<b>Draugu dzimšnas dienas</b> - napalaid tos garām";
+$lang['ui_plugins_features'][] = "<b>Notikumi</b> - esi lietas kuršā";
+$lang['ui_plugins_features'][] = "<b>Jūsu foto</b> - atceraties ar kur un kā";
+$lang['ui_plugins_features'][] = "<b>Piezīmju publikācija</b> - tieši uz jūsu facebook sienu";
+$lang['ui_plugins_features'][] = "un vairāk nakotnē..";
+
+$lang['ui_privacy'] = "Privātums";
+$lang['ui_privacy_slogan'] = "Mēs cenšamies saglabāt jūsu anonimitāti un privātumu lietošanā:";
+$lang['ui_privacy_features'][] = "Piekļuve ir šifrēta ar  SSL";
+$lang['ui_privacy_features'][] = "Mēs pieprasam tikai nepieciešamās facebook atļaujas";
+$lang['ui_privacy_features'][] = "Atsaiste no facebook ar vienu klikšķi";
+$lang['ui_privacy_features'][] = "Privātas informācijas dzēsana un facebook atļauju noņemšana pēc konta aizveršanas";
+
 $lang['ui_friends_events'] = "Notikumi";
 $lang['ui_friends_events_info'] = "Parāda notikumus ko jūs vai jūsu draugi plāno apmeklēt, lai jūs nepalaistu garām kaut-ko interesantu.";
 $lang['ui_friends_birthdays'] = "Draugu dzimšanas dienas";

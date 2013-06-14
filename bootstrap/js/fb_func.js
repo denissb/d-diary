@@ -99,7 +99,7 @@ FB.getLoginStatus(function(response) {
 function sendRequestToFriends() {
     FB.ui({
         method: 'apprequests',
-        message: ui_lang['app_advert'],
+        message: ui_lang['app_advert']
     });     
 }
 

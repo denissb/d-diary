@@ -72,6 +72,36 @@ $lang['ui_reg_cancel_fail'] = "Could not find any registration to cancel!";
 $lang['ui_reg_fb_in_use'] =  "This facebook id is already in use!";
 $lang['ui_reg_fb_in_use_res'] = "If you want to use this facebook id with a new account please unlink it from the old one, this can be done in Settings -> Account";
 
+//Front page
+$lang['ui_front_slogan']="D-diary is a simple way to organise your day!";
+$lang['ui_features'][] = "Simple and elegant design";
+$lang['ui_features'][] = "Easy to use";
+$lang['ui_features'][] = "Extendable with aditional features";
+$lang['ui_features'][] = "Not bloated with things you don't want";
+$lang['ui_features'][] = "The vintage look and feel of a simple wall calendar";
+
+$lang['ui_facebook'] = "facebook";
+$lang['ui_facebook_slogan'] = "A simple, easy to use diary that's intergrated with facebook:";
+$lang['ui_fb_features'][] = "Simple access and registration via facebook";
+$lang['ui_fb_features'][] = "Can be used outside of facebook";
+$lang['ui_fb_features'][] = "Accessable and usable without facebook";
+$lang['ui_fb_features'][] = "Can be linked with a different facebook account after";
+
+$lang['ui_plugins'] = "Plugins";
+$lang['ui_plugins_slogan'] = "Extend your diary with additional social features you need using the provided plugins:";
+$lang['ui_plugins_features'][] = "<b>Friends birthdays</b> - see the upcoming birthdays";
+$lang['ui_plugins_features'][] = "<b>Events</b> - keep track of events";
+$lang['ui_plugins_features'][] = "<b>Your photos</b> - remember when and with who";
+$lang['ui_plugins_features'][] = "<b>Publish notes</b> - right to your facebook wall";
+$lang['ui_plugins_features'][] = "more coming..";
+
+$lang['ui_privacy'] = "Privacy";
+$lang['ui_privacy_slogan'] = "We try to keep things as confidential and private as possible:";
+$lang['ui_privacy_features'][] = "SSL encrypted access";
+$lang['ui_privacy_features'][] = "Requesting only essential permissions";
+$lang['ui_privacy_features'][] = "Unlink from facebook via simple click";
+$lang['ui_privacy_features'][] = "Deletion of private data and facebook permissions on account removal";
+
 $lang['ui_friends_events'] = "Upcoming events";
 $lang['ui_friends_events_info'] = "Shows the events you and your frends are planing to attend, so you wouldn't miss anything intresting.";
 $lang['ui_friends_birthdays'] = "Frends birthdays";

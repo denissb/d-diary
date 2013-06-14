@@ -27,7 +27,7 @@
           xfbml      : true // parse XFBML
         });
 		
-		$.getScript("/bootstrap/js/fb_func.js", function(){
+		$.getScript("/bootstrap/js/compiled/fb_func.min.js", function(){
 			<?php if(!is_array($settings) && $settings) { ?>
 			window.active_settings = JSON.parse('<?php echo $settings; ?>');
 			<?php } else { ?>
@@ -55,7 +55,6 @@
 <script src="/bootstrap/js/compiled/<?php echo $this->config->item('lang_short'); ?>.min.js"></script>
 <script src="/bootstrap/js/compiled/script.min.js"></script>
 <?php if($this->uri->segment(1) == "settings") { ?>
-<script src="/bootstrap/js/register.js"></script>
 <?php } ?>
 <div class="temp"></div>
 </body>
