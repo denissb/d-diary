@@ -140,21 +140,6 @@ $(document).ready(function() {
         $(this).children('i').toggleClass('icon-chevron-up');
     });
 	
-    //Show or hide calendar
-	$(window).resize(showCalendarToggle);
-
-	$(document).ajaxComplete(function() {
-		showCalendarToggle();
-	});
-	
-	function showCalendarToggle() {
-		if (hasScrollBar()) { 
-			$('button.toggle-cal').show();
-		} else {
-			$('button.toggle-cal').hide();
-		}
-	}
-	
     $('button.toggle-cal').live('click', function() {
         $('tbody#cal-body').toggle();
         $(this).children('i').toggleClass('icon-chevron-up');

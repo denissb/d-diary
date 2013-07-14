@@ -22,7 +22,7 @@
 							<p>User’s personal information, as a general rule, will be used for the following purposes:</p>
 							<ol style="padding-bottom: 5px;">
 								<li>
-									Requesting the required information from Facebooks© Garph API
+									Requesting the required information from Facebook© Garph API
 								</li>
 								<li>
 									Posting information to facebook.com per user request.
