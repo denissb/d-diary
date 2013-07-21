@@ -196,7 +196,9 @@ Plugins.FriendsBirthdays = (function($){
 				'<a class="btn btn-mini" id="bd_before" href="javascript:void(0)">' + ui_lang['past'] + '</a>' +
 				'<a class="btn btn-mini disabled" id="bd_after" href="javascript:void(0)">' + ui_lang['upcoming']+ '</a></div>');
 			$("div#friends_birthdays").children(".well").first().addDiv("","","result_birthdays");	
-			$("div#friends_birthdays").children(".well").append('<div class="plugin_buttons bottom"><a class="btn btn-mini" id="bd_more" href="javascript:void(0)">' + ui_lang['show_more'] + '</a></div><div class="clearfix"></div>');
+			$("div#friends_birthdays").children(".well").append('<div class="plugin_buttons bottom">' +
+			'<a class="btn btn-mini" id="bd_less" href="javascript:void(0)"><i class="icon-chevron-up"></i></a>' +
+			'<a class="btn btn-mini" id="bd_more" href="javascript:void(0)">' + ui_lang['show_more'] + '</a></div><div class="clearfix"></div>');
 		},
 		getOrderedBirthdays: function(date, condition) {
 			var birthdays = $.totalStorage('friends_data');
@@ -281,6 +283,12 @@ Plugins.FriendsBirthdays = (function($){
 		
 			$('#bd_more').on('click', function() {
 				Plugins.FriendsBirthdays.displayBirthdays(3);
+				$('#bd_less').show();
+			});
+			
+			$('#bd_less').on('click', function() {
+				$('#bd_after').trigger('click');
+				$(this).hide();
 			});
 			
 			$('#bd_after').on('click', function() {
@@ -384,7 +392,9 @@ Plugins.FriendsEvents = (function($) {
 				'<a class="btn btn-mini" id="evt_before" href="javascript:void(0)">' + ui_lang['past'] + '</a>' +
 				'<a class="btn btn-mini disabled" id="evt_after" href="javascript:void(0)">' + ui_lang['upcoming'] + '</a></div>');
 			$("div#friends_events").children(".well").first().addDiv("","","result_events");
-			$("div#friends_events").children(".well").append('<div class="plugin_buttons bottom"><a class="btn btn-mini" id="evt_more" href="javascript:void(0)">' + ui_lang['show_more'] + '</a></div><div class="clearfix"></div>');
+			$("div#friends_events").children(".well").append('<div class="plugin_buttons bottom">' +
+			'<a class="btn btn-mini" id="evt_less" href="javascript:void(0)"><i class="icon-chevron-up"></i></a>' +
+			'<a class="btn btn-mini" id="evt_more" href="javascript:void(0)">' + ui_lang['show_more'] + '</a></div><div class="clearfix"></div>');
 		},
 		getOrderedEvents: function(date, condition) {
 			events = $.totalStorage('events_data');
@@ -436,6 +446,12 @@ Plugins.FriendsEvents = (function($) {
 
 			$('#evt_more').on('click', function() {
 				Plugins.FriendsEvents.displayEvents(3);
+				$('#evt_less').show();
+			});
+			
+			$('#evt_less').on('click', function() {
+				$('#evt_after').trigger('click');
+				$(this).hide();
 			});
 
 			$('#evt_after').on('click', function() {
@@ -540,7 +556,9 @@ Plugins.DayPhotos = (function($) {
 				'<a class="btn btn-mini" id="photos_after" href="javascript:void(0)">' + ui_lang['upcoming'] + '</a></div>');
 			//The div that will contain results	
 			$("div#user_photos").children(".well").first().addDiv("","","result_photos");
-			$("div#user_photos").children(".well").append('<div class="plugin_buttons bottom"><a class="btn btn-mini" id="photo_more" href="javascript:void(0)">' + ui_lang['show_more'] + '</a></div><div class="clearfix"></div>');
+			$("div#user_photos").children(".well").append('<div class="plugin_buttons bottom">' +
+			'<a class="btn btn-mini" id="photo_less" href="javascript:void(0)"><i class="icon-chevron-up"></i></a>' +
+			'<a class="btn btn-mini" id="photo_more" href="javascript:void(0)">' + ui_lang['show_more'] + '</a></div><div class="clearfix"></div>');
 			$("#photos_after").hide();
 			$("div#user_photos").append("<div id='photoModal' class='modal hide fade' tabindex='-1' role='dialog' aria-labelledby='accessModalLabel' aria-hidden='true'><div class='modal-header'>" +
 				"<h3 id='photoModalHeader'></h3><button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button>" +
@@ -627,6 +645,12 @@ Plugins.DayPhotos = (function($) {
 			
 			$('#photo_more').on('click', function() {
 				Plugins.DayPhotos.displayPhotos(3);
+				$('#photo_less').show();
+			});
+			
+			$('#photo_less').on('click', function() {
+				$('#photos_before').trigger('click');
+				$(this).hide();
 			});
 			
 			$('#photos_after').on('click', function() {

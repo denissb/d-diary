@@ -1,8 +1,8 @@
-﻿$(document).ready(function() {
+$(document).ready(function () {
     
 	var config = {};
 	config.home = "//ddiary.loc/";
-	config.change_pass = config.home+ 'settings/change_pass';
+	config.change_pass = config.home + 'settings/change_pass';
 	window.err_msg = ui_lang['check_all_fields']; // Storing error data
 	
     // Run email validation
@@ -92,7 +92,7 @@
 		} else {
 			var old_pass = $('#old-pass').val();
 			var new_pass = $('#pass-input').val();
-			if(old_pass == new_pass) {
+			if(old_pass === new_pass) {
 				$('.pass-change').response(ui_lang['pass_is_same'], false);
 				$('#pass-input').removeClass('success');
 				$('#pass-input').addClass('error');

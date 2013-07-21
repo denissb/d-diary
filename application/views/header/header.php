@@ -32,7 +32,8 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="<?php echo base_url(); ?>"><?php echo lang('ui_app_name'); ?></a>
+                    <a class="brand" href="<?php echo base_url(); ?>"><?php echo lang('ui_app_name'); ?><span class="status">beta</span></a>
+					
                     <div class="nav-collapse">
                         <?php echo $navlist; ?>
                     </div><!--/.nav-collapse -->
