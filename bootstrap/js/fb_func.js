@@ -57,7 +57,7 @@ function setLoading() {
 
 //Checks if the user is logged in and retrives required information depending on the settings
 FB.getLoginStatus(function(response) {
-	if (response.status === 'connected') {
+	if (response.status == 'connected') {
 		window.loading_queue = Object.keys(window.active_settings).length;
 		setLoading();
 		getFriendsData(function() {

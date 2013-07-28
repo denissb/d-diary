@@ -45,7 +45,7 @@
 		<div class="span3 advert">
 		   <div class="well">
 			 <img src="/bootstrap/img/icon-privacy.png" alt="concept" title="D-diary"/>
-			<h2 class="shadow"><?php echo lang('ui_prvacy'); ?></h2>
+			<h2 class="shadow"><?php echo lang('ui_privacy'); ?></h2>
 				<p><?php echo lang('ui_privacy_slogan'); ?></p>
 			<div class="clearfix"></div>
 			<ul>

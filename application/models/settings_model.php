@@ -49,16 +49,22 @@ class Settings_model extends CI_Model {
 	public function get_settings($user_id) {
 		$query = $this->db->select('settings')->from('users')->where('fb_id',$user_id)->get();
 		$settings = $query->result();
-		$result = json_decode(stripslashes($settings[0]->settings), true);
-		if(is_array($result)) {
-			return $result;
-		} else if (!is_array($result)) {
-				$result = json_decode($result, true);
-				if (json_last_error() !== JSON_ERROR_NONE) {
-					return null;
-				}
+		if(count($settings) > 0) {
+			$result = json_decode(stripslashes($settings[0]->settings), true);
+		}
+		if(isset($result)) {
+			if(is_array($result)) {
 				return $result;
-			}
+			} else if (!is_array($result)) {
+					$result = json_decode($result, true);
+					if (json_last_error() !== JSON_ERROR_NONE) {
+						return null;
+					}
+					return $result;
+				}
+		} else {
+			return "";
+		}
 	}
 	
 	// Returns user setings in a php array

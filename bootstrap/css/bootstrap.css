@@ -413,7 +413,17 @@ a:hover {
   padding-right: 20px;
   padding-left: 20px;
   *zoom: 1;
+  display: none;
 }
+
+.progress.front-page {
+	width: 60%;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-left: -30%;
+	margin-top: -5%;
+} 
 
 .container-fluid:before,
 .container-fluid:after {
@@ -3601,6 +3611,7 @@ input[type="submit"].btn.btn-mini {
   margin-bottom: 18px;
   overflow: visible;
   border-bottom: 4px solid #007bd2;
+  display: none;
 }
 
 .navbar-inner {
@@ -3643,7 +3654,7 @@ input[type="submit"].btn.btn-mini {
 .navbar .brand {
   display: block;
   float: left;
-  padding: 8px 20px 12px;
+  padding: 8px 0px 12px 20px;
   margin-left: -20px;
   font-size: 21px;
   font-weight: 600;
@@ -5336,6 +5347,14 @@ span.quote {
     text-shadow: 1px 1px #eee;
 }
 
+span.status {
+	font-size: 11px;
+	font-weight: normal;
+	position: relative;
+	top: 12px;
+	right: 22px;
+}
+
 .full-page {
 	width:70%;
 	margin: 0 auto;
@@ -5455,13 +5474,15 @@ span.date, span.place { font-size: 14px; line-height: 1.4em;}
 
 /* Friends birthdays and events*/
 
+#bd_less, #evt_less, #photo_less { display: none;}
+
 .event, .birthday { clear: both; margin: 5px 0; margin-right: 2px; background: #fff; border-radius: 4px;}
 
 .birthday { height: 60px;}
 
 .event {padding: 2px 0;}
 
-div.birthday.is_today { border: solid 1px #0074cc; }
+div.birthday.is_today { border: solid 1px #0074cc; margin: 4px 0;}
 
 /*div.event.is_today { border: solid 1px #0074cc}*/
 

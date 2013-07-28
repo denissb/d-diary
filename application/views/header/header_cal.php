@@ -32,7 +32,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="<?php echo base_url(); ?>">D-diary</a>
+                    <a class="brand" href="<?php echo base_url(); ?>">D-diary<span class="status">beta</span></a>
                     <div class="nav-collapse">
                         <?php echo $navlist; ?>
                     </div><!--/.nav-collapse -->
