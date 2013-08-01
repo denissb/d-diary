@@ -17,6 +17,7 @@
       'click [data-type=link]': 'link',
       'click [data-type=h2]': 'h2',
       'click [data-type=h3]': 'h3',
+	  'click [data-type=strikeThrough]': 'strikeThrough',
       'click a': 'cancel'
     };
 
@@ -41,10 +42,19 @@
 	  this.el.append('<a href="#" data-type="bold" title="bold" class="btn btn-mini"><i class="icon-bold"></i></a>');
       this.el.append('<a href="#" data-type="list" title="list" class="btn btn-mini"><i class="icon-list-alt"></i></a>');
       this.el.append('<a href="#" data-type="link" title="link" class="btn btn-mini"><i class="icon-retweet"></a>');
+	  this.el.append('<a href="#" data-type="strikeThrough" title="strike through" class="btn btn-mini"><i class="icon-ok"></a>');
       return this;
     };
 
-    Wysiwyg.prototype.bold = function(e) {
+    Wysiwyg.prototype.strikeThrough = function(e) {
+      e.preventDefault();
+      if (!this.selectTest()) {
+        return;
+      }
+      return this.exec('strikeThrough');a
+    };
+	
+	Wysiwyg.prototype.bold = function(e) {
       e.preventDefault();
       if (!this.selectTest()) {
         return;

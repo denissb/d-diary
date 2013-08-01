@@ -34,12 +34,6 @@
 			window.active_settings = "";	
 			<?php } ?>
 		});
-		
-        // Listen to the auth.login which will be called when the user logs in
-        // using the Login button
-        FB.Event.subscribe('auth.login', function(response) {
-          window.location = window.location;
-        });
       }
 	 });
       // Load the SDK Asynchronously

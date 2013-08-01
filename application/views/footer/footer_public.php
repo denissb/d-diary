@@ -7,7 +7,9 @@
 </footer>
 
 </div> <!-- /container fluid-->
-
+<style type="text/css">
+.navbar, .container-fluid {display: none;}
+</style>
 <div class="progress progress-striped active front-page"><div class="bar"></div></div>
 
 <!-- Le javascript
@@ -16,14 +18,6 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <div id="fb-root"></div>
     <script type="text/javascript">
-	
-	function preloader(){
-            $(".progress").hide();
-			$(".navbar").show();
-            $(".container-fluid").show();
-        }//preloader
-    window.onload = preloader;
-	
 	$(document).ready(function() {
       window.fbAsyncInit = function() {
         FB.init({
@@ -46,10 +40,19 @@
 			}, {scope: params});
 		}
 		
+		function preloader() {
+            $(".progress").hide();
+			$(".navbar").show();
+            $(".container-fluid").show();
+        }//preloader
+		
         // Listen to the auth.login which will be called when the user logs in
         // using the Login button
         FB.Event.subscribe('auth.login', function(response) {
-          window.location = window.location;
+			if(response.status === 'connected')
+				window.location = window.location;
+			else
+				preloader();		
         });
       };
 	 });
