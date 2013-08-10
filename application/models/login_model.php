@@ -46,7 +46,8 @@ class Login_model extends CI_Model{
                     'username' => $row->username,
                     'validated' => true,
 					'with_fb' => false,
-					'language' => $row->language
+					'language' => $row->language,
+					'table_num' => $row->table_num
                     );
             $this->session->set_userdata($data);
 			// Remember user to keep them signed in
@@ -83,7 +84,8 @@ class Login_model extends CI_Model{
 					'with_fb' => true,
                     'validated' => true,
 					'settings' => $row->settings,
-					'language' => $row->language == "" ? $this->facebook->get_lang() : $row->language
+					'language' => $row->language == "" ? $this->facebook->get_lang() : $row->language,
+					'table_num' => $row->table_num
                     );
             $this->session->set_userdata($data);
 			$this->facebook->setExtendedAccessToken();
@@ -155,7 +157,8 @@ class Login_model extends CI_Model{
 								'lname' => $row->l_name,
 								'username' => $row->username,
 								'validated' => true,
-								'with_fb' => $row->fb_id ? true : false
+								'with_fb' => $row->fb_id ? true : false,
+								'table_num' => $row->table_num
 								);
 						$this->session->set_userdata($data);
 						$this->log_ip_and_date($row->id);

@@ -5,7 +5,8 @@ if (!defined('BASEPATH'))
 class Signup_model extends CI_Model {
 
 	const NOCAPATCHA = "NOCAPATCHAFORFB";
-
+    const USER_LIMIT = 10000;
+    
     function __construct() {
         parent::__construct();
     }
@@ -41,7 +42,8 @@ class Signup_model extends CI_Model {
                             'f_name' => $f_name,
                             'l_name' => $l_name,
 							'reg_ip' => ip2long($this->input->ip_address()),
-							'code' => $code))
+							'code' => $code,
+                            'table_num' => $this->get_table_num()))
 						&& $this->send_reg_email($email, $code)
                 ) {
                     return "valid";
@@ -73,7 +75,8 @@ class Signup_model extends CI_Model {
                         'l_name' => $result->l_name,
 						'reg_date' => date('Y-m-d H:i:s'),
 						'has_pswd' => true,
-						'last_ip' => ip2long($this->input->ip_address())
+						'last_ip' => ip2long($this->input->ip_address()),
+                        'table_num' => $this->get_table_num()
 						)) //&&
 							//$this->db->where('code', $code)->delete('unvalidated')
                 ) {
@@ -123,7 +126,8 @@ class Signup_model extends CI_Model {
 								'fb_id' => $user['id'],
 								'reg_date' => date('Y-m-d H:i:s'),
 								'has_pswd' => false,
-								'last_ip' => ip2long($this->input->ip_address())))
+								'last_ip' => ip2long($this->input->ip_address()),
+                                'table_num' => $this->get_table_num()))
 					) {
 						// Set the data here to avoid dependancy injection..
 						$data = array(
@@ -133,6 +137,7 @@ class Signup_model extends CI_Model {
 						'username' => $user['id'],
 						'with_fb' => true,
 						'validated' => true,
+                        'table_num' => $this->get_table_num()    
 						);
 						$this->session->set_userdata($data);
 						$this->facebook->setExtendedAccessToken();
@@ -269,5 +274,73 @@ class Signup_model extends CI_Model {
 		
 		return $cap['image'];
 	}
+	
+	private function add_events_table($num) {
+        $this->load->dbforge();
+		
+		$this->dbforge->add_key('id', TRUE);
+		
+		$fields = array(
+			'id' => array(
+				'type' => 'INT',
+				'auto_increment' => TRUE
+			),
+			'date' => array(
+				'type' => 'DATE'
+             ),
+            'time' => array(
+				'type' => 'TIME'
+            ),
+             'title' => array(
+				 'type' =>'VARCHAR',
+				 'constraint' => '255'
+            ),
+            'description' => array(
+				 'type' => 'TEXT',
+				 'null' => TRUE
+            ),
+			'user_id' => array(
+				 'type' => 'INT'
+            )
+        );
+		$this->dbforge->add_field($fields);
+		$num = ceil($num);
+        
+		$table_add = $this->dbforge->create_table("events_{$num}", TRUE);
+        
+        if ($table_add) {
+            log_message("info", "Added database table events_{$num}");
+            $this->add_event_indexes();
+        } else {
+            log_message("error", "Failed to add database table events_{$num}");
+        }
+    }
+    
+    private function add_event_indexes() {
+        $index_add = $this->db->simple_query("ALTER TABLE testalter_tbl ADD INDEX user_query (user_id, date, time)");
+
+        if ($index_add) {
+            log_message("info", "Added indexes to events_{$num}");
+        } else {
+            log_message("error", "Failed to add indexes to databse table events_{$num}");
+        }    
+    }    
+	
+	function get_table_num() {
+		$query = $this->db->select('id')->from('users')->order_by('id','desc')->limit(1)->get();
+        $row = $query->row();
+        $last_id = $row->id;
+        if($last_id != 0) {
+            $division = $last_id/self::USER_LIMIT;
+            if ($division % 1 == 0) {
+                $this->add_events_table($division); 
+            }
+            $result = ceil($division);
+        } else {
+            $result = 1;
+        }
+
+        return $result;
+	}   
 }
 ?>

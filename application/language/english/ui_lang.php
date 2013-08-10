@@ -59,7 +59,7 @@ $lang['ui_russian'] = "Russian";
 $lang['ui_latvian'] = "Latvian";
 
 $lang['ui_reg_successful'] = "Your registration was successful!";
-$lang['ui_reg_gratitude'] = "Thank you for signing up, within 5 minutes you should recive a confirmation email on the specified email account.";
+$lang['ui_reg_gratitude'] = "Thank you for signing up, within 5 minutes you should recive a confirmation link on the specified email account.";
 $lang['ui_reg_use_link'] = "Please use the link in the mentioned e-mail to confirm your registration within a days time from now, otherwise the requested account will be discarded.";
 $lang['ui_reg_usefull'] = "I hope you will find d-diary usefull!";
 $lang['ui_reg_confirm_success'] = "You have sucesfully confirmed your new account!";

@@ -19,43 +19,48 @@
 <div id="fb-root"></div>
     <script type="text/javascript">
 	$(document).ready(function() {
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId      : '<?php echo  $this->config->item('appId'); ?>', // App ID
-          channelUrl : '<?php echo base_url(); ?>channel.php', // Channel File
-          status     : true, // check login status
-          cookie     : true, // enable cookies to allow the server to access the session
-          xfbml      : true // parse XFBML
-        });
-		
+	function preloader() {
+		$(".progress").hide();
+		$(".navbar").show();
+		$(".container-fluid").show();
+	}//preloader
+	
+	window.fbAsyncInit = function() {
+		FB.init({
+		  appId      : '<?php echo  $this->config->item('appId'); ?>', // App ID
+		  channelUrl : '<?php echo base_url(); ?>channel.php', // Channel File
+		  status     : true, // check login status
+		  cookie     : true, // enable cookies to allow the server to access the session
+		  xfbml      : true // parse XFBML
+		});
+
 		var fbLogin = document.getElementById("fbLogin");
-		
+
 		if(fbLogin) {
 			fbLogin.onclick = function() { fb_login(); }
 		}
-		
+
 		function fb_login(params) {
 			FB.login(function(response) {
 			console.log("Logging you in..");
 			}, {scope: params});
 		}
-		
-		function preloader() {
-            $(".progress").hide();
-			$(".navbar").show();
-            $(".container-fluid").show();
-        }//preloader
-		
-        // Listen to the auth.login which will be called when the user logs in
-        // using the Login button
-        FB.Event.subscribe('auth.login', function(response) {
+
+		// Listen to the auth.login which will be called when the user logs in
+		// using the Login button
+		FB.Event.subscribe('auth.login', function(response) {
 			if(response.status === 'connected')
 				window.location = window.location;
 			else
-				preloader();		
-        });
-      };
-	 });
+				preloader();
+		});
+		
+		FB.getLoginStatus(function(response){
+			preloader();
+		});
+	};
+	  
+	});
       // Load the SDK Asynchronously
       (function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];

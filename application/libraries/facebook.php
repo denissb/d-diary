@@ -159,12 +159,18 @@ class Facebook extends BaseFacebook
   }
   
   public function check_login() {
-	try {
-	   $this->api('/me');
-	   return true;
-	} catch (Exception $e) {
-	   return false;
+	$userId = $this->getUser();
+	if($userId) {
+		try {
+		   $me = $this->api('/me');
+		   if($me['id']) {
+				return true;
+		   }
+		} catch (Exception $e) {
+		   return false;
+		}
 	}
+	return false;
   }
   
   public function idx(array $array, $key, $default = null) {
