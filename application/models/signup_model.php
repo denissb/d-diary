@@ -339,7 +339,6 @@ class Signup_model extends CI_Model {
         } else {
             $result = 1;
         }
-
         return $result;
 	}   
 }

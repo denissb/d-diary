@@ -25,8 +25,7 @@
     <?php if ($events) {
         foreach ($events as $row):
             ?>
-            <div class="event-item">
-
+            <div class="event-item" draggable="true">
                 <div class="controlls">
                     <div class="btn-group">
                         <button class="btn btn-primary edit-event" id="<?php echo $row->id; ?>"><?php echo lang('cal_edit'); ?></button>

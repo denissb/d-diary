@@ -386,6 +386,12 @@ $(document).ready(function() {
 			});
 	});
 	
+	// Show datepicker for month selection
+	
+	$(document).on('click', '.show-small-cal', function(){
+		$(this).datepicker('show');
+	});
+	
     // Show the main adding form
     $('#show-add').live('click', function() {
         $('#event-container').hide();

@@ -7,6 +7,8 @@
 		<th colspan="{colspan}">
 		<h3 class="sel_month">{heading}</h3>
 		<button class="btn toggle-cal" title="hide calendar"><i class="icon-chevron-up"></i></button>
+		<button class="btn show-small-cal" title="pick dates" data-date-format="yyyy-mm-dd" 
+		data-date="2013-09-26"><i class="icon-calendar"></i></button>
 		</th>
 		{/heading_title_cell}
 		{heading_next_cell}<th><a href="{next_url}" class="btn"><i class="icon-arrow-right"></i></a></th>{/heading_next_cell}

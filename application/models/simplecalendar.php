@@ -26,7 +26,7 @@ class Simplecalendar extends CI_Model {
         $this->userid = $this->session->userdata('userid');
         $table_num = $this->session->userdata('table_num');
         if($table_num) {
-            $this->table_name = self::TABLE_NAME."_".$this->session->userdata('table_num');
+            $this->table_name = self::TABLE_NAME."_".$table_num;
         } else {
             die();
         }    
@@ -64,7 +64,7 @@ class Simplecalendar extends CI_Model {
                 return "reserved";
                 // Try to insert data
             } else {
-                if ($this->db->insert('events', array(
+                if ($this->db->insert($this->table_name, array(
                             'date' => $date,
                             'time' => $time,
                             'title' => $title,
@@ -94,7 +94,7 @@ class Simplecalendar extends CI_Model {
                 return "reserved";
             } else {
                 if ($this->db->where('id', $id)->where('user_id', $this->userid)
-                                ->update('events', array(
+                                ->update($this->table_name, array(
                                     'date' => $date,
                                     'time' => $time,
                                     'title' => $title,
@@ -125,7 +125,7 @@ class Simplecalendar extends CI_Model {
     // Delete the event
     public function del_event($id) {
         if (is_int(intval($id))) {
-            $query = $this->db->where('user_id', $this->userid)->where('id', $id)->delete('events');
+            $query = $this->db->where('user_id', $this->userid)->where('id', $id)->delete($this->table_name);
             return ($this->db->affected_rows() > 0 ? true : false);
         } else {
             return false;
@@ -157,7 +157,7 @@ class Simplecalendar extends CI_Model {
     public function not_done_event($id) {
         if (is_int(intval($id))) {
             $data = array('done' => 0);
-            $query = $this->db->where('user_id', $this->userid)->where('id', $id)->update('events', $data);
+            $query = $this->db->where('user_id', $this->userid)->where('id', $id)->update($this->table_name, $data);
             return ($this->db->affected_rows() > 0 ? true : false);
         } else {
             return false;

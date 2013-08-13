@@ -5269,10 +5269,11 @@ div.wysiwyg {
 
 h3.sel_month { display:inline; }
 
-.toggle-cal {
+.toggle-cal, .show-small-cal {
 	position: relative;
-	top: -2px;
+	top: -1px;
 	left: 5px;
+	margin-right: 2px;
   }
   
 .spacer {
