@@ -388,7 +388,12 @@ $(document).ready(function() {
 	
 	// Show datepicker for month selection
 	
-	$(document).on('click', '.show-small-cal', function(){
+	$('.show-small-cal').on('click', function(){
+		$(this).datepicker({'viewMode': 1})
+		 .on('changeMonth', function(ev){
+			$(this).datepicker('hide');
+			location.href = config.home + "simplecal/show/" + ev.date.getFullYear() + "/" + (getZBM(ev.date));
+		  });
 		$(this).datepicker('show');
 	});
 	
@@ -502,7 +507,7 @@ $(document).ready(function() {
 	$('#delete_acc_button').click(function() {
 	var answer = confirm(ui_lang['delete_acc']);
 		if (answer){
-			window.location = "http://ddiary.loc/logout/app/delete";
+			window.location = config.home + "logout/app/delete";
 		} else {
 			return false;
 		}
@@ -744,8 +749,10 @@ function getFormatedDate(date) {
 	return result;
 }
 
-function hasScrollBar() {
-	return $('body').outerHeight() > $(window).height();
+function getZBM(date){
+	date = date ? date : new Date();
+    month = date.getMonth();
+    return month < 10 ? "0" + (month+1) : month+1;
 }
 
 function find_increment(day) {
