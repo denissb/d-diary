@@ -38,24 +38,26 @@ class Ajax extends MY_Controller {
 			
 			// Possible outcomes (returns json cuz i needed 2 parameters)
 			switch($result) {
-				case is_array($result):
-					$this->output->set_output(json_encode($result));
-					break;
 				case 'reserved':
-					$this->output->set_output(json_encode(array('result' => lang('cal_time_reserved'))));
+					$this->set_json_response(array('result' => lang('cal_time_reserved')));
+					break;
+				case 'no_insert':
+					$this->set_json_response(array('result' => lang('cal_error')));
 					break;
 				default:
-					$this->output->set_output(json_encode(array('result' => lang('cal_error'))));
+					$this->set_json_response($result);
 			}
 		}
 	}
 	
 	public function changedate() {
-		if($this->input->post('newdate') && $this->input->post('id')) {
+		if($this->input->get('newdate', true) && $this->input->get('id', true)) {
 			$this->load->model('Simplecalendar');
-			$result = $this->Simplecalendar->change_date($this->security->xss_clean($this->input->post('id')),
-				$this->security->xss_clean($this->input->post('newdate')));
-			$this->output->set_output($result ? 'changed' : 'Error changing event');
+			$result = $this->Simplecalendar->change_date($this->input->get('id', true),
+				$this->input->get('newdate', true));
+			$response = $result ? 'changed' : 'Error changing event';	
+			$res_array = array('result' => $response);
+			$this->set_json_response($res_array);
 		}
 	}
 	
@@ -66,7 +68,7 @@ class Ajax extends MY_Controller {
 		
 		if(!is_numeric($year) || !is_numeric($month)) {
 			exit('Invalid parameters!');
-			}	
+		}	
 		
 		if($id = $this->input->post('id') && 
 			$day = $this->input->post('day')) {
@@ -84,13 +86,13 @@ class Ajax extends MY_Controller {
 			// Possible outcomes
 			switch($result) {
 				case "edited":
-					$this->output->set_output('Changes saved!');
+					$this->set_json_response(array('result' => 'Changes saved!'));
 					break;
 				case "reserved":
-					$this->output->set_output('reserved');
+					$this->set_json_response(array('result' => 'reserved'));
 					break;
 				default:
-					$this->output->set_output('error');
+					$this->set_json_response(array('result' => 'error'));
 			}
 		}
 	}
@@ -122,33 +124,39 @@ class Ajax extends MY_Controller {
 	
 	// Delete event with post by ajax
 	public function delete() {
-		if( $id = $this->input->post('id') ) {
+		if( $id = $this->input->get('id',true) ) {
 			$this->load->model('Simplecalendar');
 			$result = $this->Simplecalendar->del_event($id);
-			$this->output->set_output($result ? 'deleted' : 'Error deleting event'); }
-		else {
-			$this->output->set_output('Error deleting event');
+			$response = $result ? 'deleted' : 'Error deleting event';
+			$res_array = array('result' => $response);
+			$this->set_json_response($res_array);
+		} else {
+			$this->set_json_response(array('result' => 'Error deleting event'));
 		}
 	}
 	
 	// Mark event as done
 	public function done() {
-		if( $id = $this->input->post('id') ) {
+		if( $id = $this->input->get('id',true) ) {
 			$this->load->model('Simplecalendar');
 			$result = $this->Simplecalendar->done_event($id);
-			$this->output->set_output($result ? 'done' : 'Error marking event'); }
-		else {
-			$this->output->set_output('Error marking event');
+			$response = $result ? 'done' : 'Error marking event';
+			$res_array = array('result' => $response);
+			$this->set_json_response($res_array);
+		} else {
+			$this->set_json_response(array('result' => 'Error marking event'));
 		}
 	}
 	
 	public function not_done() {
-		if( $id = $this->input->post('id') ) {
+		if( $id = $this->input->get('id',true)) {
 			$this->load->model('Simplecalendar');
 			$result = $this->Simplecalendar->not_done_event($id);
-			$this->output->set_output($result ? 'done' : 'Error marking event'); }
-		else {
-			$this->output->set_output('Error marking event');
+			$response = $result ? 'done' : 'Error marking event';
+			$res_array = array('result' => $response);
+			$this->set_json_response($res_array);
+		} else {
+			$this->set_json_response(array('result' => 'Error marking event'));
 		}
 	}
 	
@@ -156,7 +164,13 @@ class Ajax extends MY_Controller {
 	public function access() {
 		$this->load->model('Access_model');
 		$result = $this->Access_model->get_access_history($this->session->userdata('userid'));
-		$this->output->set_output($result);
+		$this->output->set_content_type('application/json')->set_output($result);
+	}
+	
+	private function set_json_response($result) {
+		if(is_array($result)) {
+			$this->output->set_content_type('application/json')->set_output(json_encode($result));
+		}
 	}
 	
 	// Check if user logged in!

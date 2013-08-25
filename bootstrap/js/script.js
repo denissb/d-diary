@@ -1,26 +1,25 @@
 /* Configuration defined in global scope */
 var config = {};
-config.home= "//ddiary.loc/"
+config.home = "//ddiary.loc/";
 config.popup = config.home + 'ajax/showpopup';
 config.add_event = config.home + 'ajax/addevent';
-config.events = config.home +'ajax/events';
+config.events = config.home + 'ajax/events';
 config.edit = config.home + 'ajax/editevent';
 config.changedate = config.home + 'ajax/changedate';
 config.remove = config.home + 'ajax/delete';
-config.done = config.home+ 'ajax/done';
-config.not_done = config.home+ 'ajax/not_done';
-config.access = config.home+ 'ajax/access';
-config.loc = window.location.pathname.split( '/' );
-if(config.loc.length > 3) {
-    config.add_event += '/' + config.loc[3] + '/' +config.loc[4];
-    config.events += '/' + config.loc[3] + '/' +config.loc[4];
+config.done = config.home + 'ajax/done';
+config.not_done = config.home + 'ajax/not_done';
+config.access = config.home + 'ajax/access';
+config.loc = window.location.pathname.split('/');
+if (config.loc.length > 3) {
+    config.add_event += '/' + config.loc[3] + '/' + config.loc[4];
+    config.events += '/' + config.loc[3] + '/' + config.loc[4];
 }
 
 /* The javascript magic */
-$(document).ready(function() {
-	
+$(document).ready(function () {
     // Load in form html ASYNCH
-    $.get(config.popup, function(data) {
+    $.get(config.popup, function (data) {
         $('div.temp').data('popup', data);
     });
     // Load the events
@@ -28,8 +27,8 @@ $(document).ready(function() {
 	
     // Register popover		
     $('div.cal-cell').popover({
-        trigger: 'manual' ,
-        html: true,			
+        trigger: 'manual',
+        html: true,	
         content: function() {
             return $('div.temp').data('popup');
         } 
@@ -111,7 +110,7 @@ $(document).ready(function() {
                     description: description
                 },
                 success: function(data) { 
-                    if(data.result == 'Added') { 
+                    if (data.result == 'Added') { 
                         change_count("+"); 
                         $('.popover-add').response(ui_lang['cal_added'], true); 
 						$("p.event-info").remove();
@@ -181,13 +180,14 @@ $(document).ready(function() {
         var id = event.find('button.edit-event').attr('id');
         if(id != undefined) {
             $.ajax({
-                type: 'POST',
+                type: 'GET',
                 url: config.remove,
+				dataType: 'json',
                 data: {
                     id: id
                 },
                 success: function(data) { 
-                    if( data == 'deleted' ) {
+                    if( data.result == 'deleted' ) {
                         event.parent().response(ui_lang['cal_evt_deleted'], true);
                         change_count("-");
                         event.remove(); 
@@ -211,19 +211,20 @@ $(document).ready(function() {
         var id = event.find('button.edit-event').attr('id');
         if(id != undefined) {
             $.ajax({
-                type: 'POST',
+                type: 'GET',
+				dataType: 'json',
                 url: config.done,
                 data: {
                     id: id
                 },
                 success: function(data) { 
-                    if( data == 'done' ) {
+                    if( data.result == 'done' ) {
                         event.find('h3.event-name').addClass('event-done');
                         event.find('a.done-event').addClass('hide');
 						event.find('a.not-done-event').removeClass('hide');
                     }
                     else {
-                        event.response(data, false);
+                        event.response(data.result, false);
                     }
                 },
                 fail: function() {
@@ -241,19 +242,20 @@ $(document).ready(function() {
         var id = event.find('button.edit-event').attr('id');
         if(id != undefined) {
             $.ajax({
-                type: 'POST',
+                type: 'GET',
                 url: config.not_done,
+				dataType: 'json',
                 data: {
                     id: id
                 },
                 success: function(data) { 
-                    if( data == 'done' ) {
+                    if( data.result == 'done' ) {
                         event.find('h3.event-name').removeClass('event-done');
                         event.find('a.done-event').removeClass('hide');
 						event.find('a.not-done-event').addClass('hide');
                     }
                     else {
-                        event.response(data, false);
+                        event.response(data.result, false);
                     }
                 },
                 fail: function() {
@@ -283,6 +285,7 @@ $(document).ready(function() {
         if(day != "" & data != "") {
             $.ajax({
                 type: 'POST',
+				dataType: 'json',
                 url: config.edit,
                 data: {
                     id : id,
@@ -292,7 +295,7 @@ $(document).ready(function() {
                     description: description
                 },
                 success: function(data) { 
-                    switch(data) {
+                    switch(data.result) {
                         case "error":
                             event.response(ui_lang['cal_couldnt_save'], false);
                             //Disable editing of contents - not to confuse the user
@@ -355,14 +358,15 @@ $(document).ready(function() {
 						return false;
 					}
 					$.ajax({
-						type: 'POST',
+						type: 'GET',
+						dataType: 'json',
 						url: config.changedate,
 						data: {
 							id: id,
 							newdate: newdate
 						},
-						success: function(data) { 
-							if( data == 'changed' ) {
+						success: function(data) {
+							if(data.result == 'changed') {
 								event.parent().response(ui_lang['cal_date_changed'] + newdate , true);
 								change_count("-");
 								if (ev.date.getMonth() == getSelDate().getMonth()) {

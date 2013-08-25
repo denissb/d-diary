@@ -15,7 +15,7 @@ details,
 figcaption,
 figure,
 footer,
-header,
+header,a
 hgroup,
 nav,
 section {
@@ -2533,6 +2533,8 @@ table .span24 {
 	background-color: #fff;
 	margin: 5px 0;
 }
+
+.ext h4 { display: inline; }
 
 .well blockquote {
   border-color: #ddd;

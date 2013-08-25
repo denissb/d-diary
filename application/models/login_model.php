@@ -45,6 +45,7 @@ class Login_model extends CI_Model{
                     'lname' => $row->l_name,
                     'username' => $row->username,
                     'validated' => true,
+					'settings' => $row->settings,
 					'with_fb' => false,
 					'language' => $row->language,
 					'table_num' => $row->table_num
@@ -89,6 +90,7 @@ class Login_model extends CI_Model{
                     );
             $this->session->set_userdata($data);
 			$this->facebook->setExtendedAccessToken();
+			$this->remember($row->username);
 			$this->log_ip_and_date($row->id);
 			// Remember user to keep them signed in
             return true;
@@ -156,6 +158,7 @@ class Login_model extends CI_Model{
 								'fname' => $row->f_name,
 								'lname' => $row->l_name,
 								'username' => $row->username,
+								'settings' => $row->settings,
 								'validated' => true,
 								'with_fb' => $row->fb_id ? true : false,
 								'table_num' => $row->table_num
